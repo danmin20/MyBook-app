@@ -1,5 +1,5 @@
 const options = {
-  uri: "https://mybook-backend.herokuapp.com/"
+  uri: "http://192.168.0.104:4000/"
 };
 
 export default options;

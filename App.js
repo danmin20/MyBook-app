@@ -16,11 +16,11 @@ import { AuthProvider } from "./AuthContext";
 
 export default function App() {
   const [loaded, setLoaded] = useState(false);
-  const [cliend, setClient] = useState(null);
+  const [client, setClient] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(null);
   const preLoad = async () => {
     try {
-      await FontFaceObserver.loadAsync({
+      await Font.loadAsync({
         //expo fonts
       });
       await Asset.loadAsync([require("./assets/logo.png")]);

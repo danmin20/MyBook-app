@@ -1,6 +1,6 @@
-import { createStackNavigator } from "react-navigation-stack";
-import { createAppContainer } from "react-navigation";
+// import { createStackNavigator } from "react-navigation-stack";
+// import { createAppContainer } from "react-navigation";
 
-const MainNavigation = createStackNavigator({});
+// const MainNavigation = createStackNavigator({});
 
-export default createAppContainer(MainNavigation);
+// export default createAppContainer(MainNavigation);
