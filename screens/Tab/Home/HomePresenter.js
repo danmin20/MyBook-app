@@ -5,6 +5,7 @@ import { useQuery } from "react-apollo-hooks";
 import { ScrollView, Text } from "react-native";
 import { gql } from "apollo-boost";
 import SquareBook from "../../../components/SquareBook";
+import Loader from "../../../components/Loader";
 
 const SEARCH = gql`
   query books($term: String!) {
@@ -43,11 +44,12 @@ const HomePresenter = ({ term, shouldFetch }) => {
   };
   return (
     <ScrollView refreshControl={refreshing} onRefresh={refresh}>
-      {loading && <Text>loading</Text>}
+      {loading && <Loader />}
+      {!loading && (!data || !data?.books) && <Text>none</Text>}
       {!loading && (
         <BookDisplay>
-          {!loading &&
-            data &&
+          {data &&
+            data?.books &&
             data?.books.map(book => (
               <SquareBook key={book.isbn} term={term} {...book} />
             ))}

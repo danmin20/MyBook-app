@@ -1,4 +1,5 @@
 import React from "react";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import styled from "styled-components";
 import { createStackNavigator } from "react-navigation-stack";
 import { createBottomTabNavigator } from "react-navigation-tabs";
@@ -27,8 +28,21 @@ const stackFactory = (initialRoute, customConfig) =>
     }
   );
 
-export default createBottomTabNavigator({
-  Home: {
-    screen: stackFactory(Home)
+export default createBottomTabNavigator(
+  {
+    Home: {
+      screen: stackFactory(Home),
+      navigationOptions: {
+        tabBarIcon: ({ focused }) => (
+          <MaterialCommunityIcons name={focused ? "home" : "home-outline"} color={"white"} size={30} />
+        )
+      }
+    }
+  },
+  {
+    tabBarOptions: {
+      showLabel: false,
+      style: { backgroundColor: "black" }
+    }
   }
-});
+);
