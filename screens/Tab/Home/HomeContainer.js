@@ -1,7 +1,6 @@
 import React from "react";
 import SearchBar from "../../../components/SearchBar";
 import HomePresenter from "./HomePresenter";
-import constants from "../../../constants";
 
 export default class extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -11,7 +10,7 @@ export default class extends React.Component {
         onChange={navigation.getParam("onChange", () => null)}
         onSubmit={navigation.getParam("onSubmit", () => null)}
       />
-    ),
+    )
   });
   constructor(props) {
     super(props);

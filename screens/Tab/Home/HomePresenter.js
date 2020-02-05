@@ -41,7 +41,6 @@ const HomePresenter = ({ term, shouldFetch }) => {
       setRefreshing(false);
     }
   };
-  console.log(data?.books);
   return (
     <ScrollView refreshControl={refreshing} onRefresh={refresh}>
       {loading && <Text>loading</Text>}
@@ -49,10 +48,9 @@ const HomePresenter = ({ term, shouldFetch }) => {
         <BookDisplay>
           {!loading &&
             data &&
-            data?.books.map(book => {
-              console.log(book.title);
-              return <SquareBook key={book.isbn} term={book.isbn} {...book} />;
-            })}
+            data?.books.map(book => (
+              <SquareBook key={book.isbn} term={term} {...book} />
+            ))}
         </BookDisplay>
       )}
     </ScrollView>

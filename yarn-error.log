@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add @expo/vector/icons
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add react-natve-markdown-view
 
 PATH: 
   C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\Program Files (x86)\Yarn\bin\;C:\Users\danmi\AppData\Local\Microsoft\WindowsApps;;C:\Users\danmi\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\danmi\AppData\Roaming\npm;C:\Users\danmi\AppData\Local\Yarn\bin;C:\Program Files\heroku\bin
@@ -14,8 +14,8 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@expo%2fvector/icons: Request "https://registry.yarnpkg.com/@expo%2fvector/icons" returned a 405
-      at Request.params.callback [as _callback] (C:\Program Files (x86)\Yarn\lib\cli.js:66065:18)
+  Error: https://registry.yarnpkg.com/react-natve-markdown-view: Not found
+      at Request.params.callback [as _callback] (C:\Program Files (x86)\Yarn\lib\cli.js:66056:18)
       at Request.self.callback (C:\Program Files (x86)\Yarn\lib\cli.js:140665:22)
       at Request.emit (events.js:210:5)
       at Request.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:141637:10)
@@ -37,6 +37,8 @@ npm manifest:
       "eject": "expo eject"
     },
     "dependencies": {
+      "@expo/vector-icons": "^10.0.6",
+      "@react-native-community/masked-view": "^0.1.6",
       "apollo-boost": "^0.4.7",
       "apollo-cache-inmemory": "^1.6.5",
       "apollo-cache-persist": "^0.1.1",
@@ -54,6 +56,7 @@ npm manifest:
       "react-native-gesture-handler": "^1.5.6",
       "react-native-reanimated": "^1.7.0",
       "react-native-safe-area-context": "^0.6.4",
+      "react-native-screens": "^2.0.0-alpha.34",
       "react-native-swiper": "^1.5.14",
       "react-native-web": "~0.11.7",
       "react-navigation": "^4.1.0",
@@ -989,7 +992,7 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/@emotion/unitless/-/unitless-0.7.5.tgz#77211291c1900a700b8a78cfafda3160d76949ed"
     integrity sha512-OWORNpfjMsSSUBVrRBVGECkhWcULOAJz9ZW8uK9qgxD+87M7jHRcvh/A96XXNhXTLmKcoYSQtBEX7lHMO7YRwg==
   
-  "@expo/vector-icons@^10.0.2":
+  "@expo/vector-icons@^10.0.2", "@expo/vector-icons@^10.0.6":
     version "10.0.6"
     resolved "https://registry.yarnpkg.com/@expo/vector-icons/-/vector-icons-10.0.6.tgz#5718953ff0b97827d11dae5787976fa8ce5caaed"
     integrity sha512-qNlKPNdf073LpeEpyClxAh0D3mmIK4TGAQzeKR0HVwf14RIEe17+mLW5Z6Ka5Ho/lUtKMRPDHumSllFyKvpeGg==
@@ -1172,6 +1175,11 @@ Lockfile:
       sudo-prompt "^9.0.0"
       wcwidth "^1.0.1"
       ws "^1.1.0"
+  
+  "@react-native-community/masked-view@^0.1.6":
+    version "0.1.6"
+    resolved "https://registry.yarnpkg.com/@react-native-community/masked-view/-/masked-view-0.1.6.tgz#c7f2ac187c1f25aa8c30d11baa8f4398eca3bb84"
+    integrity sha512-PpMoeXwPUoldCRKDuSi+zK5rT+sJTW6ri6RdGPkSKRzU77Q1d9IaR0O5IKvBj0XSdL3p+dcOa05gk35aGDffBQ==
   
   "@react-navigation/core@^3.5.2":
     version "3.5.2"
@@ -2910,9 +2918,9 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/growly/-/growly-1.3.0.tgz#f10748cbe76af964b7c96c93c6bcc28af120c081"
     integrity sha1-8QdIy+dq+WS3yWyTxrzCivEgwIE=
   
-  "hammerjs@git+https://github.com/naver/hammer.js.git":
+  "hammerjs@https://github.com/naver/hammer.js.git":
     version "2.0.17-snapshot"
-    resolved "git+https://github.com/naver/hammer.js.git#54bc698b25edd6e1b76ca975ebaced5ce0467d51"
+    resolved "https://github.com/naver/hammer.js.git#54bc698b25edd6e1b76ca975ebaced5ce0467d51"
     dependencies:
       "@types/hammerjs" "^2.0.36"
   
@@ -4564,6 +4572,13 @@ Lockfile:
     integrity sha512-MtRSIcZNstxv87Jet+UsPhEd1tpGe8cVskDXlP657x6rHpSrbrc+y13ZNXrwAgGNNhqQNX7UJT68ZIq//ZRmvw==
     dependencies:
       hoist-non-react-statics "^2.3.1"
+  
+  react-native-screens@^2.0.0-alpha.34:
+    version "2.0.0-alpha.34"
+    resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-2.0.0-alpha.34.tgz#41c689f81a5272fd6fbd00155b6ec254dae60b52"
+    integrity sha512-O5h8S9rc25QCfWZ9NA6tBn7Wr6a3GsswI+MdtAbwpjXOkQ6ShN8mK/ROzN4Ls2HipWMVSi/1Mz6iuVhNlayJWw==
+    dependencies:
+      debounce "^1.2.0"
   
   react-native-swiper@^1.5.14:
     version "1.5.14"
