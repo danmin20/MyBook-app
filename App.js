@@ -20,9 +20,9 @@ export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
   const preLoad = async () => {
     try {
-      await Font.loadAsync({
-        //expo fonts
-      });
+      // await Font.loadAsync({
+      //   //expo fonts
+      // });
       await Asset.loadAsync([require("./assets/logo.png")]);
       const cache = new InMemoryCache();
       await persistCache({

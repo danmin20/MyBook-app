@@ -11,8 +11,8 @@ const TextInput = styled.TextInput`
   width: ${constants.width / 1.7}px;
   padding: 5px 10px;
   border-radius: 4px;
-  background-color: ${props => props.theme.greyColor};
-  border: 1px solid ${props => props.theme.moderateGreyColor};
+  border: 0px solid ${props => props.theme.moderateGreyColor};
+  border-bottom-width: 1px;
 `;
 
 const AuthInput = ({

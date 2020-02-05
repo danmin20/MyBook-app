@@ -11,6 +11,11 @@ const View = styled.View`
   justify-content: center;
   align-items: center;
   flex: 1;
+  background-color: white;
+`;
+
+const Button = styled.View`
+  margin-top: 30px;
 `;
 
 export default ({ navigation }) => {
@@ -56,17 +61,19 @@ export default ({ navigation }) => {
       <View>
         <AuthInput
           {...nameInput}
-          placeholder="NAME"
+          placeholder="이름"
           onSubmitEditing={handleSignup}
           autoCapitalize="words"
         />
         <AuthInput
           {...emailInput}
-          placeholder="E-MAIL"
+          placeholder="이메일"
           onSubmitEditing={handleSignup}
           autoCorrect={false}
         />
+        <Button>
         <AuthButton loading={loading} onPress={handleSignup} text="회원가입" />
+        </Button>
       </View>
     </TouchableWithoutFeedback>
   );
