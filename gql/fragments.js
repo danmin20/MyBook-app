@@ -32,6 +32,7 @@ export const POST_FRAGMENT = gql`
     isLiked
     likeCount
     commentCount
+    createdAt
   }
   ${BOOK_FRAGMENT}
 `;
@@ -40,6 +41,7 @@ export const USER_FRAGMENT = gql`
   fragment UserParts on User {
     id
     name
+    bio
     email
     posts {
       ...PostParts

@@ -3,11 +3,11 @@ import { useQuery } from "react-apollo-hooks";
 import { ME } from "../../gql/queries";
 import { ScrollView, RefreshControl } from "react-native";
 import Loader from "../../components/Loader";
+import UserBooks from "../../components/UserBooks";
 
 export default ({ navigation }) => {
   const [refreshing, setRefreshing] = useState(false);
   const { loading, data, refetch } = useQuery(ME);
-
   const refresh = async () => {
     try {
       setRefreshing(true);
@@ -18,14 +18,13 @@ export default ({ navigation }) => {
       setRefreshing(false);
     }
   };
-  console.log(data)
   return (
     <ScrollView
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={refresh} />
       }
     >
-      {loading ? <Loader /> : null}
+      {loading ? <Loader /> : data && data?.me && <UserBooks {...data?.me} />}
     </ScrollView>
   );
 };
