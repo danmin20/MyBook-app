@@ -7,6 +7,7 @@ import { useQuery } from "react-apollo-hooks";
 import Swiper from "react-native-swiper";
 import Loader from "./Loader";
 import constants from "../constants";
+import { withNavigation } from "react-navigation";
 
 const Container = styled.View`
   border: 0.5px solid ${styles.moderateGreyColor};
@@ -45,7 +46,7 @@ const Info = styled.View`
   margin: 10px;
 `;
 
-export default () => {
+const HomeScreen = ({ navigation }) => {
   const { data: data_10, loading: loading_10 } = useQuery(SEARCH, {
     variables: { term: "10대" }
   });
@@ -72,7 +73,12 @@ export default () => {
         </TopicBox>
         <Swiper style={{ height: 170 }} activeDotColor={"black"}>
           {data_10?.books.map(book => (
-            <TouchableOpacity key={book.isbn}>
+            <TouchableOpacity
+              key={book.isbn}
+              onPress={() =>
+                navigation.navigate("BookDetail", { isbn: book.isbn })
+              }
+            >
               <BookBox>
                 <Image source={{ uri: book.image }} />
                 <Info>
@@ -88,7 +94,10 @@ export default () => {
           ))}
         </Swiper>
       </Container>
-      <Container key={2}>
+      <Container
+        key={2}
+        onPress={() => navigation.navigate("BookDetail", { isbn: book.isbn })}
+      >
         <TopicBox>
           <Topic>20대 추천도서</Topic>
         </TopicBox>
@@ -110,7 +119,10 @@ export default () => {
           ))}
         </Swiper>
       </Container>
-      <Container key={3}>
+      <Container
+        key={3}
+        onPress={() => navigation.navigate("BookDetail", { isbn: book.isbn })}
+      >
         <TopicBox>
           <Topic>30대 추천도서</Topic>
         </TopicBox>
@@ -132,7 +144,10 @@ export default () => {
           ))}
         </Swiper>
       </Container>
-      <Container key={4}>
+      <Container
+        key={4}
+        onPress={() => navigation.navigate("BookDetail", { isbn: book.isbn })}
+      >
         <TopicBox>
           <Topic>40대 추천도서</Topic>
         </TopicBox>
@@ -154,7 +169,10 @@ export default () => {
           ))}
         </Swiper>
       </Container>
-      <Container key={5}>
+      <Container
+        key={5}
+        onPress={() => navigation.navigate("BookDetail", { isbn: book.isbn })}
+      >
         <TopicBox>
           <Topic>50대 추천도서</Topic>
         </TopicBox>
@@ -179,3 +197,5 @@ export default () => {
     </>
   );
 };
+
+export default withNavigation(HomeScreen);

@@ -45,7 +45,9 @@ const SquareBook = ({
   description
 }) => {
   return (
-    <TouchableOpacity>
+    <TouchableOpacity
+      onPress={() => navigation.navigate("BookDetail", { isbn })}
+    >
       <Container>
         <Image source={{ uri: image }} />
         <Info>

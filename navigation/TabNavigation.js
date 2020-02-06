@@ -6,6 +6,8 @@ import { createBottomTabNavigator } from "react-navigation-tabs";
 import Home from "../screens/Tab/Home";
 import MyBooks from "../screens/Tab/MyBooks";
 import Feed from "../screens/Tab/Feed";
+import BookDetail from "../screens/Tab/BookDetail";
+import UserDetail from "../screens/Tab/UserDetail";
 
 const stackFactory = (initialRoute, customConfig) =>
   createStackNavigator(
@@ -15,6 +17,20 @@ const stackFactory = (initialRoute, customConfig) =>
         navigationOptions: {
           ...customConfig
         }
+      },
+      BookDetail: {
+        screen: BookDetail,
+        navigationOptions: {
+          headerTitle: () => {
+            "none";
+          }
+        }
+      },
+      UserDetail: {
+        screen: UserDetail,
+        navigationOptions: ({ navigation }) => ({
+          title: navigation.getParam("username")
+        })
       }
     },
     {

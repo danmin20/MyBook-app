@@ -1,5 +1,5 @@
 import { gql } from "apollo-boost";
-import { BOOK_FRAGMENT, USER_FRAGMENT } from "./fragments";
+import { BOOK_FRAGMENT, USER_FRAGMENT, POST_FRAGMENT } from "./fragments";
 
 export const SEARCH = gql`
   query books($term: String!) {
