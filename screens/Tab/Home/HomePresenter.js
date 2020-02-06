@@ -3,25 +3,10 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import { useQuery } from "react-apollo-hooks";
 import { ScrollView, Text } from "react-native";
-import { gql } from "apollo-boost";
 import SquareBook from "../../../components/SquareBook";
 import Loader from "../../../components/Loader";
-
-const SEARCH = gql`
-  query books($term: String!) {
-    books(term: $term) {
-      isbn
-      title
-      link
-      image
-      author
-      price
-      discount
-      publisher
-      description
-    }
-  }
-`;
+import { SEARCH } from "../../../Queries";
+import HomeScreen from "../../../components/HomeScreen";
 
 const BookDisplay = styled.View``;
 
@@ -45,7 +30,7 @@ const HomePresenter = ({ term, shouldFetch }) => {
   return (
     <ScrollView refreshControl={refreshing} onRefresh={refresh}>
       {loading && <Loader />}
-      {!loading && (!data || !data?.books) && <Text>none</Text>}
+      {!loading && (!data || !data?.books) && <HomeScreen />}
       {!loading && (
         <BookDisplay>
           {data &&
