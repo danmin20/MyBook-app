@@ -94,16 +94,18 @@ const HomeScreen = ({ navigation }) => {
           ))}
         </Swiper>
       </Container>
-      <Container
-        key={2}
-        onPress={() => navigation.navigate("BookDetail", { isbn: book.isbn })}
-      >
+      <Container key={2}>
         <TopicBox>
           <Topic>20대 추천도서</Topic>
         </TopicBox>
         <Swiper style={{ height: 170 }} activeDotColor={"black"}>
           {data_20?.books.map(book => (
-            <TouchableOpacity key={book.isbn}>
+            <TouchableOpacity
+              key={book.isbn}
+              onPress={() =>
+                navigation.navigate("BookDetail", { isbn: book.isbn })
+              }
+            >
               <BookBox>
                 <Image source={{ uri: book.image }} />
                 <Info>
@@ -119,16 +121,18 @@ const HomeScreen = ({ navigation }) => {
           ))}
         </Swiper>
       </Container>
-      <Container
-        key={3}
-        onPress={() => navigation.navigate("BookDetail", { isbn: book.isbn })}
-      >
+      <Container key={3}>
         <TopicBox>
           <Topic>30대 추천도서</Topic>
         </TopicBox>
         <Swiper style={{ height: 170 }} activeDotColor={"black"}>
           {data_30?.books.map(book => (
-            <TouchableOpacity key={book.isbn}>
+            <TouchableOpacity
+              key={book.isbn}
+              onPress={() =>
+                navigation.navigate("BookDetail", { isbn: book.isbn })
+              }
+            >
               <BookBox>
                 <Image source={{ uri: book.image }} />
                 <Info>
@@ -144,16 +148,18 @@ const HomeScreen = ({ navigation }) => {
           ))}
         </Swiper>
       </Container>
-      <Container
-        key={4}
-        onPress={() => navigation.navigate("BookDetail", { isbn: book.isbn })}
-      >
+      <Container key={4}>
         <TopicBox>
           <Topic>40대 추천도서</Topic>
         </TopicBox>
         <Swiper style={{ height: 170 }} activeDotColor={"black"}>
           {data_40?.books.map(book => (
-            <TouchableOpacity key={book.isbn}>
+            <TouchableOpacity
+              key={book.isbn}
+              onPress={() =>
+                navigation.navigate("BookDetail", { isbn: book.isbn })
+              }
+            >
               <BookBox>
                 <Image source={{ uri: book.image }} />
                 <Info>
@@ -169,16 +175,18 @@ const HomeScreen = ({ navigation }) => {
           ))}
         </Swiper>
       </Container>
-      <Container
-        key={5}
-        onPress={() => navigation.navigate("BookDetail", { isbn: book.isbn })}
-      >
+      <Container key={5}>
         <TopicBox>
           <Topic>50대 추천도서</Topic>
         </TopicBox>
         <Swiper style={{ height: 170 }} activeDotColor={"black"}>
           {data_50?.books.map(book => (
-            <TouchableOpacity key={book.isbn}>
+            <TouchableOpacity
+              key={book.isbn}
+              onPress={() =>
+                navigation.navigate("BookDetail", { isbn: book.isbn })
+              }
+            >
               <BookBox>
                 <Image source={{ uri: book.image }} />
                 <Info>

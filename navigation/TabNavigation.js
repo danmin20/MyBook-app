@@ -21,9 +21,7 @@ const stackFactory = (initialRoute, customConfig) =>
       BookDetail: {
         screen: BookDetail,
         navigationOptions: {
-          headerTitle: () => {
-            "none";
-          }
+          title: "책 상세정보"
         }
       },
       UserDetail: {
@@ -35,9 +33,14 @@ const stackFactory = (initialRoute, customConfig) =>
     },
     {
       defaultNavigationOptions: {
+        headerBackTitleVisible: false,
         headerStyle: {
           backgroundColor: "black"
         },
+        headerTitleStyle: {
+          color: "white"
+        },
+        headerTitleAlign: "center",
         headerBackTitle: null,
         cardStyle: { backgroundColor: "white" }
       }
@@ -71,7 +74,9 @@ export default createBottomTabNavigator(
       }
     },
     MyBooks: {
-      screen: stackFactory(MyBooks),
+      screen: stackFactory(MyBooks, {
+        title: ""
+      }),
       navigationOptions: {
         tabBarIcon: ({ focused }) => (
           <MaterialCommunityIcons

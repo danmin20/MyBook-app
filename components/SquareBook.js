@@ -58,8 +58,8 @@ const SquareBook = ({
           </Title>
           <SubInfo>
             <MarkdownView>
-              {"\n"}**가격** {price}
-              {"\n"}**작가** {author}
+              {"\n"}**정가** {price}
+              {"\n"}**저자** {author}
               {"\n"}**출판사** {publisher}
             </MarkdownView>
           </SubInfo>

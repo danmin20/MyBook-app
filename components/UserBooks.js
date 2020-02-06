@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useLogOut } from "../AuthContext";
 import { Image, ScrollView, TouchableOpacity } from "react-native";
 import constants from "../constants";
+import { withNavigation } from "react-navigation";
 
 const View = styled.View`
   background-color: #e3e1de;
@@ -57,7 +58,7 @@ const StatName = styled.Text`
   margin-top: 5px;
   font-size: 13px;
   color: white;
-`; 
+`;
 const Date = styled.Text`
   background-color: white;
   width: 82px;
@@ -132,4 +133,4 @@ const UserBooks = ({
   );
 };
 
-export default UserBooks;
+export default withNavigation(UserBooks);
