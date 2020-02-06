@@ -1,11 +1,11 @@
 import React from "react";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import styled from "styled-components";
 import { createStackNavigator } from "react-navigation-stack";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import Home from "../screens/Tab/Home";
-
-const Icon = styled.View``;
+import MyBooks from "../screens/Tab/MyBooks";
+import Feed from "../screens/Tab/Feed";
 
 const stackFactory = (initialRoute, customConfig) =>
   createStackNavigator(
@@ -34,7 +34,35 @@ export default createBottomTabNavigator(
       screen: stackFactory(Home),
       navigationOptions: {
         tabBarIcon: ({ focused }) => (
-          <MaterialCommunityIcons name={focused ? "home" : "home-outline"} color={"white"} size={30} />
+          <MaterialCommunityIcons
+            name={focused ? "home" : "home-outline"}
+            color={"white"}
+            size={30}
+          />
+        )
+      }
+    },
+    Feed: {
+      screen: stackFactory(Feed),
+      navigationOptions: {
+        tabBarIcon: ({ focused }) => (
+          <MaterialIcons
+            name={focused ? "people" : "people-outline"}
+            color={"white"}
+            size={30}
+          />
+        )
+      }
+    },
+    MyBooks: {
+      screen: stackFactory(MyBooks),
+      navigationOptions: {
+        tabBarIcon: ({ focused }) => (
+          <MaterialCommunityIcons
+            name={focused ? "bookmark" : "bookmark-outline"}
+            color={"white"}
+            size={30}
+          />
         )
       }
     }

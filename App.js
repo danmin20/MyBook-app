@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {} from "@expo/vector-icons";
+import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { AppLoading } from "expo";
 import { AsyncStorage } from "react-native";
 import * as Font from "expo-font";
@@ -20,9 +20,10 @@ export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
   const preLoad = async () => {
     try {
-      // await Font.loadAsync({
-      //   //expo fonts
-      // });
+      await Font.loadAsync({
+        ...MaterialIcons.font,
+        ...MaterialCommunityIcons.font
+      });
       await Asset.loadAsync([require("./assets/logo.png")]);
       const cache = new InMemoryCache();
       await persistCache({

@@ -5,7 +5,7 @@ import { useQuery } from "react-apollo-hooks";
 import { ScrollView, Text } from "react-native";
 import SquareBook from "../../../components/SquareBook";
 import Loader from "../../../components/Loader";
-import { SEARCH } from "../../../Queries";
+import { SEARCH } from "../../../gql/queries";
 import HomeScreen from "../../../components/HomeScreen";
 
 const BookDisplay = styled.View``;
