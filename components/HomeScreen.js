@@ -70,10 +70,10 @@ export default () => {
         <TopicBox>
           <Topic>10대 추천도서</Topic>
         </TopicBox>
-        <Swiper style={{ height: 170 }}>
+        <Swiper style={{ height: 170 }} activeDotColor={"black"}>
           {data_10?.books.map(book => (
-            <TouchableOpacity>
-              <BookBox key={book.isbn}>
+            <TouchableOpacity key={book.isbn}>
+              <BookBox>
                 <Image source={{ uri: book.image }} />
                 <Info>
                   <Title>
@@ -92,10 +92,10 @@ export default () => {
         <TopicBox>
           <Topic>20대 추천도서</Topic>
         </TopicBox>
-        <Swiper style={{ height: 170 }}>
+        <Swiper style={{ height: 170 }} activeDotColor={"black"}>
           {data_20?.books.map(book => (
-            <TouchableOpacity>
-              <BookBox key={book.isbn}>
+            <TouchableOpacity key={book.isbn}>
+              <BookBox>
                 <Image source={{ uri: book.image }} />
                 <Info>
                   <Title>
@@ -114,10 +114,10 @@ export default () => {
         <TopicBox>
           <Topic>30대 추천도서</Topic>
         </TopicBox>
-        <Swiper style={{ height: 170 }}>
+        <Swiper style={{ height: 170 }} activeDotColor={"black"}>
           {data_30?.books.map(book => (
-            <TouchableOpacity>
-              <BookBox key={book.isbn}>
+            <TouchableOpacity key={book.isbn}>
+              <BookBox>
                 <Image source={{ uri: book.image }} />
                 <Info>
                   <Title>
@@ -136,10 +136,10 @@ export default () => {
         <TopicBox>
           <Topic>40대 추천도서</Topic>
         </TopicBox>
-        <Swiper style={{ height: 170 }}>
+        <Swiper style={{ height: 170 }} activeDotColor={"black"}>
           {data_40?.books.map(book => (
-            <TouchableOpacity>
-              <BookBox key={book.isbn}>
+            <TouchableOpacity key={book.isbn}>
+              <BookBox>
                 <Image source={{ uri: book.image }} />
                 <Info>
                   <Title>
@@ -158,10 +158,10 @@ export default () => {
         <TopicBox>
           <Topic>50대 추천도서</Topic>
         </TopicBox>
-        <Swiper style={{ height: 170 }}>
+        <Swiper style={{ height: 170 }} activeDotColor={"black"}>
           {data_50?.books.map(book => (
-            <TouchableOpacity>
-              <BookBox key={book.isbn}>
+            <TouchableOpacity key={book.isbn}>
+              <BookBox>
                 <Image source={{ uri: book.image }} />
                 <Info>
                   <Title>
