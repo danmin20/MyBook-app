@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { SEARCH } from "../Queries";
+import { SEARCH } from "../gql/queries";
 import { TouchableOpacity } from "react-native";
 import styles from "../styles";
 import { useQuery } from "react-apollo-hooks";
