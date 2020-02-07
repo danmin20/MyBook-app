@@ -1,16 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "react-apollo-hooks";
 import { USER_DETAIL } from "../../gql/queries";
-import { ScrollView } from "react-native";
+import { ScrollView, RefreshControl } from "react-native";
 import Loader from "../../components/Loader";
 import UserBooks from "../../components/UserBooks";
 
 export default ({ navigation }) => {
-  const { loading, data } = useQuery(USER_DETAIL, {
+  const [refreshing, setRefreshing] = useState(false);
+  const { loading, data, refetch } = useQuery(USER_DETAIL, {
     variables: { userId: navigation.getParam("userId") }
   });
+  const refresh = async () => {
+    try {
+      setRefreshing(true);
+      await refetch();
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setRefreshing(false);
+    }
+  };
   return (
-    <ScrollView>
+    <ScrollView
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={refresh} />
+      }
+    >
       {loading ? (
         <Loader />
       ) : (

@@ -101,17 +101,6 @@ const Func = styled.View`
 const FuncText = styled.Text`
   font-size: 11px;
 `;
-const Func_2 = styled.View`
-  justify-content: center;
-  align-items: center;
-  border-radius: 5px;
-  padding: 3px 15px;
-  margin-top: 10px;
-`;
-const FuncText_2 = styled.Text`
-  font-size: 11px;
-  color: white;
-`;
 
 const UserBooks = ({
   id,
@@ -158,9 +147,9 @@ const UserBooks = ({
             ) : (
               <TouchableOpacity onPress={handleFollow}>
                 {isFollowing ? (
-                  <Func_2>
-                    <FuncText_2>팔로잉</FuncText_2>
-                  </Func_2>
+                  <Func>
+                    <FuncText>언팔로우</FuncText>
+                  </Func>
                 ) : (
                   <Func>
                     <FuncText>팔로우</FuncText>

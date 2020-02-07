@@ -1,17 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "react-apollo-hooks";
 import { SEARCH_USER } from "../../gql/queries";
-import { ScrollView, View, Text } from "react-native";
+import { ScrollView, View, Text, RefreshControl } from "react-native";
 import Loader from "../../components/Loader";
 import SquareUser from "../../components/SquareUser";
 
 export default ({ navigation }) => {
-  const { data, loading } = useQuery(SEARCH_USER, {
+  const [refreshing, setRefreshing] = useState(false);
+  const { data, loading, refetch } = useQuery(SEARCH_USER, {
     variables: { name: navigation.getParam("name") }
   });
-  console.log(data);
+  const refresh = async () => {
+    try {
+      setRefreshing(true);
+      await refetch();
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setRefreshing(false);
+    }
+  };
+  console.log(data?.searchUser)
   return (
-    <ScrollView>
+    <ScrollView
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={refresh} />
+      }
+    >
       {loading && <Loader />}
       {!loading && data && data?.searchUser && (
         <View>

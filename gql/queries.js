@@ -57,7 +57,6 @@ export const SEARCH_USER = gql`
       postsCount
     }
   }
-  ${USER_FRAGMENT}
 `;
 
 export const TOGGLE_FOLLOW = gql`
