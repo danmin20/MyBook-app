@@ -8,6 +8,7 @@ import MyBooks from "../screens/Tab/MyBooks";
 import Feed from "../screens/Tab/Feed";
 import BookDetail from "../screens/Tab/BookDetail";
 import UserDetail from "../screens/Tab/UserDetail";
+import PostDetail from "../screens/Tab/PostDetail";
 
 const stackFactory = (initialRoute, customConfig) =>
   createStackNavigator(
@@ -23,6 +24,12 @@ const stackFactory = (initialRoute, customConfig) =>
         navigationOptions: {
           title: "책 상세정보"
         }
+      },
+      PostDetail: {
+        screen: PostDetail,
+        navigationOptions: ({ navigation }) => ({
+          title: navigation.getParam("title")
+        })
       },
       UserDetail: {
         screen: UserDetail,

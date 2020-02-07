@@ -84,7 +84,7 @@ export default ({ navigation }) => {
                 </TextColumn>
               </TextRow>
               <Descript>
-                <Text>{detail.description}</Text>
+                <Text>{detail.description.replace(/&quot;/gi, '"')}</Text>
               </Descript>
               <Link>
                 <MaterialCommunityIcons

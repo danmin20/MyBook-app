@@ -5,7 +5,7 @@ import { ScrollView, RefreshControl } from "react-native";
 import Loader from "../../components/Loader";
 import UserBooks from "../../components/UserBooks";
 
-export default ({ navigation }) => {
+export default () => {
   const [refreshing, setRefreshing] = useState(false);
   const { loading, data, refetch } = useQuery(ME);
   const refresh = async () => {

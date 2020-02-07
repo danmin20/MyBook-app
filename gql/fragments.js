@@ -21,6 +21,10 @@ export const POST_FRAGMENT = gql`
     book {
       ...BookParts
     }
+    user{
+      id
+      name
+    }
     comments {
       id
       text

@@ -18,3 +18,12 @@ export const ME = gql`
   }
   ${USER_FRAGMENT}
 `;
+
+export const POST_DETAIL = gql`
+  query seeFullPost($id: String!) {
+    seeFullPost(id: $id) {
+      ...PostParts
+    }
+  }
+  ${POST_FRAGMENT}
+`;

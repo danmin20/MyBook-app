@@ -114,7 +114,14 @@ const UserBooks = ({
           {posts &&
             posts.map(post => (
               <Book key={post.id}>
-                <TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate("PostDetail", {
+                      title: post.book.title,
+                      id: post.id
+                    })
+                  }
+                >
                   <Image
                     style={{
                       height: 116,
