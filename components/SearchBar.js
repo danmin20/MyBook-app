@@ -1,53 +1,63 @@
 import React from "react";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import styled from "styled-components";
 import PropTypes from "prop-types";
-import styled, { withTheme } from "styled-components";
-import { TextInput } from "react-native-gesture-handler";
-import constants from "../constants";
 import styles from "../styles";
-import { Text } from "react-native";
 
-const Search = styled.View`
+const Container = styled.View`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
-`;
-const Input = styled.View`
+  background-color: ${styles.blackColor};
 `;
 
-const SearchBar = ({ onChange, value, onSubmit }) => (
-  <Search>
-    <MaterialCommunityIcons
-      name={"book-open-variant"}
-      color={"white"}
-      size={30}
+const TextInput = styled.TextInput`
+  width: 80%;
+  margin-bottom: 20px;
+  padding: 2px 10px;
+  border-radius: 5px;
+  background-color: white;
+`;
+
+const SearchBar = ({
+  placeholder,
+  value,
+  keyboardType = "default",
+  autoCapitalize = "none",
+  returnKeyType = "done",
+  onChange,
+  onSubmitEditing = () => null,
+  autoCorrect = true
+}) => (
+  <Container>
+    <TextInput
+      onChangeText={onChange}
+      keyboardType={keyboardType}
+      placeholder={placeholder}
+      autoCapitalize={autoCapitalize}
+      value={value}
+      returnKeyType={returnKeyType}
+      onSubmitEditing={onSubmitEditing}
+      autoCorrect={autoCorrect}
     />
-    <Input>
-      <TextInput
-        style={{
-          width: constants.width - 40,
-          padding: 1,
-          paddingLeft: 15,
-          fontSize: 15,
-          backgroundColor: "white",
-          borderRadius: 5
-        }}
-        returnKeyType="search"
-        onChangeText={onChange}
-        onEndEditing={onSubmit}
-        value={value}
-        placeholder={"검색"}
-        placeholderTextColor={styles.darkGreyColor}
-      />
-    </Input>
-  </Search>
+  </Container>
 );
 
 SearchBar.propTypes = {
+  placeholder: PropTypes.string.isRequired,
+  value: PropTypes.string,
+  keyboardType: PropTypes.oneOf([
+    "default",
+    "number-pad",
+    "decimal-pad",
+    "numeric",
+    "email-address",
+    "phone-pad"
+  ]),
+  autoCapitalize: PropTypes.oneOf(["none", "sentences", "words", "characters"]),
   onChange: PropTypes.func.isRequired,
-  value: PropTypes.string.isRequired,
-  onSubmit: PropTypes.func.isRequired
+  returnKeyType: PropTypes.oneOf(["done", "go", "next", "search", "send"]),
+  onSubmitEditing: PropTypes.func,
+  autoCorrect: PropTypes.bool
 };
 
 export default SearchBar;

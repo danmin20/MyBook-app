@@ -32,17 +32,12 @@ const SubInfo = styled.View`
 
 const SquareBook = ({
   navigation,
-  key,
-  term,
   isbn,
   title,
-  link,
   image,
   author,
   price,
-  discount,
-  publisher,
-  description
+  publisher
 }) => {
   return (
     <TouchableOpacity

@@ -9,7 +9,6 @@ import styles from "../styles";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const Container = styled.View``;
-const Header = styled.View``;
 const Name = styled.Text`
   color: white;
 `;
@@ -93,11 +92,6 @@ const Post = ({
   };
   return (
     <Container>
-      <Header>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("UserDetail", { userId: user.id })}
-        ></TouchableOpacity>
-      </Header>
       <Content>
         <BookInfo>
           <TouchableOpacity
@@ -131,9 +125,15 @@ const Post = ({
           </Info>
         </BookInfo>
         <Buttom>
-          <NameBox>
-            <Name>{user.name}</Name>
-          </NameBox>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("UserDetail", { userId: user.id })
+            }
+          >
+            <NameBox>
+              <Name>{user.name}</Name>
+            </NameBox>
+          </TouchableOpacity>
           <Sentiment>
             <Text>{sentiment}</Text>
           </Sentiment>

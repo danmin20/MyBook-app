@@ -9,7 +9,9 @@ import Feed from "../screens/Tab/Feed";
 import BookDetail from "../screens/Tab/BookDetail";
 import UserDetail from "../screens/Tab/UserDetail";
 import PostDetail from "../screens/Tab/PostDetail";
+import BookDisplay from "../screens/Tab/BookDisplay";
 import styles from "../styles";
+import { Text, View } from "react-native";
 
 const stackFactory = (initialRoute, customConfig) =>
   createStackNavigator(
@@ -35,7 +37,15 @@ const stackFactory = (initialRoute, customConfig) =>
       UserDetail: {
         screen: UserDetail,
         navigationOptions: {
-          title: ""
+          headerTitle: () => {
+            "none";
+          }
+        }
+      },
+      BookDisplay: {
+        screen: BookDisplay,
+        navigationOptions: {
+          title: "검색결과"
         }
       }
     },
@@ -58,7 +68,19 @@ const stackFactory = (initialRoute, customConfig) =>
 export default createBottomTabNavigator(
   {
     Home: {
-      screen: stackFactory(Home),
+      screen: stackFactory(Home, {
+        headerTitle: () => (
+          <View style={{flexDirection: "row", alignItems: "center", justifyContent:"center"}}>
+            <MaterialCommunityIcons
+              name="book-variant"
+              size={25}
+              color="white"
+            />
+            <Text style={{fontSize: 22, color: "white"}}> MY BOOK</Text>
+          </View>
+        ),
+        headerTitleAlign: "center"
+      }),
       navigationOptions: {
         tabBarIcon: ({ focused }) => (
           <MaterialCommunityIcons

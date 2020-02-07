@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useLogOut } from "../AuthContext";
-import { Image, ScrollView, TouchableOpacity } from "react-native";
+import { Image, ScrollView, TouchableOpacity, Text } from "react-native";
 import constants from "../constants";
 import { withNavigation } from "react-navigation";
 import styles from "../styles";
@@ -25,8 +25,8 @@ const Book = styled.View`
   padding: 1px;
   border-bottom-width: 15px;
   border-right-width: 15px;
-  border-bottom-left-radius: 10px;
-  border-top-right-radius: 10px;
+  border-bottom-left-radius: 15px;
+  border-top-right-radius: 15px;
   background-color: ${styles.blackColor};
 `;
 const Profile = styled.View`
@@ -74,6 +74,18 @@ const Date = styled.Text`
   font-size: 12px;
   text-align: center;
 `;
+const Stats = styled.View`
+  align-items: center;
+`;
+const Func = styled.View`
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 5px;
+  padding: 5px 80px;
+  margin-top: 20px;
+  margin-left: 50px;
+`;
 
 const UserBooks = ({
   name,
@@ -97,20 +109,35 @@ const UserBooks = ({
             </BioBox>
           )}
         </Profile>
-        <ProfileStats>
-          <Stat>
-            <StatName>게시물</StatName>
-            <Num>{postsCount}</Num>
-          </Stat>
-          <Stat>
-            <StatName>팔로워</StatName>
-            <Num>{followersCount}</Num>
-          </Stat>
-          <Stat>
-            <StatName>팔로잉</StatName>
-            <Num>{followingCount}</Num>
-          </Stat>
-        </ProfileStats>
+        <Stats>
+          <ProfileStats>
+            <Stat>
+              <StatName>게시물</StatName>
+              <Num>{postsCount}</Num>
+            </Stat>
+            <Stat>
+              <StatName>팔로워</StatName>
+              <Num>{followersCount}</Num>
+            </Stat>
+            <Stat>
+              <StatName>팔로잉</StatName>
+              <Num>{followingCount}</Num>
+            </Stat>
+          </ProfileStats>
+          {isSelf ? (
+            <TouchableOpacity onPress={logOut}>
+              <Func>
+                <Text>로그아웃</Text>
+              </Func>
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity>
+              <Func>
+                <Text>팔로잉</Text>
+              </Func>
+            </TouchableOpacity>
+          )}
+        </Stats>
       </Header>
       <ScrollView>
         <Books>
