@@ -36,3 +36,26 @@ export const USER_DETAIL = gql`
   }
   ${USER_FRAGMENT}
 `;
+
+export const FEED = gql`
+  {
+    seeFeed {
+      ...PostParts
+    }
+  }
+  ${POST_FRAGMENT}
+`;
+
+export const SEARCH_USER = gql`
+  query searchUser($name: String!) {
+    searchUser(name: $name) {
+      id
+      name
+      bio
+      isFollowing
+      isSelf
+      postsCount
+    }
+  }
+  ${USER_FRAGMENT}
+`;

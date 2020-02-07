@@ -6,7 +6,6 @@ import styles from "../styles";
 import { useQuery } from "react-apollo-hooks";
 import Swiper from "react-native-swiper";
 import Loader from "./Loader";
-import constants from "../constants";
 import { withNavigation } from "react-navigation";
 
 const Container = styled.View`
@@ -14,12 +13,14 @@ const Container = styled.View`
   align-items: center;
 `;
 const TopicBox = styled.View`
-  background-color: ${styles.lightGreyColor};
-  width: ${constants.width}px;
+  margin-top: 10px;
+  border: 0px solid ${styles.moderateGreyColor};
+  border-bottom-width: 1px;
 `;
 const Topic = styled.Text`
-  font-size: 18px;
-  margin: 10px;
+  font-size: 15px;
+  margin: 5px 10px;
+  color: ${styles.blackColor};
 `;
 const BookBox = styled.View`
   margin: 10px;

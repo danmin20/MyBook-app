@@ -8,7 +8,8 @@ import styles from "../styles";
 const Container = styled.View`
   padding: 30px 15px;
   flex-direction: row;
-  border: 0.5px solid ${styles.moderateGreyColor};
+  border: 0px solid ${styles.moderateGreyColor};
+  border-bottom-width: 1px;
 `;
 const Image = styled.Image`
   width: 100px;

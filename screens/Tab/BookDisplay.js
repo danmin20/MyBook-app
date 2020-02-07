@@ -12,12 +12,11 @@ export default ({ navigation }) => {
   return (
     <ScrollView>
       {loading && <Loader />}
-      {!loading && (!data || !data?.books) && <HomeScreen />}
-      {!loading && (
+      {!loading && data && data?.books && (
         <View>
-          {data &&
-            data?.books &&
-            data?.books.map(book => <SquareBook key={book.isbn} {...book} />)}
+          {data?.books.map(book => (
+            <SquareBook key={book.isbn} {...book} />
+          ))}
         </View>
       )}
     </ScrollView>

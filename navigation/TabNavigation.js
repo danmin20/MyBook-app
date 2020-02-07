@@ -1,6 +1,5 @@
 import React from "react";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
-import styled from "styled-components";
 import { createStackNavigator } from "react-navigation-stack";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import Home from "../screens/Tab/Home";
@@ -10,6 +9,7 @@ import BookDetail from "../screens/Tab/BookDetail";
 import UserDetail from "../screens/Tab/UserDetail";
 import PostDetail from "../screens/Tab/PostDetail";
 import BookDisplay from "../screens/Tab/BookDisplay";
+import UserDisplay from "../screens/Tab/UserDisplay";
 import styles from "../styles";
 import { Text, View } from "react-native";
 
@@ -44,9 +44,15 @@ const stackFactory = (initialRoute, customConfig) =>
       },
       BookDisplay: {
         screen: BookDisplay,
-        navigationOptions: {
-          title: "검색결과"
-        }
+        navigationOptions: ({ navigation }) => ({
+          title: "' " + navigation.getParam("term") + " '  검색결과"
+        })
+      },
+      UserDisplay: {
+        screen: UserDisplay,
+        navigationOptions: ({ navigation }) => ({
+          title: "' " + navigation.getParam("name") + " '  검색결과"
+        })
       }
     },
     {
@@ -70,13 +76,19 @@ export default createBottomTabNavigator(
     Home: {
       screen: stackFactory(Home, {
         headerTitle: () => (
-          <View style={{flexDirection: "row", alignItems: "center", justifyContent:"center"}}>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center"
+            }}
+          >
             <MaterialCommunityIcons
               name="book-variant"
               size={25}
               color="white"
             />
-            <Text style={{fontSize: 22, color: "white"}}> MY BOOK</Text>
+            <Text style={{ fontSize: 22, color: "white" }}> MY BOOK</Text>
           </View>
         ),
         headerTitleAlign: "center"
@@ -92,7 +104,25 @@ export default createBottomTabNavigator(
       }
     },
     Feed: {
-      screen: stackFactory(Feed),
+      screen: stackFactory(Feed, {
+        headerTitle: () => (
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center"
+            }}
+          >
+            <MaterialCommunityIcons
+              name="book-variant"
+              size={25}
+              color="white"
+            />
+            <Text style={{ fontSize: 22, color: "white" }}> MY BOOK</Text>
+          </View>
+        ),
+        headerTitleAlign: "center"
+      }),
       navigationOptions: {
         tabBarIcon: ({ focused }) => (
           <MaterialIcons
