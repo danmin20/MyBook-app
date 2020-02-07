@@ -9,6 +9,7 @@ import Feed from "../screens/Tab/Feed";
 import BookDetail from "../screens/Tab/BookDetail";
 import UserDetail from "../screens/Tab/UserDetail";
 import PostDetail from "../screens/Tab/PostDetail";
+import styles from "../styles";
 
 const stackFactory = (initialRoute, customConfig) =>
   createStackNavigator(
@@ -42,7 +43,7 @@ const stackFactory = (initialRoute, customConfig) =>
       defaultNavigationOptions: {
         headerBackTitleVisible: false,
         headerStyle: {
-          backgroundColor: "black"
+          backgroundColor: styles.blackColor
         },
         headerTitleStyle: {
           color: "white"
@@ -98,7 +99,7 @@ export default createBottomTabNavigator(
   {
     tabBarOptions: {
       showLabel: false,
-      style: { backgroundColor: "black" }
+      style: { backgroundColor: styles.blackColor }
     }
   }
 );

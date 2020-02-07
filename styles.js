@@ -1,5 +1,5 @@
 const styles = {
-    blackColor: "#262626",
+    blackColor: "#2E2E2E",
     greyColor: "#FAFAFA",
     darkGreyColor: "#999",
     lightGreyColor: "rgb(230, 230, 230)",

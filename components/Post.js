@@ -56,7 +56,7 @@ const Buttom = styled.View`
 `;
 const NameBox = styled.View`
   margin-top: 15px;
-  background-color: #403e3b;
+  background-color: ${styles.blackColor};
   padding: 3px 25px;
   margin-right: auto;
   border-radius: 10px;

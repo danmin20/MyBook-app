@@ -4,27 +4,30 @@ import { useLogOut } from "../AuthContext";
 import { Image, ScrollView, TouchableOpacity } from "react-native";
 import constants from "../constants";
 import { withNavigation } from "react-navigation";
+import styles from "../styles";
 
 const View = styled.View`
-  background-color: #e3e1de;
+  background-color: white;
   height: ${constants.height}px;
 `;
 const Header = styled.View`
   flex-direction: row;
-  background-color: black;
+  background-color: ${styles.blackColor};
   padding-bottom: 25px;
 `;
-const Books = styled.View``;
+const Books = styled.View`
+  margin: 20px;
+  flex-direction: row;
+`;
 const Book = styled.View`
-  margin: 3px;
-  padding-top: 10px;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-bottom: 2px;
-  border: 0px solid white;
+  margin: auto;
+  border: 0px solid ${styles.blackColor};
+  padding: 1px;
+  border-bottom-width: 15px;
+  border-right-width: 15px;
   border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  border-bottom-width: 10px;
+  border-top-right-radius: 10px;
+  background-color: ${styles.blackColor};
 `;
 const Profile = styled.View`
   justify-content: center;
@@ -61,14 +64,14 @@ const StatName = styled.Text`
 `;
 const Date = styled.Text`
   background-color: white;
-  width: 82px;
-  padding: 10px;
+  width: 84px;
+  padding: 5px;
   position: absolute;
-  bottom: 25px;
-  left: 10px;
+  bottom: 15px;
   margin: auto;
+  border: 1px solid ${styles.blackColor};
   color: black;
-  font-size: 10px;
+  font-size: 12px;
   text-align: center;
 `;
 
@@ -115,6 +118,10 @@ const UserBooks = ({
             posts.map(post => (
               <Book key={post.id}>
                 <TouchableOpacity
+                  style={{
+                    height: 116,
+                    width: 82
+                  }}
                   onPress={() =>
                     navigation.navigate("PostDetail", {
                       title: post.book.title,
@@ -125,8 +132,7 @@ const UserBooks = ({
                   <Image
                     style={{
                       height: 116,
-                      width: 82,
-                      borderRadius: 5
+                      width: 82
                     }}
                     source={{ uri: post.book.image }}
                   />
