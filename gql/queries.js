@@ -27,3 +27,12 @@ export const POST_DETAIL = gql`
   }
   ${POST_FRAGMENT}
 `;
+
+export const USER_DETAIL = gql`
+  query seeUser($userId: String!) {
+    seeUser(userId: $userId) {
+      ...UserParts
+    }
+  }
+  ${USER_FRAGMENT}
+`;

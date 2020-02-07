@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import { useQuery } from "react-apollo-hooks";
-import { ScrollView, Text } from "react-native";
+import { ScrollView, Text, RefreshControl } from "react-native";
 import SquareBook from "../../../components/SquareBook";
 import Loader from "../../../components/Loader";
 import { SEARCH } from "../../../gql/queries";
@@ -28,7 +28,11 @@ const HomePresenter = ({ term, shouldFetch }) => {
     }
   };
   return (
-    <ScrollView refreshControl={refreshing} onRefresh={refresh}>
+    <ScrollView
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={refresh} />
+      }
+    >
       {loading && <Loader />}
       {!loading && (!data || !data?.books) && <HomeScreen />}
       {!loading && (

@@ -39,7 +39,7 @@ const BioBox = styled.View`
   margin-top: 15px;
   background-color: white;
   padding: 0 10px;
-  border-radius: 25px;
+  border-radius: 10px;
 `;
 const Bio = styled.Text``;
 const ProfileStats = styled.View`

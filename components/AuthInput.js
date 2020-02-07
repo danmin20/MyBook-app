@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import constants from "../constants";
+import styles from "../styles";
 
 const Container = styled.View`
   margin-bottom: 10px;
@@ -11,7 +12,7 @@ const TextInput = styled.TextInput`
   width: ${constants.width / 1.7}px;
   padding: 5px 10px;
   border-radius: 4px;
-  border: 0px solid ${props => props.theme.moderateGreyColor};
+  border: 0px solid ${styles.moderateGreyColor};
   border-bottom-width: 1px;
 `;
 

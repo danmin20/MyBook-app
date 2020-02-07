@@ -1,17 +1,32 @@
-import React from "react";
-import { Text, ScrollView } from "react-native";
+import React, { useState } from "react";
+import { Text, ScrollView, RefreshControl } from "react-native";
 import { useQuery } from "react-apollo-hooks";
 import { POST_DETAIL } from "../../gql/queries";
 import Loader from "../../components/Loader";
 import Post from "../../components/Post";
 
 export default ({ navigation }) => {
-  const { loading, data } = useQuery(POST_DETAIL, {
+  const [refreshing, setRefreshing] = useState(false);
+  const { loading, data, refetch } = useQuery(POST_DETAIL, {
     variables: { id: navigation.getParam("id") }
   });
-  console.log(data.seeFullPost)
+  const refresh = async () => {
+    try {
+      setRefreshing(true);
+      await refetch();
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setRefreshing(false);
+    }
+  };
+  console.log(data.seeFullPost);
   return (
-    <ScrollView>
+    <ScrollView
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={refresh} />
+      }
+    >
       {loading ? (
         <Loader />
       ) : (
