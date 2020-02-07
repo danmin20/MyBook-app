@@ -1,19 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useLogOut } from "../AuthContext";
 import { Image, ScrollView, TouchableOpacity, Text } from "react-native";
 import constants from "../constants";
 import { withNavigation } from "react-navigation";
 import styles from "../styles";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useMutation } from "react-apollo-hooks";
+import { TOGGLE_FOLLOW } from "../gql/queries";
 
 const View = styled.View`
   background-color: white;
   height: ${constants.height}px;
 `;
-const Header = styled.View`
-  flex-direction: row;
+const Top = styled.View`
   background-color: ${styles.blackColor};
   padding-bottom: 25px;
+`;
+const Header = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 `;
 const Books = styled.View`
   margin: 20px;
@@ -39,12 +46,17 @@ const Name = styled.Text`
   color: white;
 `;
 const BioBox = styled.View`
-  margin-top: 15px;
-  background-color: white;
+  flex-direction: row;
+  margin-top: 20px;
+  align-items: center;
+  justify-content: center;
   padding: 0 10px;
-  border-radius: 10px;
 `;
-const Bio = styled.Text``;
+const Bio = styled.Text`
+  color: white;
+  font-weight: bold;
+  font-size: 15px;
+`;
 const ProfileStats = styled.View`
   flex-direction: row;
   justify-content: center;
@@ -76,18 +88,33 @@ const Date = styled.Text`
 `;
 const Stats = styled.View`
   align-items: center;
+  margin-right: 10px;
 `;
 const Func = styled.View`
   justify-content: center;
   align-items: center;
   background-color: white;
   border-radius: 5px;
-  padding: 5px 80px;
-  margin-top: 20px;
-  margin-left: 50px;
+  padding: 3px 15px;
+  margin-top: 10px;
+`;
+const FuncText = styled.Text`
+  font-size: 11px;
+`;
+const Func_2 = styled.View`
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  padding: 3px 15px;
+  margin-top: 10px;
+`;
+const FuncText_2 = styled.Text`
+  font-size: 11px;
+  color: white;
 `;
 
 const UserBooks = ({
+  id,
   name,
   bio,
   postsCount,
@@ -95,50 +122,86 @@ const UserBooks = ({
   followingCount,
   posts,
   isSelf,
+  isFollowing: isFollowingProp,
   navigation
 }) => {
   const logOut = useLogOut();
+  const [isFollowing, setIsFollowing] = useState(isFollowingProp);
+  const [toggleFollowMtation] = useMutation(TOGGLE_FOLLOW, {
+    variables: { id }
+  });
+  const handleFollow = async () => {
+    setIsFollowing(p => !p);
+    if (isFollowing) {
+      setIsFollowing(false);
+    } else {
+      setIsFollowing(true);
+    }
+    try {
+      await toggleFollowMtation();
+    } catch (e) {
+      console.log(e);
+    }
+  };
   return (
     <View>
-      <Header>
-        <Profile>
-          <Name>{name}</Name>
-          {bio && (
-            <BioBox>
-              <Bio>{bio}</Bio>
-            </BioBox>
-          )}
-        </Profile>
-        <Stats>
-          <ProfileStats>
-            <Stat>
-              <StatName>게시물</StatName>
-              <Num>{postsCount}</Num>
-            </Stat>
-            <Stat>
-              <StatName>팔로워</StatName>
-              <Num>{followersCount}</Num>
-            </Stat>
-            <Stat>
-              <StatName>팔로잉</StatName>
-              <Num>{followingCount}</Num>
-            </Stat>
-          </ProfileStats>
-          {isSelf ? (
-            <TouchableOpacity onPress={logOut}>
-              <Func>
-                <Text>로그아웃</Text>
-              </Func>
-            </TouchableOpacity>
-          ) : (
-            <TouchableOpacity>
-              <Func>
-                <Text>팔로잉</Text>
-              </Func>
-            </TouchableOpacity>
-          )}
-        </Stats>
-      </Header>
+      <Top>
+        <Header>
+          <Profile>
+            <Name>{name}</Name>
+            {isSelf ? (
+              <TouchableOpacity onPress={logOut}>
+                <Func>
+                  <FuncText>로그아웃</FuncText>
+                </Func>
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity onPress={handleFollow}>
+                {isFollowing ? (
+                  <Func_2>
+                    <FuncText_2>팔로잉</FuncText_2>
+                  </Func_2>
+                ) : (
+                  <Func>
+                    <FuncText>팔로우</FuncText>
+                  </Func>
+                )}
+              </TouchableOpacity>
+            )}
+          </Profile>
+          <Stats>
+            <ProfileStats>
+              <Stat>
+                <StatName>게시물</StatName>
+                <Num>{postsCount}</Num>
+              </Stat>
+              <Stat>
+                <StatName>팔로워</StatName>
+                <Num>{followersCount}</Num>
+              </Stat>
+              <Stat>
+                <StatName>팔로잉</StatName>
+                <Num>{followingCount}</Num>
+              </Stat>
+            </ProfileStats>
+          </Stats>
+        </Header>
+        {bio && (
+          <BioBox>
+            <MaterialCommunityIcons
+              name="format-quote-open"
+              color="white"
+              size={30}
+            />
+            <Bio> {bio} </Bio>
+            <MaterialCommunityIcons
+              name="format-quote-close"
+              color="white"
+              size={30}
+            />
+          </BioBox>
+        )}
+      </Top>
       <ScrollView>
         <Books>
           {posts &&

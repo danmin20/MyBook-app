@@ -59,3 +59,9 @@ export const SEARCH_USER = gql`
   }
   ${USER_FRAGMENT}
 `;
+
+export const TOGGLE_FOLLOW = gql`
+  mutation toggleFollow($id: String!) {
+    toggleFollow(id: $id)
+  }
+`;
