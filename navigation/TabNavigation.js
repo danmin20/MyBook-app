@@ -12,6 +12,7 @@ import BookDisplay from "../screens/Tab/BookDisplay";
 import UserDisplay from "../screens/Tab/UserDisplay";
 import styles from "../styles";
 import { Text, View } from "react-native";
+import Upload from "../screens/Tab/Upload";
 
 const stackFactory = (initialRoute, customConfig) =>
   createStackNavigator(
@@ -53,6 +54,14 @@ const stackFactory = (initialRoute, customConfig) =>
         navigationOptions: ({ navigation }) => ({
           title: "' " + navigation.getParam("name") + " '  검색결과"
         })
+      },
+      Upload: {
+        screen: Upload,
+        navigationOptions: {
+          headerTitle: () => {
+            "none";
+          }
+        }
       }
     },
     {

@@ -64,3 +64,12 @@ export const TOGGLE_FOLLOW = gql`
     toggleFollow(id: $id)
   }
 `;
+
+export const UPLOAD = gql`
+  mutation upload($bookId: String!, $sentiment: String!) {
+    upload(bookId: $bookId, sentiment: $sentiment) {
+      ...PostParts
+    }
+  }
+  ${POST_FRAGMENT}
+`;

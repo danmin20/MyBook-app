@@ -2,7 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import { useQuery } from "react-apollo-hooks";
 import { SEARCH } from "../../gql/queries";
-import { Text, Image, ScrollView, Linking } from "react-native";
+import {
+  Text,
+  Image,
+  ScrollView,
+  Linking,
+  TouchableOpacity
+} from "react-native";
 import Loader from "../../components/Loader";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import styles from "../../styles";
@@ -11,9 +17,6 @@ const Container = styled.View`
   justify-content: center;
   align-items: center;
   flex: 1;
-`;
-const Img = styled.View`
-  margin-top: 20px;
 `;
 const Link = styled.View`
   flex-direction: row;
@@ -28,7 +31,7 @@ const Info = styled.View`
   margin: 20px;
 `;
 const Descript = styled.View`
-  margin-top: 10px;
+  margin-top: 20px;
   padding: 10px;
   border-radius: 10px;
   background-color: ${styles.lightGreyColor};
@@ -37,6 +40,7 @@ const Title = styled.Text`
   text-align: center;
   font-weight: bold;
   font-size: 17px;
+  margin-top: 15px;
   margin-bottom: 15px;
 `;
 const TextRow = styled.View`
@@ -47,6 +51,13 @@ const TextColumn = styled.View`
 `;
 const Kind = styled.Text`
   opacity: 0.7;
+`;
+const Upload = styled.TouchableOpacity`
+  flex-direction: row;
+  margin-left: auto;
+  padding: 15px;
+  align-items: center;
+  justify-content: center;
 `;
 
 export default ({ navigation }) => {
@@ -61,12 +72,18 @@ export default ({ navigation }) => {
       ) : (
         detail && (
           <Container>
-            <Img>
-              <Image
-                source={{ uri: detail.image }}
-                style={{ width: 130, height: 180, borderRadius: 15 }}
-              />
-            </Img>
+            <Upload
+              onPress={() =>
+                navigation.navigate("Upload", { bookId: detail.isbn })
+              }
+            >
+              <Text>글쓰러 가기 </Text>
+              <MaterialCommunityIcons name="arrow-right" size={20} />
+            </Upload>
+            <Image
+              source={{ uri: detail.image }}
+              style={{ width: 130, height: 180, borderRadius: 15 }}
+            />
             <Info>
               <Title>{detail.title}</Title>
               <TextRow>
