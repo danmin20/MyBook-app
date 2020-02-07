@@ -55,6 +55,7 @@ const NameBox = styled.View`
 
 const Post = ({
   id,
+  title,
   user,
   book,
   likeCount: likeCountProp,
@@ -85,7 +86,7 @@ const Post = ({
   return (
     <TouchableOpacity
       onPress={() =>
-        navigation.navigate("PostDetail", { title: book.title, id: id })
+        navigation.navigate("PostDetail", { title: title, id: id })
       }
     >
       <Container>
@@ -122,6 +123,7 @@ const Post = ({
 
 Post.propTypes = {
   id: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
   user: PropTypes.shape({
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired

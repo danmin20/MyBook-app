@@ -12,6 +12,7 @@ import {
 import useInput from "../../hook/useInput";
 import { ActivityIndicator, Image } from "react-native";
 import styles from "../../styles";
+import constants from "../../constants";
 
 const View = styled.View`
   justify-content: flex-start;
@@ -33,7 +34,7 @@ const Form = styled.View`
 `;
 const Sentiment = styled.TextInput`
   margin-left: 15px;
-  margin-right: auto;
+  flex: 1;
 `;
 
 const Button = styled.TouchableOpacity`
@@ -82,7 +83,6 @@ export default ({ navigation }) => {
     refetchQueries: () => [{ query: [FEED, SEARCH_USER, ME, USER_DETAIL] }]
   });
   const book = data.books[0];
-  console.log(book);
   const handleUpload = async () => {
     try {
       setIsLoading(true);
@@ -109,7 +109,10 @@ export default ({ navigation }) => {
         {loading ? <ActivityIndicator color="white" /> : <Text>업로드</Text>}
       </Button>
       <Container>
-        <Image source={{ uri: book.image }} style={{ height: 50, width: 50 }} />
+        <Image
+          source={{ uri: book.image }}
+          style={{ height: 116, width: 82, borderRadius: 5 }}
+        />
         <Sentiment
           onChangeText={sentimentInput.onChange}
           value={sentimentInput.value}

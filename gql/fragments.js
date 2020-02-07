@@ -17,6 +17,7 @@ export const BOOK_FRAGMENT = gql`
 export const POST_FRAGMENT = gql`
   fragment PostParts on Post {
     id
+    title
     sentiment
     book {
       ...BookParts
