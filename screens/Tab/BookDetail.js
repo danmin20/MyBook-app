@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useQuery } from "react-apollo-hooks";
 import { SEARCH } from "../../gql/queries";
-import { Text, Image, ScrollView, Linking } from "react-native";
+import { Text, ScrollView, Linking } from "react-native";
 import Loader from "../../components/Loader";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import styles from "../../styles";
@@ -11,6 +11,14 @@ const Container = styled.View`
   justify-content: center;
   align-items: center;
   flex: 1;
+`;
+const Img = styled.View`
+  align-items: center;
+`;
+const Image = styled.Image`
+  width: 130px;
+  height: 180px;
+  border-radius: 15px;
 `;
 const Link = styled.View`
   flex-direction: row;
@@ -74,12 +82,20 @@ export default ({ navigation }) => {
               <Text>글쓰러 가기 </Text>
               <MaterialCommunityIcons name="arrow-right" size={20} />
             </Upload>
-            <Image
-              source={{ uri: detail.image }}
-              style={{ width: 130, height: 180, borderRadius: 15 }}
-            />
             <Info>
-              <Title>{detail.title}</Title>
+              <Img>
+                <Image
+                  style={{ position: "absolute" }}
+                  source={require("../../assets/noImage.png")}
+                />
+                {detail.image !== "" && (
+                  <Image source={{ uri: detail.image }} />
+                )}
+                {detail.image === "" && (
+                  <Image source={require("../../assets/noImage.png")} />
+                )}
+              </Img>
+              <Title>{detail.title.replace(/&quot;/gi, '"')}</Title>
               <TextRow>
                 <TextColumn>
                   <Kind>출판사</Kind>

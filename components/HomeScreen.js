@@ -60,9 +60,6 @@ const HomeScreen = ({ navigation }) => {
   const { data: data_40, loading: loading_40 } = useQuery(SEARCH, {
     variables: { term: "40대" }
   });
-  const { data: data_50, loading: loading_50 } = useQuery(SEARCH, {
-    variables: { term: "50대" }
-  });
   return (
     <>
       {loading_10 && loading_20 && loading_30 && loading_40 && loading_50 && (
@@ -155,33 +152,6 @@ const HomeScreen = ({ navigation }) => {
         </TopicBox>
         <Swiper style={{ height: 170 }} activeDotColor={styles.blackColor}>
           {data_40?.books.map(book => (
-            <TouchableOpacity
-              key={book.isbn}
-              onPress={() =>
-                navigation.navigate("BookDetail", { isbn: book.isbn })
-              }
-            >
-              <BookBox>
-                <Image source={{ uri: book.image }} />
-                <Info>
-                  <Title>
-                    {book.title.replace(/<b>/gi, "").replace(/<\/b>/gi, "")}
-                  </Title>
-                  <Author>
-                    {book.author.replace(/<b>/gi, "").replace(/<\/b>/gi, "")}
-                  </Author>
-                </Info>
-              </BookBox>
-            </TouchableOpacity>
-          ))}
-        </Swiper>
-      </Container>
-      <Container key={5}>
-        <TopicBox>
-          <Topic>50대 추천도서</Topic>
-        </TopicBox>
-        <Swiper style={{ height: 170 }} activeDotColor={styles.blackColor}>
-          {data_50?.books.map(book => (
             <TouchableOpacity
               key={book.isbn}
               onPress={() =>

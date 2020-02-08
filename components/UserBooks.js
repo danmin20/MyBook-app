@@ -23,13 +23,14 @@ const Header = styled.View`
   justify-content: center;
 `;
 const Books = styled.View`
-justify-content: space-between;
-margin: 30px;
+  justify-content: center;
   flex-direction: row;
   flex-wrap: wrap;
 `;
 const Book = styled.View`
-margin-bottom: 30px;
+  margin-top: 30px;
+  margin-left: 15px;
+  margin-right: 15px;
   border: 0px solid ${styles.blackColor};
   padding: 1px;
   border-bottom-width: 15px;

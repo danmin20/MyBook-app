@@ -154,7 +154,7 @@ Post.propTypes = {
   book: PropTypes.shape({
     isbn: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
+    image: PropTypes.string,
     link: PropTypes.string.isRequired,
     publisher: PropTypes.string.isRequired,
     author: PropTypes.string.isRequired

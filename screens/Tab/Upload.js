@@ -3,13 +3,18 @@ import styled from "styled-components";
 import { useMutation, useQuery } from "react-apollo-hooks";
 import { UPLOAD, FEED, ME, SEARCH } from "../../gql/queries";
 import useInput from "../../hook/useInput";
-import { ActivityIndicator, Image } from "react-native";
+import { ActivityIndicator } from "react-native";
 import styles from "../../styles";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import constants from "../../constants";
 
 const View = styled.View`
   flex: 1;
+`;
+const Image = styled.Image`
+  height: 116px;
+  width: 82px;
+  border-radius: 5px;
 `;
 const Container = styled.View`
   padding: 15px 15px;
@@ -120,9 +125,14 @@ export default ({ navigation }) => {
         </Header>
         <Content>
           <Image
-            source={{ uri: book.image }}
-            style={{ height: 116, width: 82, borderRadius: 5 }}
+            style={{ position: "absolute" }}
+            source={require("../../assets/noImage.png")}
           />
+          {book.image !== "" && <Image source={{ uri: book.image }} />}
+          {book.image === "" && (
+            <Image source={require("../../assets/noImage.png")} />
+          )}
+
           <Sentiment
             onChangeText={sentimentInput.onChange}
             value={sentimentInput.value}

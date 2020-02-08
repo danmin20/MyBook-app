@@ -24,7 +24,10 @@ export default function App() {
         ...MaterialIcons.font,
         ...MaterialCommunityIcons.font
       });
-      await Asset.loadAsync([require("./assets/logo.png")]);
+      await Asset.loadAsync([
+        require("./assets/logo.png"),
+        require("./assets/noImage.png")
+      ]);
       const cache = new InMemoryCache();
       await persistCache({
         cache,

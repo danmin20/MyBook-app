@@ -1,7 +1,7 @@
 import React from "react";
 import { MarkdownView } from "react-native-markdown-view";
 import styled from "styled-components";
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, Text, View } from "react-native";
 import { withNavigation } from "react-navigation";
 import styles from "../styles";
 
@@ -27,8 +27,13 @@ const Title = styled.View`
   margin-bottom: 5px;
 `;
 const SubInfo = styled.View`
-  opacity: 0.5;
-  margin-top: -40px;
+  flex-direction: row;
+`;
+const TextColumn = styled.View`
+  margin-right: 10px;
+`;
+const Kind = styled.Text`
+  opacity: 0.7;
 `;
 
 const SquareBook = ({
@@ -45,19 +50,34 @@ const SquareBook = ({
       onPress={() => navigation.navigate("BookDetail", { isbn })}
     >
       <Container>
-        <Image source={{ uri: image }} />
+        <View>
+          <Image
+            style={{ position: "absolute" }}
+            source={require("../assets/noImage.png")}
+          />
+          {image !== "" && <Image source={{ uri: image }} />}
+          {image === "" && <Image source={require("../assets/noImage.png")} />}
+        </View>
         <Info>
           <Title>
             <MarkdownView>
-              {title.replace(/<b>/gi, "").replace(/<\/b>/gi, "")}
+              {title
+                .replace(/<b>/gi, "")
+                .replace(/<\/b>/gi, "")
+                .replace(/&quot;/gi, '"')}
             </MarkdownView>
           </Title>
           <SubInfo>
-            <MarkdownView>
-              {"\n"}**정가** {price}
-              {"\n"}**저자** {author}
-              {"\n"}**출판사** {publisher}
-            </MarkdownView>
+            <TextColumn>
+              <Kind>저자</Kind>
+              <Kind>정가</Kind>
+              <Kind>출판사</Kind>
+            </TextColumn>
+            <TextColumn>
+              <Text>{author}</Text>
+              <Text>{price}</Text>
+              <Text>{publisher}</Text>
+            </TextColumn>
           </SubInfo>
         </Info>
       </Container>

@@ -106,7 +106,7 @@ const Post = ({
           </NameBox>
           <Title>
             <MaterialCommunityIcons name="format-quote-open" size={20} />
-            <Text style={{fontSize:15, fontStyle: "italic"}}> {title} </Text>
+            <Text style={{ fontSize: 15, fontStyle: "italic" }}> {title} </Text>
             <MaterialCommunityIcons name="format-quote-close" size={20} />
           </Title>
         </Header>
@@ -148,7 +148,7 @@ Post.propTypes = {
   book: PropTypes.shape({
     isbn: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
+    image: PropTypes.string,
     link: PropTypes.string.isRequired,
     publisher: PropTypes.string.isRequired,
     author: PropTypes.string.isRequired
