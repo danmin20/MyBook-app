@@ -66,10 +66,15 @@ export const TOGGLE_FOLLOW = gql`
 `;
 
 export const UPLOAD = gql`
-  mutation upload($bookId: String!, $sentiment: String!) {
-    upload(bookId: $bookId, sentiment: $sentiment) {
-      ...PostParts
+  mutation upload($bookId: String!, $title: String!, $sentiment: String!) {
+    upload(bookId: $bookId, title: $title, sentiment: $sentiment) {
+      id
     }
   }
-  ${POST_FRAGMENT}
+`;
+
+export const TOGGLE_LIKE = gql`
+  mutation toggleLike($postId: String!) {
+    toggleLike(postId: $postId)
+  }
 `;

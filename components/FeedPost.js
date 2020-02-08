@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { gql } from "apollo-boost";
 import PropTypes from "prop-types";
 import { TouchableOpacity, Image, Text } from "react-native";
 import { withNavigation } from "react-navigation";
 import { useMutation } from "react-apollo-hooks";
 import styles from "../styles";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import constants from "../constants";
+import { TOGGLE_LIKE } from "../gql/queries";
 
 const Container = styled.View`
   padding: 10px;
   align-items: center;
   justify-content: center;
-  border: 0px solid ${styles.moderateGreyColor};
-  border-bottom-width: 1px;
 `;
 const Name = styled.Text`
   color: ${styles.blackColor};
@@ -27,13 +27,9 @@ const Sentiment = styled.View`
 const Date = styled.Text`
   margin-right: 10px;
   margin-left: auto;
+  margin-bottom: 10px;
   font-size: 10px;
   opacity: 0.7;
-`;
-const TOGGLE_LIKE = gql`
-  mutation toggleLike($postId: String!) {
-    toggleLike(postId: $postId)
-  }
 `;
 const Box = styled.View`
   margin: 10px;
@@ -45,12 +41,26 @@ const BookInfo = styled.View`
   align-items: center;
   margin-right: 5px;
 `;
+const Title = styled.View`
+  flex-direction: row;
+  justify-content: center;
+  padding: 10px;
+  margin-right: 10px;
+  flex: 3;
+`;
 const NameBox = styled.View`
-  margin: 10px;
-  padding: 5px 15px;
-  margin-right: auto;
+  align-items: center;
+  justify-content: center;
   border: 0px solid ${styles.darkGreyColor};
   border-bottom-width: 1px;
+  padding: 10px;
+  flex: 1;
+`;
+const Header = styled.View`
+  width: ${constants.width}px;
+  flex-direction: row;
+  margin: 10px;
+  flex: 1;
 `;
 
 const Post = ({
@@ -90,9 +100,16 @@ const Post = ({
       }
     >
       <Container>
-        <NameBox>
-          <Name>{user.name}</Name>
-        </NameBox>
+        <Header>
+          <NameBox>
+            <Name>{user.name}</Name>
+          </NameBox>
+          <Title>
+            <MaterialCommunityIcons name="format-quote-open" size={20} />
+            <Text style={{fontSize:15, fontStyle: "italic"}}> {title} </Text>
+            <MaterialCommunityIcons name="format-quote-close" size={20} />
+          </Title>
+        </Header>
         <Box>
           <BookInfo>
             <Image

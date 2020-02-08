@@ -20,7 +20,6 @@ export default ({ navigation }) => {
       setRefreshing(false);
     }
   };
-  console.log(data?.searchUser)
   return (
     <ScrollView
       refreshControl={

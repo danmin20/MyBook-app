@@ -23,11 +23,13 @@ const Header = styled.View`
   justify-content: center;
 `;
 const Books = styled.View`
-  margin: 20px;
+justify-content: space-between;
+margin: 30px;
   flex-direction: row;
+  flex-wrap: wrap;
 `;
 const Book = styled.View`
-  margin: auto;
+margin-bottom: 30px;
   border: 0px solid ${styles.blackColor};
   padding: 1px;
   border-bottom-width: 15px;
@@ -213,7 +215,7 @@ const UserBooks = ({
                       height: 116,
                       width: 82
                     }}
-                    source={{ uri: post.book.image }}
+                    source={{ uri: post.book?.image }}
                   />
                 </TouchableOpacity>
                 <Date>{post.createdAt.substring(0, 10)}</Date>

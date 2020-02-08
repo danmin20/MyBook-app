@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { gql } from "apollo-boost";
 import PropTypes from "prop-types";
 import { TouchableOpacity, Image, Text, Linking } from "react-native";
 import { withNavigation } from "react-navigation";
 import { useMutation } from "react-apollo-hooks";
 import styles from "../styles";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { TOGGLE_LIKE } from "../gql/queries";
 
 const Container = styled.View``;
 const Name = styled.Text`
@@ -25,11 +25,6 @@ const Date = styled.Text`
   margin-left: auto;
   font-size: 10px;
   opacity: 0.7;
-`;
-const TOGGLE_LIKE = gql`
-  mutation toggleLike($postId: String!) {
-    toggleLike(postId: $postId)
-  }
 `;
 const Link = styled.View`
   flex-direction: row;

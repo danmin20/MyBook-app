@@ -1,71 +1,53 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useMutation, useQuery } from "react-apollo-hooks";
-import {
-  UPLOAD,
-  FEED,
-  SEARCH_USER,
-  ME,
-  USER_DETAIL,
-  SEARCH
-} from "../../gql/queries";
+import { UPLOAD, FEED, ME, SEARCH } from "../../gql/queries";
 import useInput from "../../hook/useInput";
 import { ActivityIndicator, Image } from "react-native";
 import styles from "../../styles";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import constants from "../../constants";
 
 const View = styled.View`
-  justify-content: flex-start;
   flex: 1;
 `;
 const Container = styled.View`
-  padding: 10px 15px;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  border: 0px solid ${styles.lightGreyColor};
-  border-top-width: 2px;
-  border-bottom-width: 1px;
+  padding: 15px 15px;
 `;
-const Form = styled.View`
-  padding: 15px 0;
-  border: 0px solid ${styles.lightGreyColor};
-  border-bottom-width: 1px;
+const Header = styled.View`
+  flex-direction: row;
+  justify-content: center;
+`;
+const Content = styled.View`
+  margin: 15px;
+  flex-direction: row;
+`;
+const Title = styled.TextInput`
+  padding: 5px 10px;
+  font-size: 18px;
+  max-width: ${constants.width - 50}px;
+  text-align: center;
 `;
 const Sentiment = styled.TextInput`
+  border-radius: 10px;
   margin-left: 15px;
+  background-color: ${styles.lightGreyColor};
+  padding: 10px;
+  min-height: 116px;
   flex: 1;
 `;
-
 const Button = styled.TouchableOpacity`
+  flex-direction: row;
+  margin-left: auto;
   padding: 15px;
-  align-items: flex-end;
+  align-items: center;
+  justify-content: center;
 `;
 const Text = styled.Text`
   font-size: 15px;
   margin-left: 15px;
   margin-top: 3px;
   margin-bottom: 3px;
-`;
-const Upload = styled.Text`
-  color: ${styles.blueColor};
-  font-weight: bold;
-  font-size: 15px;
-`;
-const Share = styled.View`
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin-right: 15px;
-  margin-top: -15px;
-  margin-bottom: -15px;
-`;
-const Setting = styled.Text`
-  font-size: 12px;
-  margin-left: 15px;
-  margin-top: 10px;
-  font-weight: bold;
-  color: ${styles.darkGreyColor};
 `;
 
 export default ({ navigation }) => {
@@ -78,11 +60,12 @@ export default ({ navigation }) => {
         .replace(/<\/b>/gi, "")
     }
   });
+  const titleInput = useInput("");
   const sentimentInput = useInput("");
-  const [uploadMutation] = useMutation(UPLOAD, {
-    refetchQueries: () => [{ query: [FEED, SEARCH_USER, ME, USER_DETAIL] }]
-  });
+  const [uploadMutation] = useMutation(UPLOAD);
   const book = data.books[0];
+  const { refetch: refetchFeed } = useQuery(FEED);
+  const { refetch: refetchMe } = useQuery(ME);
   const handleUpload = async () => {
     try {
       setIsLoading(true);
@@ -90,12 +73,19 @@ export default ({ navigation }) => {
         data: { upload }
       } = await uploadMutation({
         variables: {
+          title: titleInput.value,
           sentiment: sentimentInput.value,
-          bookId: navigation.getParam("bookId")
+          bookId: navigation
+            .getParam("bookId")
+            .replace(/<b>/gi, "")
+            .replace(/<\/b>/gi, "")
         }
       });
+      await refetchFeed();
+      await refetchMe();
       if (upload.id) {
         navigation.navigate("MyBooks");
+      } else {
       }
     } catch (e) {
       console.log(e);
@@ -106,20 +96,41 @@ export default ({ navigation }) => {
   return (
     <View>
       <Button onPress={handleUpload}>
-        {loading ? <ActivityIndicator color="white" /> : <Text>업로드</Text>}
+        {loading ? (
+          <ActivityIndicator
+            style={{ marginLeft: 15, marginTop: 3, marginBottom: 3 }}
+            color="black"
+          />
+        ) : (
+          <Text>업로드하기 </Text>
+        )}
+        <MaterialCommunityIcons name="arrow-right" size={20} />
       </Button>
       <Container>
-        <Image
-          source={{ uri: book.image }}
-          style={{ height: 116, width: 82, borderRadius: 5 }}
-        />
-        <Sentiment
-          onChangeText={sentimentInput.onChange}
-          value={sentimentInput.value}
-          placeholder="내용 입력..."
-          multiline={true}
-          placeholderTextColor={styles.darkGreyColor}
-        />
+        <Header>
+          <MaterialCommunityIcons name="format-quote-open" size={30} />
+          <Title
+            onChangeText={titleInput.onChange}
+            value={titleInput.value}
+            placeholder="제목 입력..."
+            multiline={true}
+            placeholderTextColor={styles.darkGreyColor}
+          />
+          <MaterialCommunityIcons name="format-quote-close" size={30} />
+        </Header>
+        <Content>
+          <Image
+            source={{ uri: book.image }}
+            style={{ height: 116, width: 82, borderRadius: 5 }}
+          />
+          <Sentiment
+            onChangeText={sentimentInput.onChange}
+            value={sentimentInput.value}
+            placeholder="내용 입력..."
+            multiline={true}
+            placeholderTextColor={styles.darkGreyColor}
+          />
+        </Content>
       </Container>
     </View>
   );

@@ -2,13 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useQuery } from "react-apollo-hooks";
 import { SEARCH } from "../../gql/queries";
-import {
-  Text,
-  Image,
-  ScrollView,
-  Linking,
-  TouchableOpacity
-} from "react-native";
+import { Text, Image, ScrollView, Linking } from "react-native";
 import Loader from "../../components/Loader";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import styles from "../../styles";
