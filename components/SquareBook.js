@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { TouchableOpacity, Text, View } from "react-native";
 import { withNavigation } from "react-navigation";
 import styles from "../styles";
+import PropTypes from "prop-types";
 
 const Container = styled.View`
   padding: 30px 15px;
@@ -83,6 +84,15 @@ const SquareBook = ({
       </Container>
     </TouchableOpacity>
   );
+};
+
+SquareBook.propTypes = {
+  isbn: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  image: PropTypes.string,
+  author: PropTypes.string.isRequired,
+  price: PropTypes.string,
+  publisher: PropTypes.string.isRequired
 };
 
 export default withNavigation(SquareBook);

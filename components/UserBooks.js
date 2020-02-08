@@ -8,6 +8,7 @@ import styles from "../styles";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useMutation } from "react-apollo-hooks";
 import { TOGGLE_FOLLOW } from "../gql/queries";
+import PropTypes from "prop-types";
 
 const View = styled.View`
   background-color: white;
@@ -226,6 +227,26 @@ const UserBooks = ({
       </ScrollView>
     </View>
   );
+};
+
+UserBooks.propTypes = {
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  bio: PropTypes.string,
+  postsCount: PropTypes.number.isRequired,
+  followersCount: PropTypes.number.isRequired,
+  followingCount: PropTypes.number.isRequired,
+  posts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      book: PropTypes.shape({
+        image: PropTypes.string
+      })
+    })
+  ),
+  isSelf: PropTypes.bool.isRequired,
+  isFollowing: PropTypes.bool.isRequired
 };
 
 export default withNavigation(UserBooks);

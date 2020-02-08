@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { TouchableOpacity, Text } from "react-native";
 import { withNavigation } from "react-navigation";
 import styles from "../styles";
+import PropTypes from "prop-types";
 
 const Container = styled.View`
   padding: 25px 15px;
@@ -43,7 +44,6 @@ const Self = styled.View`
 const SquareUser = ({
   id,
   name,
-  bio,
   postsCount,
   isFollowing,
   isSelf,
@@ -73,6 +73,14 @@ const SquareUser = ({
       </Container>
     </TouchableOpacity>
   );
+};
+
+SquareUser.propTypes = {
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  postsCount: PropTypes.number.isRequired,
+  isFollowing: PropTypes.bool.isRequired,
+  isSelf: PropTypes.bool.isRequired
 };
 
 export default withNavigation(SquareUser);

@@ -69,7 +69,6 @@ const Post = ({
   user,
   book,
   likeCount: likeCountProp,
-  comments = [],
   isLiked: isLikedProp,
   createdAt,
   sentiment,
