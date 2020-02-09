@@ -25,6 +25,7 @@ export const POST_FRAGMENT = gql`
     user{
       id
       name
+      isSelf
     }
     comments {
       id

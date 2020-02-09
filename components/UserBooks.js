@@ -78,7 +78,7 @@ const StatName = styled.Text`
   font-size: 13px;
   color: white;
 `;
-const Date = styled.Text`
+const Title = styled.Text`
   background-color: white;
   width: 84px;
   padding: 5px;
@@ -220,7 +220,7 @@ const UserBooks = ({
                     source={{ uri: post.book?.image }}
                   />
                 </TouchableOpacity>
-                <Date>{post.createdAt.substring(0, 10)}</Date>
+                <Title>{post.title}</Title>
               </Book>
             ))}
         </Books>

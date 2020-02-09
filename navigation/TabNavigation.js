@@ -13,6 +13,7 @@ import UserDisplay from "../screens/Tab/UserDisplay";
 import styles from "../styles";
 import { Text, View } from "react-native";
 import Upload from "../screens/Tab/Upload";
+import EditPost from "../screens/Tab/EditPost";
 
 const stackFactory = (initialRoute, customConfig) =>
   createStackNavigator(
@@ -57,6 +58,14 @@ const stackFactory = (initialRoute, customConfig) =>
       },
       Upload: {
         screen: Upload,
+        navigationOptions: {
+          headerTitle: () => {
+            "none";
+          }
+        }
+      },
+      EditPost: {
+        screen: EditPost,
         navigationOptions: {
           headerTitle: () => {
             "none";

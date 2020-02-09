@@ -76,7 +76,11 @@ export default ({ navigation }) => {
           <Container>
             <Upload
               onPress={() =>
-                navigation.navigate("Upload", { bookId: detail.isbn })
+                navigation.navigate("Upload", {
+                  bookId: detail.isbn
+                    .replace(/<b>/gi, "")
+                    .replace(/<\/b>/gi, "")
+                })
               }
             >
               <Text>글쓰러 가기 </Text>
@@ -111,7 +115,11 @@ export default ({ navigation }) => {
                 </TextColumn>
               </TextRow>
               <Descript>
-                <Text>{detail.description.replace(/&quot;/gi, '"')}</Text>
+                <Text>
+                  {detail.description
+                    .replace(/&quot;/gi, '"')
+                    .replace(/&#x0D;/gi, "\n")}
+                </Text>
               </Descript>
               <Link>
                 <MaterialCommunityIcons

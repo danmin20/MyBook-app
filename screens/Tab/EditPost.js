@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useMutation, useQuery } from "react-apollo-hooks";
-import { UPLOAD, FEED, ME, SEARCH } from "../../gql/queries";
+import { FEED, ME, SEARCH, EDIT_POST } from "../../gql/queries";
 import useInput from "../../hook/useInput";
 import { ActivityIndicator } from "react-native";
 import styles from "../../styles";
@@ -57,34 +57,29 @@ const Text = styled.Text`
 
 export default ({ navigation }) => {
   const [loading, setIsLoading] = useState(false);
-  const { data } = useQuery(SEARCH, {
-    variables: {
-      term: navigation.getParam("bookId")
-    }
-  });
-  const titleInput = useInput("");
-  const sentimentInput = useInput("");
-  const [uploadMutation] = useMutation(UPLOAD);
-  const book = data?.books[0];
+  const titleInput = useInput();
+  const sentimentInput = useInput();
+  const [editMutation] = useMutation(EDIT_POST);
   const { refetch: refetchFeed } = useQuery(FEED);
   const { refetch: refetchMe } = useQuery(ME);
-  const handleUpload = async () => {
+  const uri = navigation.getParam("uri");
+  const handleEdit = async () => {
     try {
       setIsLoading(true);
       const {
-        data: { upload }
-      } = await uploadMutation({
+        data: { editPost }
+      } = await editMutation({
         variables: {
+          id: navigation.getParam("postId"),
           title: titleInput.value,
           sentiment: sentimentInput.value,
-          bookId: navigation.getParam("bookId")
+          action: "EDIT"
         }
       });
       await refetchFeed();
       await refetchMe();
-      if (upload.id) {
-        navigation.navigate("MyBooks");
-      } else {
+      if (editPost.id) {
+        navigation.navigate("PostDetail", { title: titleInput.value });
       }
     } catch (e) {
       console.log(e);
@@ -94,14 +89,14 @@ export default ({ navigation }) => {
   };
   return (
     <View>
-      <Button onPress={handleUpload}>
+      <Button onPress={handleEdit}>
         {loading ? (
           <ActivityIndicator
             style={{ marginLeft: 15, marginTop: 3, marginBottom: 3 }}
             color="black"
           />
         ) : (
-          <Text>업로드하기 </Text>
+          <Text>수정하기 </Text>
         )}
         <MaterialCommunityIcons name="arrow-right" size={20} />
       </Button>
@@ -109,10 +104,11 @@ export default ({ navigation }) => {
         <Header>
           <MaterialCommunityIcons name="format-quote-open" size={30} />
           <Title
+            defaultValue={navigation.getParam("title")}
             onChangeText={titleInput.onChange}
             value={titleInput.value}
-            placeholder="제목 입력..."
             multiline={true}
+            placeholder="제목 입력..."
             placeholderTextColor={styles.darkGreyColor}
           />
           <MaterialCommunityIcons name="format-quote-close" size={30} />
@@ -122,16 +118,14 @@ export default ({ navigation }) => {
             style={{ position: "absolute" }}
             source={require("../../assets/noImage.png")}
           />
-          {book?.image !== "" && <Image source={{ uri: book?.image }} />}
-          {book?.image === "" && (
-            <Image source={require("../../assets/noImage.png")} />
-          )}
-
+          {uri !== "" && <Image source={{ uri }} />}
+          {uri === "" && <Image source={require("../../assets/noImage.png")} />}
           <Sentiment
+            defaultValue={navigation.getParam("sentiment")}
             onChangeText={sentimentInput.onChange}
             value={sentimentInput.value}
-            placeholder="내용 입력..."
             multiline={true}
+            placeholder="내용 입력..."
             placeholderTextColor={styles.darkGreyColor}
           />
         </Content>

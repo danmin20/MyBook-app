@@ -78,3 +78,11 @@ export const TOGGLE_LIKE = gql`
     toggleLike(postId: $postId)
   }
 `;
+
+export const EDIT_POST = gql`
+  mutation editPost($id: String!, $title: String, $sentiment: String, $action: ACTION!) {
+    editPost(id: $id, title: $title, sentiment: $sentiment, action: $action){
+      id
+    }
+  }
+`;

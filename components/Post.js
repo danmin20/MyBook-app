@@ -3,14 +3,19 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import { TouchableOpacity, Image, Text, Linking } from "react-native";
 import { withNavigation } from "react-navigation";
-import { useMutation } from "react-apollo-hooks";
+import { useMutation, useQuery } from "react-apollo-hooks";
 import styles from "../styles";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { TOGGLE_LIKE } from "../gql/queries";
+import { TOGGLE_LIKE, ME, EDIT_POST, FEED } from "../gql/queries";
+import Loader from "./Loader";
 
 const Container = styled.View``;
 const Name = styled.Text`
   color: white;
+`;
+const Header = styled.View`
+  flex-direction: row;
+  margin-top: 15px;
 `;
 const Content = styled.View`
   margin: 0 20px;
@@ -48,18 +53,21 @@ const Buttom = styled.View`
   border: 0px solid ${styles.moderateGreyColor};
   border-top-width: 1px;
 `;
-const NameBox = styled.View`
-  margin-top: 15px;
+const NameBox = styled.TouchableOpacity`
   background-color: ${styles.blackColor};
   padding: 3px 25px;
   margin-right: auto;
   border-radius: 10px;
+`;
+const Funcs = styled.View`
+  flex-direction: row;
 `;
 
 const Post = ({
   id,
   user,
   book,
+  title,
   likeCount: likeCountProp,
   comments = [],
   isLiked: isLikedProp,
@@ -67,11 +75,15 @@ const Post = ({
   sentiment,
   navigation
 }) => {
+  const [loading, setLoading] = useState(false);
   const [isLiked, setIsLiked] = useState(isLikedProp);
   const [likeCount, setLikeCount] = useState(likeCountProp);
+  const { refetch: refetchFeed } = useQuery(FEED);
+  const { refetch: refetchMe } = useQuery(ME);
   const [toggleLikeMutation] = useMutation(TOGGLE_LIKE, {
     variables: { postId: id }
   });
+  const [deleteMutation] = useMutation(EDIT_POST);
   const handleLike = async () => {
     setIsLiked(p => !p);
     if (isLiked) {
@@ -85,14 +97,37 @@ const Post = ({
       console.log(e);
     }
   };
+  const handleDelete = async () => {
+    try {
+      setLoading(true);
+      const {
+        data: { editPost }
+      } = await deleteMutation({
+        variables: {
+          id,
+          action: "DELETE"
+        }
+      });
+      await refetchFeed();
+      await refetchMe();
+      if (editPost.id) {
+        navigation.goBack();
+      }
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <Container>
+      {loading && <Loader />}
       <Content>
         <BookInfo>
           <TouchableOpacity
             onPress={() =>
               navigation.navigate("BookDetail", {
-                isbn: book.isbn.replace(/<b>/gi, "").replace(/<\/b>/gi, "")
+                isbn: book.isbn
               })
             }
           >
@@ -103,7 +138,9 @@ const Post = ({
           </TouchableOpacity>
           <Info>
             <Text>{book.author}</Text>
-            <Text>{book.publisher}</Text>
+            <Text style={{ opacity: 0.5, fontSize: 12, marginTop: 5 }}>
+              {book.publisher}
+            </Text>
             <Link>
               <MaterialCommunityIcons
                 name={"alpha-n-box"}
@@ -111,7 +148,12 @@ const Post = ({
                 size={20}
               />
               <Text
-                style={{ color: "white", fontSize: 10, fontWeight: "bold" }}
+                style={{
+                  color: "white",
+                  fontSize: 12,
+                  fontWeight: "bold",
+                  marginLeft: 5
+                }}
                 onPress={() => Linking.openURL(book.link)}
               >
                 네이버 책
@@ -120,15 +162,34 @@ const Post = ({
           </Info>
         </BookInfo>
         <Buttom>
-          <TouchableOpacity
-            onPress={() =>
-              navigation.navigate("UserDetail", { userId: user.id })
-            }
-          >
-            <NameBox>
+          <Header>
+            <NameBox
+              onPress={() =>
+                navigation.navigate("UserDetail", { userId: user.id })
+              }
+            >
               <Name>{user.name}</Name>
             </NameBox>
-          </TouchableOpacity>
+            {user.isSelf && (
+              <Funcs>
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate("EditPost", {
+                      postId: id,
+                      uri: book.image,
+                      title,
+                      sentiment
+                    })
+                  }
+                >
+                  <Text>수정</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={handleDelete}>
+                  <Text>삭제</Text>
+                </TouchableOpacity>
+              </Funcs>
+            )}
+          </Header>
           <Sentiment>
             <Text>{sentiment}</Text>
           </Sentiment>
