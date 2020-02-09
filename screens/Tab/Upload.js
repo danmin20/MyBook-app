@@ -56,7 +56,7 @@ const Text = styled.Text`
 `;
 
 export default ({ navigation }) => {
-  const [loading, setIsLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const { data } = useQuery(SEARCH, {
     variables: {
       term: navigation.getParam("bookId")
@@ -70,7 +70,7 @@ export default ({ navigation }) => {
   const { refetch: refetchMe } = useQuery(ME);
   const handleUpload = async () => {
     try {
-      setIsLoading(true);
+      setLoading(true);
       const {
         data: { upload }
       } = await uploadMutation({
@@ -89,7 +89,7 @@ export default ({ navigation }) => {
     } catch (e) {
       console.log(e);
     } finally {
-      setIsLoading(false);
+      setLoading(false);
     }
   };
   return (

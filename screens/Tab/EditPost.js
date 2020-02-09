@@ -56,7 +56,7 @@ const Text = styled.Text`
 `;
 
 export default ({ navigation }) => {
-  const [loading, setIsLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const titleInput = useInput();
   const sentimentInput = useInput();
   const [editMutation] = useMutation(EDIT_POST);
@@ -65,7 +65,7 @@ export default ({ navigation }) => {
   const uri = navigation.getParam("uri");
   const handleEdit = async () => {
     try {
-      setIsLoading(true);
+      setLoading(true);
       const {
         data: { editPost }
       } = await editMutation({
@@ -84,7 +84,7 @@ export default ({ navigation }) => {
     } catch (e) {
       console.log(e);
     } finally {
-      setIsLoading(false);
+      setLoading(false);
     }
   };
   return (

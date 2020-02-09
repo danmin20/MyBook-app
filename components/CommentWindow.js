@@ -9,10 +9,9 @@ const Container = styled.View`
 `;
 
 const TextInput = styled.TextInput`
-  width: ${constants.width / 1.7}px;
+width: auto;
+  background-color: white;
   padding: 5px 10px;
-  border: 0px solid ${styles.moderateGreyColor};
-  border-bottom-width: 1px;
 `;
 
 const CommentWindow = ({
@@ -21,6 +20,7 @@ const CommentWindow = ({
   keyboardType = "default",
   autoCapitalize = "none",
   returnKeyType = "done",
+  multiline = true,
   onChange,
   onSubmitEditing = () => null,
   autoCorrect = true
@@ -35,6 +35,7 @@ const CommentWindow = ({
       returnKeyType={returnKeyType}
       onSubmitEditing={onSubmitEditing}
       autoCorrect={autoCorrect}
+      multiline={multiline}
     />
   </Container>
 );
@@ -54,7 +55,8 @@ CommentWindow.propTypes = {
   onChange: PropTypes.func.isRequired,
   returnKeyType: PropTypes.oneOf(["done", "go", "next", "search", "send"]),
   onSubmitEditing: PropTypes.func,
-  autoCorrect: PropTypes.bool
+  autoCorrect: PropTypes.bool,
+  multiline: PropTypes.bool
 };
 
 export default CommentWindow;
