@@ -5,10 +5,10 @@ import { TouchableOpacity, Image, Text, Linking, Alert } from "react-native";
 import { withNavigation, ScrollView } from "react-navigation";
 import { useMutation, useQuery } from "react-apollo-hooks";
 import styles from "../styles";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import { TOGGLE_LIKE, ME, EDIT_POST, FEED } from "../gql/queries";
 import Loader from "./Loader";
-import Comments from "./Comments";
+import Comment from "./Comment";
 import constants from "../constants";
 
 const Container = styled.View`
@@ -54,8 +54,10 @@ const Info = styled.View``;
 const Buttom = styled.View`
   margin: 10px 0;
   padding-top: 10px;
+  padding-bottom: 20px;
   border: 0px solid ${styles.moderateGreyColor};
   border-top-width: 1px;
+  border-bottom-width: 1px;
 `;
 const NameBox = styled.TouchableOpacity`
   background-color: ${styles.blackColor};
@@ -66,6 +68,12 @@ const NameBox = styled.TouchableOpacity`
 const Funcs = styled.View`
   flex-direction: row;
   align-items: center;
+`;
+const HandleComments = styled.TouchableOpacity`
+  margin-right: auto;
+  margin-left: 15px;
+  padding: 5px 10px;
+  opacity: 0.5;
 `;
 
 const Post = ({
@@ -82,7 +90,7 @@ const Post = ({
 }) => {
   const [loading, setLoading] = useState(false);
   const [isLiked, setIsLiked] = useState(isLikedProp);
-  const [isOpened, setIsOpened] = useState(false);
+  const [isOpened, setIsOpened] = useState(true);
   const [likeCount, setLikeCount] = useState(likeCountProp);
   const { refetch: refetchFeed } = useQuery(FEED);
   const { refetch: refetchMe } = useQuery(ME);
@@ -109,7 +117,7 @@ const Post = ({
   const handleDelete = () => {
     Alert.alert(
       "",
-      "정말로 삭제하시겠습니까?",
+      "글을 삭제하시겠습니까?",
       [
         {
           text: "예",
@@ -204,11 +212,19 @@ const Post = ({
                     })
                   }
                 >
-                  <Text style={{ opacity: 0.7 }}>수정 </Text>
+                  <MaterialIcons
+                    name="mode-edit"
+                    size={15}
+                    color={styles.blackColor}
+                  />
                 </TouchableOpacity>
-                <Text> | </Text>
+                <Text>{"  "}</Text>
                 <TouchableOpacity onPress={handleDelete}>
-                  <Text style={{ opacity: 0.7 }}> 삭제</Text>
+                  <MaterialIcons
+                    name="delete"
+                    size={15}
+                    color={styles.blackColor}
+                  />
                 </TouchableOpacity>
               </Funcs>
             )}
@@ -225,17 +241,16 @@ const Post = ({
           </Date>
         </Buttom>
       </Content>
-      <TouchableOpacity onPress={handleOpen}>
+      <HandleComments onPress={handleOpen}>
         {isOpened ? <Text>댓글 숨기기</Text> : <Text>댓글 펼치기</Text>}
-      </TouchableOpacity>
+      </HandleComments>
       {comments[0] !== undefined && isOpened && (
         <>
           <ScrollView>
             {comments.map(comment => (
-              <Comments key={comment.id} userOfPost={user.id} {...comment} />
+              <Comment key={comment.id} postId={id} userOfPost={user.id} {...comment} />
             ))}
           </ScrollView>
-          <Text>댓글창</Text>
         </>
       )}
     </Container>

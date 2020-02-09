@@ -8,7 +8,8 @@ import Post from "../../components/Post";
 export default ({ navigation }) => {
   const [refreshing, setRefreshing] = useState(false);
   const { loading, data, refetch } = useQuery(POST_DETAIL, {
-    variables: { id: navigation.getParam("id") }
+    variables: { id: navigation.getParam("id") },
+    fetchPolicy: "cache-and-network"
   });
   const refresh = async () => {
     try {
@@ -29,7 +30,12 @@ export default ({ navigation }) => {
       {loading ? (
         <Loader />
       ) : (
-        data && data.seeFullPost && <Post {...data.seeFullPost} />
+        data &&
+        data.seeFullPost && (
+          <>
+            <Post {...data.seeFullPost} /><Text>댓글창</Text>
+          </>
+        )
       )}
     </ScrollView>
   );

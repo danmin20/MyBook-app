@@ -80,8 +80,21 @@ export const TOGGLE_LIKE = gql`
 `;
 
 export const EDIT_POST = gql`
-  mutation editPost($id: String!, $title: String, $sentiment: String, $action: ACTION!) {
-    editPost(id: $id, title: $title, sentiment: $sentiment, action: $action){
+  mutation editPost(
+    $id: String!
+    $title: String
+    $sentiment: String
+    $action: ACTION!
+  ) {
+    editPost(id: $id, title: $title, sentiment: $sentiment, action: $action) {
+      id
+    }
+  }
+`;
+
+export const DEL_COMMENT = gql`
+  mutation deleteComment($id: String!) {
+    deleteComment(id: $id) {
       id
     }
   }
