@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import { TouchableOpacity, Image, Text, Linking } from "react-native";
+import { TouchableOpacity, Image, Text, Linking, Alert } from "react-native";
 import { withNavigation } from "react-navigation";
 import { useMutation, useQuery } from "react-apollo-hooks";
 import styles from "../styles";
@@ -61,6 +61,7 @@ const NameBox = styled.TouchableOpacity`
 `;
 const Funcs = styled.View`
   flex-direction: row;
+  align-items: center;
 `;
 
 const Post = ({
@@ -97,27 +98,40 @@ const Post = ({
       console.log(e);
     }
   };
-  const handleDelete = async () => {
-    try {
-      setLoading(true);
-      const {
-        data: { editPost }
-      } = await deleteMutation({
-        variables: {
-          id,
-          action: "DELETE"
-        }
-      });
-      await refetchFeed();
-      await refetchMe();
-      if (editPost.id) {
-        navigation.goBack();
-      }
-    } catch (e) {
-      console.log(e);
-    } finally {
-      setLoading(false);
-    }
+  const handleDelete = () => {
+    Alert.alert(
+      "",
+      "정말로 삭제하시겠습니까?",
+      [
+        {
+          text: "예",
+          onPress: async () => {
+            try {
+              setLoading(true);
+              const {
+                data: { editPost }
+              } = await deleteMutation({
+                variables: {
+                  id,
+                  action: "DELETE"
+                }
+              });
+              await refetchFeed();
+              await refetchMe();
+              if (editPost.id) {
+                navigation.goBack();
+              }
+            } catch (e) {
+              console.log(e);
+            } finally {
+              setLoading(false);
+            }
+          }
+        },
+        { text: "아니오", style: "cancel" }
+      ],
+      { cancelable: false }
+    );
   };
   return (
     <Container>
@@ -182,10 +196,11 @@ const Post = ({
                     })
                   }
                 >
-                  <Text>수정</Text>
+                  <Text style={{ opacity: 0.7 }}>수정 </Text>
                 </TouchableOpacity>
+                <Text> | </Text>
                 <TouchableOpacity onPress={handleDelete}>
-                  <Text>삭제</Text>
+                  <Text style={{ opacity: 0.7 }}> 삭제</Text>
                 </TouchableOpacity>
               </Funcs>
             )}
