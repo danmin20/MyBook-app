@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useLogOut } from "../AuthContext";
-import { Image, ScrollView, TouchableOpacity, Text } from "react-native";
+import { Image, ScrollView, TouchableOpacity } from "react-native";
 import constants from "../constants";
 import { withNavigation } from "react-navigation";
 import styles from "../styles";
@@ -28,7 +28,7 @@ const Books = styled.View`
   flex-direction: row;
   flex-wrap: wrap;
 `;
-const Book = styled.View`
+const Book = styled.TouchableOpacity`
   margin-top: 30px;
   margin-left: 15px;
   margin-right: 15px;
@@ -199,27 +199,22 @@ const UserBooks = ({
         <Books>
           {posts &&
             posts.map(post => (
-              <Book key={post.id}>
-                <TouchableOpacity
+              <Book
+                key={post.id}
+                onPress={() =>
+                  navigation.navigate("PostDetail", {
+                    title: post.title,
+                    id: post.id
+                  })
+                }
+              >
+                <Image
                   style={{
                     height: 116,
                     width: 82
                   }}
-                  onPress={() =>
-                    navigation.navigate("PostDetail", {
-                      title: post.title,
-                      id: post.id
-                    })
-                  }
-                >
-                  <Image
-                    style={{
-                      height: 116,
-                      width: 82
-                    }}
-                    source={{ uri: post.book?.image }}
-                  />
-                </TouchableOpacity>
+                  source={{ uri: post.book?.image }}
+                />
                 <Title>{post.title}</Title>
               </Book>
             ))}

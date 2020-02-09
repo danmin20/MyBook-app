@@ -2,14 +2,18 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import { TouchableOpacity, Image, Text, Linking, Alert } from "react-native";
-import { withNavigation } from "react-navigation";
+import { withNavigation, ScrollView } from "react-navigation";
 import { useMutation, useQuery } from "react-apollo-hooks";
 import styles from "../styles";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { TOGGLE_LIKE, ME, EDIT_POST, FEED } from "../gql/queries";
 import Loader from "./Loader";
+import Comments from "./Comments";
+import constants from "../constants";
 
-const Container = styled.View``;
+const Container = styled.View`
+  max-height: ${constants.height}px;
+`;
 const Name = styled.Text`
   color: white;
 `;
@@ -78,6 +82,7 @@ const Post = ({
 }) => {
   const [loading, setLoading] = useState(false);
   const [isLiked, setIsLiked] = useState(isLikedProp);
+  const [isOpened, setIsOpened] = useState(false);
   const [likeCount, setLikeCount] = useState(likeCountProp);
   const { refetch: refetchFeed } = useQuery(FEED);
   const { refetch: refetchMe } = useQuery(ME);
@@ -85,6 +90,9 @@ const Post = ({
     variables: { postId: id }
   });
   const [deleteMutation] = useMutation(EDIT_POST);
+  const handleOpen = () => {
+    setIsOpened(p => !p);
+  };
   const handleLike = async () => {
     setIsLiked(p => !p);
     if (isLiked) {
@@ -217,6 +225,19 @@ const Post = ({
           </Date>
         </Buttom>
       </Content>
+      <TouchableOpacity onPress={handleOpen}>
+        {isOpened ? <Text>댓글 숨기기</Text> : <Text>댓글 펼치기</Text>}
+      </TouchableOpacity>
+      {comments[0] !== undefined && isOpened && (
+        <>
+          <ScrollView>
+            {comments.map(comment => (
+              <Comments key={comment.id} userOfPost={user.id} {...comment} />
+            ))}
+          </ScrollView>
+          <Text>댓글창</Text>
+        </>
+      )}
     </Container>
   );
 };
@@ -244,7 +265,7 @@ Post.propTypes = {
       text: PropTypes.string.isRequired,
       user: PropTypes.shape({
         id: PropTypes.string.isRequired,
-        username: PropTypes.string.isRequired
+        name: PropTypes.string.isRequired
       }).isRequired
     })
   ).isRequired,

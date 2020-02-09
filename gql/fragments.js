@@ -34,6 +34,7 @@ export const POST_FRAGMENT = gql`
         id
         name
       }
+      createdAt
     }
     isLiked
     likeCount
