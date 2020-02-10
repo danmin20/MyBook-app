@@ -8,7 +8,8 @@ import SquareUser from "../../components/SquareUser";
 export default ({ navigation }) => {
   const [refreshing, setRefreshing] = useState(false);
   const { data, loading, refetch } = useQuery(SEARCH_USER, {
-    variables: { name: navigation.getParam("name") }
+    variables: { name: navigation.getParam("name") },
+    fetchPolicy: "cache-and-network"
   });
   const refresh = async () => {
     try {

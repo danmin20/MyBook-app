@@ -161,7 +161,7 @@ Post.propTypes = {
       text: PropTypes.string.isRequired,
       user: PropTypes.shape({
         id: PropTypes.string.isRequired,
-        username: PropTypes.string.isRequired
+        name: PropTypes.string.isRequired
       }).isRequired
     })
   ).isRequired,

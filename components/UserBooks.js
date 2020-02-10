@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useLogOut } from "../AuthContext";
-import { Image, ScrollView, TouchableOpacity } from "react-native";
+import { Image, ScrollView, TouchableOpacity, Text } from "react-native";
 import constants from "../constants";
 import { withNavigation } from "react-navigation";
 import styles from "../styles";
@@ -105,6 +105,15 @@ const Func = styled.View`
 const FuncText = styled.Text`
   font-size: 11px;
 `;
+const Buttoncontainer = styled.View`
+  padding: 2px 0;
+  flex-direction: row;
+  background-color: ${styles.moderateGreyColor};
+`;
+const Button = styled.TouchableOpacity`
+  width: ${constants.width / 2}px;
+  align-items: center;
+`;
 
 const UserBooks = ({
   id,
@@ -123,6 +132,16 @@ const UserBooks = ({
   const [toggleFollowMtation] = useMutation(TOGGLE_FOLLOW, {
     variables: { id }
   });
+  const [isMine, setIsMine] = useState(true);
+  const [isLikes, setIsLikes] = useState(false);
+  const setMine = () => {
+    setIsMine(true);
+    setIsLikes(false);
+  };
+  const setLikes = () => {
+    setIsLikes(true);
+    setIsMine(false);
+  };
   const handleFollow = async () => {
     setIsFollowing(p => !p);
     if (isFollowing) {
@@ -195,9 +214,26 @@ const UserBooks = ({
           </BioBox>
         )}
       </Top>
+      <Buttoncontainer>
+        <Button onPress={setMine}>
+          <MaterialCommunityIcons
+            name={isMine ? "pencil-box" : "pencil-box-outline"}
+            size={40}
+            color={styles.blackColor}
+          />
+        </Button>
+        <Button onPress={setLikes}>
+          <MaterialCommunityIcons
+            name={isLikes ? "heart-box" : "heart-box-outline"}
+            size={40}
+            color={styles.blackColor}
+          />
+        </Button>
+      </Buttoncontainer>
       <ScrollView>
         <Books>
-          {posts &&
+          {isMine &&
+            posts &&
             posts.map(post => (
               <Book
                 key={post.id}
@@ -218,6 +254,7 @@ const UserBooks = ({
                 <Title>{post.title}</Title>
               </Book>
             ))}
+          {isLikes && <Text>likes</Text>}
         </Books>
       </ScrollView>
     </View>

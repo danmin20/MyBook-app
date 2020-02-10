@@ -28,7 +28,7 @@ export default ({ navigation }) => {
   const commentInput = useInput("");
   const [refreshing, setRefreshing] = useState(false);
   const { loading, data, refetch } = useQuery(POST_DETAIL, {
-    variables: { id: navigation.getParam("id") }
+    variables: { id: navigation.getParam("id") },
     //fetchPolicy: "cache-and-network"
   });
   const [addCommentMutation] = useMutation(ADD_COMMENT);
@@ -66,7 +66,7 @@ export default ({ navigation }) => {
       ) : (
         data &&
         data.seeFullPost && (
-          <View>
+          <View style={{flex: 1}} >
             <ScrollView
               refreshControl={
                 <RefreshControl refreshing={refreshing} onRefresh={refresh} />

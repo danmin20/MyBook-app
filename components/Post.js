@@ -5,7 +5,11 @@ import { TouchableOpacity, Image, Text, Linking, Alert } from "react-native";
 import { withNavigation } from "react-navigation";
 import { useMutation, useQuery } from "react-apollo-hooks";
 import styles from "../styles";
-import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
+import {
+  MaterialCommunityIcons,
+  MaterialIcons,
+  Ionicons
+} from "@expo/vector-icons";
 import { TOGGLE_LIKE, ME, EDIT_POST, FEED } from "../gql/queries";
 import Loader from "./Loader";
 import Comment from "./Comment";
@@ -29,6 +33,9 @@ const Sentiment = styled.View`
   padding: 10px;
   border-radius: 10px;
   background-color: ${styles.lightGreyColor};
+`;
+const Bottom = styled.View`
+  flex-direction: row;
 `;
 const Date = styled.Text`
   margin-left: auto;
@@ -74,6 +81,14 @@ const HandleComments = styled.TouchableOpacity`
   margin-left: 15px;
   padding: 5px 10px;
   opacity: 0.5;
+`;
+const Like = styled.View`
+  flex-direction: row;
+  align-items: center;
+  padding: 5px;
+`;
+const HeartIconContainer = styled.TouchableOpacity`
+  opacity: 0.7;
 `;
 
 const Post = ({
@@ -232,13 +247,26 @@ const Post = ({
           <Sentiment>
             <Text>{sentiment}</Text>
           </Sentiment>
-          <Date>
-            {createdAt
-              .substring(0, 10)
-              .replace("-", "년 ")
-              .replace("-", "월 ")}
-            일에 작성된 글
-          </Date>
+          <Bottom>
+            <Like>
+              <HeartIconContainer onPress={handleLike}>
+                <Ionicons
+                  color={isLiked ? styles.redColor : styles.blackColor}
+                  size={25}
+                  name={isLiked ? "ios-heart" : "ios-heart-empty"}
+                />
+              </HeartIconContainer>
+
+              <Text style={{ marginLeft: 5 }}>좋아요 {likeCount}개</Text>
+            </Like>
+            <Date>
+              {createdAt
+                .substring(0, 10)
+                .replace("-", "년 ")
+                .replace("-", "월 ")}
+              일에 작성된 글
+            </Date>
+          </Bottom>
         </Buttom>
       </Content>
       <HandleComments onPress={handleOpen}>
@@ -246,9 +274,14 @@ const Post = ({
       </HandleComments>
       {comments[0] !== undefined && isOpened && (
         <>
-            {comments.map(comment => (
-              <Comment key={comment.id} postId={id} userOfPost={user.id} {...comment} />
-            ))}
+          {comments.map(comment => (
+            <Comment
+              key={comment.id}
+              postId={id}
+              userOfPost={user.id}
+              {...comment}
+            />
+          ))}
         </>
       )}
     </Container>
@@ -281,7 +314,7 @@ Post.propTypes = {
         name: PropTypes.string.isRequired
       }).isRequired
     })
-  ).isRequired,
+  ),
   createdAt: PropTypes.string.isRequired
 };
 
