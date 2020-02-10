@@ -2,16 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import constants from "../constants";
-import styles from "../styles";
-
-const Container = styled.View`
-  margin-bottom: 10px;
-`;
 
 const TextInput = styled.TextInput`
-width: auto;
+  width: ${constants.width / 1.3}px;
   background-color: white;
   padding: 5px 10px;
+  border-radius: 10px;
 `;
 
 const CommentWindow = ({
@@ -25,19 +21,17 @@ const CommentWindow = ({
   onSubmitEditing = () => null,
   autoCorrect = true
 }) => (
-  <Container>
-    <TextInput
-      onChangeText={onChange}
-      keyboardType={keyboardType}
-      placeholder={placeholder}
-      autoCapitalize={autoCapitalize}
-      value={value}
-      returnKeyType={returnKeyType}
-      onSubmitEditing={onSubmitEditing}
-      autoCorrect={autoCorrect}
-      multiline={multiline}
-    />
-  </Container>
+  <TextInput
+    onChangeText={onChange}
+    keyboardType={keyboardType}
+    placeholder={placeholder}
+    autoCapitalize={autoCapitalize}
+    value={value}
+    returnKeyType={returnKeyType}
+    onSubmitEditing={onSubmitEditing}
+    autoCorrect={autoCorrect}
+    multiline={multiline}
+  />
 );
 
 CommentWindow.propTypes = {

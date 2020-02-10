@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import { TouchableOpacity, Image, Text, Linking, Alert } from "react-native";
-import { withNavigation, ScrollView } from "react-navigation";
+import { withNavigation } from "react-navigation";
 import { useMutation, useQuery } from "react-apollo-hooks";
 import styles from "../styles";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
@@ -246,11 +246,9 @@ const Post = ({
       </HandleComments>
       {comments[0] !== undefined && isOpened && (
         <>
-          <ScrollView>
             {comments.map(comment => (
               <Comment key={comment.id} postId={id} userOfPost={user.id} {...comment} />
             ))}
-          </ScrollView>
         </>
       )}
     </Container>
