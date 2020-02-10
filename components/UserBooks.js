@@ -123,10 +123,12 @@ const UserBooks = ({
   followersCount,
   followingCount,
   posts,
+  likes,
   isSelf,
   isFollowing: isFollowingProp,
   navigation
 }) => {
+  console.log(likes);
   const logOut = useLogOut();
   const [isFollowing, setIsFollowing] = useState(isFollowingProp);
   const [toggleFollowMtation] = useMutation(TOGGLE_FOLLOW, {

@@ -58,6 +58,11 @@ export const USER_FRAGMENT = gql`
     followersCount
     followingCount
     postsCount
+    likes {
+      post {
+        ...PostParts
+      }
+    }
   }
   ${POST_FRAGMENT}
 `;
