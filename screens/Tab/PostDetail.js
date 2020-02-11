@@ -27,9 +27,9 @@ const Button = styled.TouchableOpacity`
 export default ({ navigation }) => {
   const commentInput = useInput("");
   const [refreshing, setRefreshing] = useState(false);
-  const { loading, data, refetch } = useQuery(POST_DETAIL, {
+  const { data, refetch } = useQuery(POST_DETAIL, {
     variables: { id: navigation.getParam("id") },
-    //fetchPolicy: "cache-and-network"
+    fetchPolicy: "cache-and-network"
   });
   const [addCommentMutation] = useMutation(ADD_COMMENT);
   const refresh = async () => {
@@ -61,31 +61,26 @@ export default ({ navigation }) => {
   };
   return (
     <>
-      {loading ? (
-        <Loader />
-      ) : (
-        data &&
-        data.seeFullPost && (
-          <View style={{flex: 1}} >
-            <ScrollView
-              refreshControl={
-                <RefreshControl refreshing={refreshing} onRefresh={refresh} />
-              }
-            >
-              <Post {...data.seeFullPost} />
-            </ScrollView>
-            <CommentInput>
-              <CommentWindow
-                {...commentInput}
-                placeholder="댓글 입력..."
-                onSubmitEditing={handleAddComment}
-              />
-              <Button>
-                <Text style={{ color: "white" }}>등록</Text>
-              </Button>
-            </CommentInput>
-          </View>
-        )
+      {data && data.seeFullPost && (
+        <View style={{ flex: 1 }}>
+          <ScrollView
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={refresh} />
+            }
+          >
+            <Post {...data.seeFullPost} />
+          </ScrollView>
+          <CommentInput>
+            <CommentWindow
+              {...commentInput}
+              placeholder="댓글 입력..."
+              onSubmitEditing={handleAddComment}
+            />
+            <Button>
+              <Text style={{ color: "white" }}>등록</Text>
+            </Button>
+          </CommentInput>
+        </View>
       )}
     </>
   );

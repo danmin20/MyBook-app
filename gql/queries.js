@@ -107,3 +107,12 @@ export const ADD_COMMENT = gql`
     }
   }
 `;
+
+export const POST_DB = gql`
+  {
+    seePostDB {
+      ...PostParts
+    }
+  }
+  ${POST_FRAGMENT}
+`;
