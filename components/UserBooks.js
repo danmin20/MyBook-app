@@ -64,23 +64,34 @@ const Bio = styled.Text`
 const ProfileStats = styled.View`
   flex-direction: row;
   justify-content: center;
+  margin-left: 10px;
 `;
 const Stat = styled.View`
   align-items: center;
-  margin-left: 50px;
+  background-color: ${styles.lightBrownColor};
+  margin-left: 10px;
+  justify-content: center;
+  height: 70px;
+  width: 70px;
+  border-radius: 35px;
 `;
 const FollowStat = styled.TouchableOpacity`
   align-items: center;
-  margin-left: 50px;
+  background-color: ${styles.lightBrownColor};
+  margin-left: 10px;
+  justify-content: center;
+  height: 70px;
+  width: 70px;
+  border-radius: 35px;
 `;
 const Num = styled.Text`
   font-size: 20px;
-  color: white;
+  color: ${styles.brownColor};
 `;
 const StatName = styled.Text`
   margin-top: 5px;
   font-size: 13px;
-  color: white;
+  color: ${styles.brownColor};
 `;
 const Title = styled.Text`
   background-color: white;
@@ -224,13 +235,13 @@ const UserBooks = ({
           <BioBox>
             <MaterialCommunityIcons
               name="format-quote-open"
-              color={styles.blackColor}
+              color={styles.moderateBrownColor}
               size={30}
             />
             <Bio> {bio} </Bio>
             <MaterialCommunityIcons
               name="format-quote-close"
-              color={styles.blackColor}
+              color={styles.moderateBrownColor}
               size={30}
             />
           </BioBox>
@@ -239,14 +250,14 @@ const UserBooks = ({
       <Buttoncontainer>
         <Button onPress={setMine}>
           <MaterialCommunityIcons
-            name={"pencil-box"}
+            name={"pencil-circle"}
             size={40}
             color={isMine ? styles.blackColor : styles.brownColor}
           />
         </Button>
         <Button onPress={setLikes}>
           <MaterialCommunityIcons
-            name={"heart-box"}
+            name={"heart-circle"}
             size={40}
             color={isLikes ? styles.blackColor : styles.brownColor}
           />

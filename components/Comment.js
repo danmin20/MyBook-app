@@ -13,7 +13,7 @@ const Container = styled.View`
   flex-direction: row;
   padding: 10px;
   margin: 5px 10px;
-  border: 0px solid ${styles.lightGreyColor};
+  border: 0px solid ${styles.brownGrey};
   border-bottom-width: 1px;
 `;
 const Name = styled.TouchableOpacity`

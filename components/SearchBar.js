@@ -5,7 +5,7 @@ import styles from "../styles";
 
 const Container = styled.View`
   width: 100%;
-  background-color: ${styles.blackColor};
+  background-color: ${styles.brownColor};
 `;
 
 const TextInput = styled.TextInput`

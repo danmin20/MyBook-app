@@ -32,7 +32,7 @@ const Sentiment = styled.View`
   margin: 10px 0;
   padding: 10px;
   border-radius: 10px;
-  background-color: ${styles.lightGreyColor};
+  background-color: ${styles.brownGrey};
 `;
 const Bottom = styled.View`
   flex-direction: row;
@@ -64,7 +64,7 @@ const Buttom = styled.View`
   margin: 10px 0;
   padding-top: 10px;
   padding-bottom: 20px;
-  border: 0px solid ${styles.moderateGreyColor};
+  border: 0px solid ${styles.brownGrey};
   border-top-width: 1px;
   border-bottom-width: 1px;
 `;

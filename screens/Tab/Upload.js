@@ -36,7 +36,7 @@ const Title = styled.TextInput`
 const Sentiment = styled.TextInput`
   border-radius: 10px;
   margin-left: 15px;
-  background-color: ${styles.lightGreyColor};
+  background-color: ${styles.brownGrey};
   padding: 10px;
   min-height: 116px;
   flex: 1;

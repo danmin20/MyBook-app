@@ -11,7 +11,7 @@ const Container = styled.View`
 const TextInput = styled.TextInput`
   width: ${constants.width / 1.7}px;
   padding: 5px 10px;
-  border: 0px solid ${styles.moderateGreyColor};
+  border: 0px solid ${styles.brownGrey};
   border-bottom-width: 1px;
 `;
 

@@ -13,7 +13,7 @@ const CommentInput = styled.View`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background-color: ${styles.lightGreyColor};
+  background-color: ${styles.brownGrey};
   padding: 15px 10px;
   margin-top: auto;
 `;

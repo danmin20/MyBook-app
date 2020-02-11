@@ -1,13 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import { TouchableOpacity, Image, Text } from "react-native";
 import { withNavigation } from "react-navigation";
-import { useMutation } from "react-apollo-hooks";
 import styles from "../styles";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import constants from "../constants";
-import { TOGGLE_LIKE } from "../gql/queries";
 
 const Container = styled.View`
   padding: 10px;
@@ -22,7 +19,7 @@ const Sentiment = styled.View`
   height: 116px;
   padding: 10px;
   border-radius: 10px;
-  background-color: ${styles.lightGreyColor};
+  background-color: ${styles.brownGrey};
 `;
 const Date = styled.Text`
   margin-right: 10px;
@@ -41,41 +38,39 @@ const BookInfo = styled.View`
   align-items: center;
   margin-right: 5px;
 `;
+const TitleBox = styled.View`
+  background-color: ${styles.moderateBrownColor};
+  flex-direction: row;
+  flex: 1;
+`;
+const Square = styled.View`
+  background-color: white;
+  flex:1;
+  border-bottom-right-radius: 20px;
+`;
 const Title = styled.View`
+  flex: 13;
   flex-direction: row;
   justify-content: center;
   padding: 10px;
-  margin-right: 10px;
-  flex: 3;
+  background-color: ${styles.moderateBrownColor};
+  border-radius: 10px;
+  border-bottom-left-radius: 0;
 `;
 const NameBox = styled.View`
-  align-items: center;
-  justify-content: center;
-  border: 0px solid ${styles.darkGreyColor};
-  border-bottom-width: 1px;
-  padding: 10px;
-  flex: 1;
+  margin-top: auto;
+  padding-bottom: 0;
+  flex: 4;
+  background-color: ${styles.brownColor};
 `;
 const Header = styled.View`
-  width: ${constants.width}px;
+  width: 90%;
   flex-direction: row;
   margin: 10px;
   flex: 1;
 `;
 
-const Post = ({
-  id,
-  title,
-  user,
-  book,
-  likeCount: likeCountProp,
-  isLiked: isLikedProp,
-  createdAt,
-  sentiment,
-  navigation
-}) => {
-  const [isLiked, setIsLiked] = useState(isLikedProp);
-  const [likeCount, setLikeCount] = useState(likeCountProp);
+const Post = ({ id, title, user, book, createdAt, sentiment, navigation }) => {
   return (
     <TouchableOpacity
       onPress={() =>
@@ -87,6 +82,9 @@ const Post = ({
           <NameBox>
             <Name>{user.name}</Name>
           </NameBox>
+          <TitleBox>
+            <Square/>
+          </TitleBox>
           <Title>
             <MaterialCommunityIcons name="format-quote-open" size={20} />
             <Text style={{ fontSize: 15, fontStyle: "italic" }}> {title} </Text>
@@ -106,7 +104,7 @@ const Post = ({
             />
           </BookInfo>
           <Sentiment>
-            <Text>{sentiment}</Text>
+            <Text style={{ color: styles.brownColor }}>{sentiment}</Text>
           </Sentiment>
         </Box>
         <Date>

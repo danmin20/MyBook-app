@@ -11,7 +11,7 @@ const Container = styled.View`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  border: 0px solid ${styles.moderateGreyColor};
+  border: 0px solid ${styles.brownGrey};
   border-bottom-width: 1px;
 `;
 const Name = styled.View`

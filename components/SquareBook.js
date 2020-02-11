@@ -10,7 +10,7 @@ import constants from "../constants";
 const Container = styled.View`
   padding: 30px 15px;
   flex-direction: row;
-  border: 0px solid ${styles.moderateGreyColor};
+  border: 0px solid ${styles.brownGrey};
   border-bottom-width: 1px;
 `;
 const Image = styled.Image`
@@ -24,13 +24,13 @@ const Info = styled.View`
   margin-left: 20px;
 `;
 const Title = styled.View`
-  border: 0px solid ${styles.lightGreyColor};
+  border: 0px solid ${styles.brownGrey};
   border-bottom-width: 1px;
   margin-bottom: 5px;
 `;
 const SubInfo = styled.View`
   flex-direction: row;
-  max-width: ${constants.width/1.6}px;
+  max-width: ${constants.width / 1.6}px;
 `;
 const Kind = styled.Text`
   opacity: 0.7;
@@ -65,7 +65,14 @@ const SquareBook = ({
               {title
                 .replace(/<b>/gi, "")
                 .replace(/<\/b>/gi, "")
-                .replace(/&quot;/gi, '"')}
+                .replace(/&#x0D;/gi, "\n")
+                .replace(/&quot;/gi, '"')
+                .replace(/&nbsp;/gi, " ")
+                .replace(/&lt;/gi, "<")
+                .replace(/&gt;/gi, ">")
+                .replace(/&amp;/gi, "&")
+                .replace(/&#035;/gi, "#")
+                .replace(/#039;/gi, "'")}
             </MarkdownView>
           </Title>
           <SubInfo>

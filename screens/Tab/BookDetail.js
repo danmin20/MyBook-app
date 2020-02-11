@@ -37,7 +37,7 @@ const Descript = styled.View`
   margin-top: 20px;
   padding: 10px;
   border-radius: 10px;
-  background-color: ${styles.lightGreyColor};
+  background-color: ${styles.brownGrey};
 `;
 const Title = styled.Text`
   text-align: center;
@@ -119,8 +119,16 @@ export default ({ navigation }) => {
               <Descript>
                 <Text>
                   {detail.description
+                    .replace(/<b>/gi, "")
+                    .replace(/<\/b>/gi, "")
                     .replace(/&quot;/gi, '"')
-                    .replace(/&#x0D;/gi, "\n")}
+                    .replace(/&#x0D;/gi, "\n")
+                    .replace(/&nbsp;/gi, " ")
+                    .replace(/&lt;/gi, "<")
+                    .replace(/&gt;/gi, ">")
+                    .replace(/&amp;/gi, "&")
+                    .replace(/&#035;/gi, "#")
+                    .replace(/#039;/gi, "'")}
                 </Text>
               </Descript>
               <Link>

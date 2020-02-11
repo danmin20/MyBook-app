@@ -177,7 +177,7 @@ export default createBottomTabNavigator(
   {
     tabBarOptions: {
       showLabel: false,
-      style: { backgroundColor: styles.tabBrown }
+      style: { backgroundColor: styles.moderateBrownColor }
     }
   }
 );

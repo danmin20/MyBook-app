@@ -7,7 +7,9 @@ import { useQuery } from "react-apollo-hooks";
 import Loader from "./Loader";
 import { withNavigation } from "react-navigation";
 
-const Container = styled.View``;
+const Container = styled.View`
+  margin-top: 5px;
+`;
 const ContainerDB = styled.View`
   background-color: ${styles.lightBrownColor};
 `;
@@ -16,13 +18,13 @@ const TopicBox = styled.View`
   margin-top: 10px;
   margin-right: auto;
   width: auto;
-  border: 0px solid ${styles.moderateGreyColor};
-  border-bottom-width: 1px;
 `;
 const Topic = styled.Text`
   font-size: 15px;
-  margin: 5px 10px;
-  color: ${styles.blackColor};
+  padding: 5px 10px;
+  color: ${styles.brownColor};
+  background-color: ${styles.brownGrey};
+  border-radius: 10px;
 `;
 const BookScroll = styled.ScrollView`
   padding: 5px;
@@ -57,6 +59,10 @@ const Name = styled.Text`
   font-size: 10px;
   margin-bottom: 5px;
   color: ${styles.blackColor};
+  background-color: white;
+  padding: 1px 5px;
+  text-align: center;
+  border-radius: 10px;
 `;
 
 const HomeScreen = ({ navigation }) => {
