@@ -54,10 +54,12 @@ const Link = styled.View`
 const BookInfo = styled.View`
   flex-direction: row;
   margin: 20px 80px;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 `;
-const Info = styled.View``;
+const Info = styled.View`
+  margin-left: 20px;
+`;
 const Buttom = styled.View`
   margin: 10px 0;
   padding-top: 10px;

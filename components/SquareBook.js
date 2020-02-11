@@ -5,6 +5,7 @@ import { TouchableOpacity, Text, View } from "react-native";
 import { withNavigation } from "react-navigation";
 import styles from "../styles";
 import PropTypes from "prop-types";
+import constants from "../constants";
 
 const Container = styled.View`
   padding: 30px 15px;
@@ -29,12 +30,11 @@ const Title = styled.View`
 `;
 const SubInfo = styled.View`
   flex-direction: row;
-`;
-const TextColumn = styled.View`
-  margin-right: 10px;
+  max-width: ${constants.width/1.6}px;
 `;
 const Kind = styled.Text`
   opacity: 0.7;
+  width: 50px;
 `;
 
 const SquareBook = ({
@@ -69,16 +69,16 @@ const SquareBook = ({
             </MarkdownView>
           </Title>
           <SubInfo>
-            <TextColumn>
-              <Kind>저자</Kind>
-              <Kind>정가</Kind>
-              <Kind>출판사</Kind>
-            </TextColumn>
-            <TextColumn>
-              <Text>{author}</Text>
-              <Text>{price}</Text>
-              <Text>{publisher}</Text>
-            </TextColumn>
+            <Kind>저자</Kind>
+            <Text>{author}</Text>
+          </SubInfo>
+          <SubInfo>
+            <Kind>정가</Kind>
+            <Text>{price}</Text>
+          </SubInfo>
+          <SubInfo>
+            <Kind>출판사</Kind>
+            <Text>{publisher}</Text>
           </SubInfo>
         </Info>
       </Container>

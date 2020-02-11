@@ -57,8 +57,8 @@ const Text = styled.Text`
 
 export default ({ navigation }) => {
   const [loading, setLoading] = useState(false);
-  const titleInput = useInput();
-  const sentimentInput = useInput();
+  const titleInput = useInput(navigation.getParam("title"));
+  const sentimentInput = useInput(navigation.getParam("sentiment"));
   const [editMutation] = useMutation(EDIT_POST);
   const { refetch: refetchFeed } = useQuery(FEED);
   const { refetch: refetchMe } = useQuery(ME);
@@ -104,7 +104,6 @@ export default ({ navigation }) => {
         <Header>
           <MaterialCommunityIcons name="format-quote-open" size={30} />
           <Title
-            defaultValue={navigation.getParam("title")}
             onChangeText={titleInput.onChange}
             value={titleInput.value}
             multiline={true}
@@ -121,7 +120,6 @@ export default ({ navigation }) => {
           {uri !== "" && <Image source={{ uri }} />}
           {uri === "" && <Image source={require("../../assets/noImage.png")} />}
           <Sentiment
-            defaultValue={navigation.getParam("sentiment")}
             onChangeText={sentimentInput.onChange}
             value={sentimentInput.value}
             multiline={true}

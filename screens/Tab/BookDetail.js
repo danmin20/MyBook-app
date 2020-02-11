@@ -6,6 +6,7 @@ import { Text, ScrollView, Linking } from "react-native";
 import Loader from "../../components/Loader";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import styles from "../../styles";
+import constants from "../../constants";
 
 const Container = styled.View`
   justify-content: center;
@@ -47,11 +48,10 @@ const Title = styled.Text`
 `;
 const TextRow = styled.View`
   flex-direction: row;
-`;
-const TextColumn = styled.View`
-  margin-left: 10px;
+  max-width: ${constants.width / 1.3}px;
 `;
 const Kind = styled.Text`
+  width: 50px;
   opacity: 0.7;
 `;
 const Upload = styled.TouchableOpacity`
@@ -101,18 +101,20 @@ export default ({ navigation }) => {
               </Img>
               <Title>{detail.title.replace(/&quot;/gi, '"')}</Title>
               <TextRow>
-                <TextColumn>
-                  <Kind>출판사</Kind>
-                  <Kind>저자</Kind>
-                  <Kind>정가</Kind>
-                  <Kind>할인가</Kind>
-                </TextColumn>
-                <TextColumn>
-                  <Text>{detail.publisher}</Text>
-                  <Text>{detail.author}</Text>
-                  <Text>{detail.price}</Text>
-                  <Text>{detail.discount}</Text>
-                </TextColumn>
+                <Kind>출판사</Kind>
+                <Text>{detail.publisher}</Text>
+              </TextRow>
+              <TextRow>
+                <Kind>저자</Kind>
+                <Text>{detail.author}</Text>
+              </TextRow>
+              <TextRow>
+                <Kind>정가</Kind>
+                <Text>{detail.price}</Text>
+              </TextRow>
+              <TextRow>
+                <Kind>할인가</Kind>
+                <Text>{detail.discount}</Text>
               </TextRow>
               <Descript>
                 <Text>
