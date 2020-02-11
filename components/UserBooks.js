@@ -69,6 +69,10 @@ const Stat = styled.View`
   align-items: center;
   margin-left: 50px;
 `;
+const FollowStat = styled.TouchableOpacity`
+  align-items: center;
+  margin-left: 50px;
+`;
 const Num = styled.Text`
   font-size: 20px;
   color: white;
@@ -122,13 +126,14 @@ const UserBooks = ({
   postsCount,
   followersCount,
   followingCount,
+  followers,
+  following,
   posts,
   likes,
   isSelf,
   isFollowing: isFollowingProp,
   navigation
 }) => {
-  console.log(likes);
   const logOut = useLogOut();
   const [isFollowing, setIsFollowing] = useState(isFollowingProp);
   const [toggleFollowMtation] = useMutation(TOGGLE_FOLLOW, {
@@ -189,14 +194,22 @@ const UserBooks = ({
                 <StatName>게시물</StatName>
                 <Num>{postsCount}</Num>
               </Stat>
-              <Stat>
+              <FollowStat
+                onPress={() =>
+                  navigation.navigate("FollowDisplay", { follow: followers, type: "팔로워" })
+                }
+              >
                 <StatName>팔로워</StatName>
                 <Num>{followersCount}</Num>
-              </Stat>
-              <Stat>
+              </FollowStat>
+              <FollowStat
+                onPress={() =>
+                  navigation.navigate("FollowDisplay", { follow: following, type: "팔로잉" })
+                }
+              >
                 <StatName>팔로잉</StatName>
                 <Num>{followingCount}</Num>
-              </Stat>
+              </FollowStat>
             </ProfileStats>
           </Stats>
         </Header>
@@ -256,7 +269,28 @@ const UserBooks = ({
                 <Title>{post.title}</Title>
               </Book>
             ))}
-          {isLikes && <Text>likes</Text>}
+          {isLikes &&
+            likes &&
+            likes.map(like => (
+              <Book
+                key={like.post.id}
+                onPress={() =>
+                  navigation.navigate("PostDetail", {
+                    title: like.post.title,
+                    id: like.post.id
+                  })
+                }
+              >
+                <Image
+                  style={{
+                    height: 116,
+                    width: 82
+                  }}
+                  source={{ uri: like.post.book.image }}
+                />
+                <Title>{like.post.title}</Title>
+              </Book>
+            ))}
         </Books>
       </ScrollView>
     </View>

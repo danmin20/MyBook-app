@@ -125,6 +125,7 @@ const Post = ({
     }
     try {
       await toggleLikeMutation();
+      await refetchMe();
     } catch (e) {
       console.log(e);
     }

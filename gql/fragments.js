@@ -22,7 +22,7 @@ export const POST_FRAGMENT = gql`
     book {
       ...BookParts
     }
-    user{
+    user {
       id
       name
       isSelf
@@ -52,6 +52,20 @@ export const USER_FRAGMENT = gql`
     email
     posts {
       ...PostParts
+    }
+    followers {
+      id
+      name
+      postsCount
+      isFollowing
+      isSelf
+    }
+    following {
+      id
+      name
+      postsCount
+      isFollowing
+      isSelf
     }
     isFollowing
     isSelf

@@ -14,6 +14,7 @@ import styles from "../styles";
 import { Text, View } from "react-native";
 import Upload from "../screens/Tab/Upload";
 import EditPost from "../screens/Tab/EditPost";
+import FollowDisplay from "../screens/Tab/FollowDisplay";
 
 const stackFactory = (initialRoute, customConfig) =>
   createStackNavigator(
@@ -71,6 +72,12 @@ const stackFactory = (initialRoute, customConfig) =>
             "none";
           }
         }
+      },
+      FollowDisplay: {
+        screen: FollowDisplay,
+        navigationOptions: ({ navigation }) => ({
+          title: navigation.getParam("type")
+        })
       }
     },
     {

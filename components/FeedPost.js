@@ -76,22 +76,6 @@ const Post = ({
 }) => {
   const [isLiked, setIsLiked] = useState(isLikedProp);
   const [likeCount, setLikeCount] = useState(likeCountProp);
-  const [toggleLikeMutation] = useMutation(TOGGLE_LIKE, {
-    variables: { postId: id }
-  });
-  const handleLike = async () => {
-    setIsLiked(p => !p);
-    if (isLiked) {
-      setLikeCount(likeCount - 1);
-    } else {
-      setLikeCount(likeCount + 1);
-    }
-    try {
-      await toggleLikeMutation();
-    } catch (e) {
-      console.log(e);
-    }
-  };
   return (
     <TouchableOpacity
       onPress={() =>
