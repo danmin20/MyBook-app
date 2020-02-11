@@ -4,15 +4,13 @@ import PropTypes from "prop-types";
 import styles from "../styles";
 
 const Container = styled.View`
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
   background-color: ${styles.blackColor};
 `;
 
 const TextInput = styled.TextInput`
-  width: 80%;
-  margin-bottom: 20px;
+  width: 86%;
+  margin-bottom: 15px;
   padding: 2px 10px;
   border-radius: 5px;
   background-color: white;

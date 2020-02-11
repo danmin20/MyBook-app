@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styled from "styled-components";
 import { useQuery } from "react-apollo-hooks";
 import { FEED } from "../../gql/queries";
 import { ScrollView, RefreshControl } from "react-native";
@@ -6,9 +7,28 @@ import Loader from "../../components/Loader";
 import FeedPost from "../../components/FeedPost";
 import SearchBar from "../../components/SearchBar";
 import useInput from "../../hook/useInput";
+import styles from "../../styles";
+import { EvilIcons } from "@expo/vector-icons";
+
+const Box = styled.View`
+  flex-direction: row;
+  background-color: ${styles.blackColor};
+  align-items: center;
+`;
+const Search = styled.TouchableOpacity`
+  justify-content: center;
+  background-color: ${styles.blackColor};
+  padding: 5px;
+  padding-bottom: 10px;
+  margin-bottom: auto;
+`;
 
 export default ({ navigation }) => {
+  const [search, setSearch] = useState(false);
   const searchInput = useInput("");
+  const toggleSearch = () => {
+    setSearch(p => !p);
+  };
   const handleSearch = async () => {
     const { value } = searchInput;
     if (value !== "") {
@@ -29,11 +49,18 @@ export default ({ navigation }) => {
   };
   return (
     <>
-      <SearchBar
-        {...searchInput}
-        placeholder="유저 검색"
-        onSubmitEditing={handleSearch}
-      />
+      <Box>
+        <Search onPress={toggleSearch}>
+          <EvilIcons name="search" size={20} color="white" />
+        </Search>
+        {search ? (
+          <SearchBar
+            {...searchInput}
+            placeholder="도서 검색"
+            onSubmitEditing={handleSearch}
+          />
+        ) : null}
+      </Box>
       <ScrollView
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={refresh} />
