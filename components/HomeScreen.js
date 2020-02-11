@@ -12,6 +12,7 @@ const Container = styled.View`
 `;
 const ContainerDB = styled.View`
   background-color: ${styles.lightBrownColor};
+  margin-bottom: 5px;
 `;
 const TopicBox = styled.View`
   margin-left: 10px;

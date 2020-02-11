@@ -18,30 +18,19 @@ const Container = styled.View`
 `;
 const Name = styled.TouchableOpacity`
   margin-right: 10px;
-  opacity: 0.5;
 `;
 const CommentText = styled.View``;
 const Date = styled.View`
   margin-top: auto;
   margin-left: auto;
-  opacity: 0.3;
 `;
 const Delete = styled.View`
-  opacity: 0.5;
   margin-top: auto;
   margin-left: auto;
   padding: 0 10px;
 `;
 
-const Comment = ({
-  navigation,
-  postId,
-  id,
-  text,
-  userOfPost,
-  user,
-  createdAt
-}) => {
+const Comment = ({ navigation, id, text, userOfPost, user, createdAt }) => {
   const [loading, setLoading] = useState(false);
   const [isDeleted, setIsDeleted] = useState(false);
   const [deleteCommentMutation] = useMutation(DEL_COMMENT);
@@ -84,7 +73,7 @@ const Comment = ({
               navigation.navigate("UserDetail", { userId: user.id })
             }
           >
-            <Text>{user.name}</Text>
+            <Text style={{ color: styles.brownColor }}>{user.name}</Text>
           </Name>
           <CommentText>
             <Text>{text}</Text>
@@ -96,14 +85,14 @@ const Comment = ({
                   <MaterialIcons
                     name="delete"
                     size={15}
-                    color={styles.blackColor}
+                    color={styles.brownColor}
                   />
                 </TouchableOpacity>
               </Delete>
             )}
           </View>
           <Date>
-            <Text style={{ fontSize: 10 }}>
+            <Text style={{ fontSize: 10, color: styles.moderateBrownColor }}>
               {createdAt.substring(0, 10).replace(/-/gi, ".")}
             </Text>
           </Date>

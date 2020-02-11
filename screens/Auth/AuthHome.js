@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import constants from "../../constants";
 import AuthButton from "../../components/AuthButton";
+import styles from "../../styles";
 
 const View = styled.View`
   justify-content: center;
@@ -22,6 +23,7 @@ const LoginLink = styled.View``;
 const LoginLinkText = styled.Text`
   margin-top: 20px;
   font-weight: 600;
+  color: ${styles.brownColor};
 `;
 
 export default ({ navigation }) => (

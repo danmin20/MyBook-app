@@ -107,7 +107,11 @@ export default ({ navigation }) => {
       </Button>
       <Container>
         <Header>
-          <MaterialCommunityIcons name="format-quote-open" size={30} />
+          <MaterialCommunityIcons
+            name="format-quote-open"
+            size={30}
+            color={styles.brownColor}
+          />
           <Title
             onChangeText={titleInput.onChange}
             value={titleInput.value}
@@ -115,7 +119,11 @@ export default ({ navigation }) => {
             multiline={true}
             placeholderTextColor={styles.darkGreyColor}
           />
-          <MaterialCommunityIcons name="format-quote-close" size={30} />
+          <MaterialCommunityIcons
+            name="format-quote-close"
+            size={30}
+            color={styles.brownColor}
+          />
         </Header>
         <Content>
           <Image

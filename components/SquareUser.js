@@ -33,7 +33,7 @@ const Posts = styled.View`
   flex: 1;
 `;
 const Self = styled.View`
-  background-color: ${styles.blackColor};
+  background-color: ${styles.brownColor};
   width: 25px;
   height: 25px;
   border-radius: 17.5px;
@@ -64,7 +64,9 @@ const SquareUser = ({
                 <Text style={{ color: "white", fontWeight: "bold" }}>나</Text>
               </Self>
             )}
-            {isFollowing && <Text>• 팔로잉</Text>}
+            {isFollowing && (
+              <Text style={{ color: styles.brownColor }}>• 팔로잉</Text>
+            )}
           </Sub>
         </Info>
         <Posts>

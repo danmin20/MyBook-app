@@ -98,11 +98,19 @@ export default ({ navigation }) => {
         ) : (
           <Text>수정하기 </Text>
         )}
-        <MaterialCommunityIcons name="arrow-right" size={20} />
+        <MaterialCommunityIcons
+          name="arrow-right"
+          size={20}
+          color={styles.brownColor}
+        />
       </Button>
       <Container>
         <Header>
-          <MaterialCommunityIcons name="format-quote-open" size={30} />
+          <MaterialCommunityIcons
+            name="format-quote-open"
+            size={30}
+            color={styles.brownColor}
+          />
           <Title
             onChangeText={titleInput.onChange}
             value={titleInput.value}
@@ -110,7 +118,11 @@ export default ({ navigation }) => {
             placeholder="제목 입력..."
             placeholderTextColor={styles.darkGreyColor}
           />
-          <MaterialCommunityIcons name="format-quote-close" size={30} />
+          <MaterialCommunityIcons
+            name="format-quote-close"
+            size={30}
+            color={styles.brownColor}
+          />
         </Header>
         <Content>
           <Image

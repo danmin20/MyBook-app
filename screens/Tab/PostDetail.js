@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { ScrollView, RefreshControl, Text, View } from "react-native";
 import { useQuery, useMutation } from "react-apollo-hooks";
 import { POST_DETAIL, ADD_COMMENT } from "../../gql/queries";
-import Loader from "../../components/Loader";
 import Post from "../../components/Post";
 import CommentWindow from "../../components/CommentWindow";
 import useInput from "../../hook/useInput";
@@ -13,12 +12,12 @@ const CommentInput = styled.View`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background-color: ${styles.brownGrey};
+  background-color: ${styles.moderateBrownColor};
   padding: 15px 10px;
   margin-top: auto;
 `;
 const Button = styled.TouchableOpacity`
-  background-color: ${styles.blackColor};
+  background-color: ${styles.brownColor};
   padding: 10px;
   margin-left: 10px;
   border-radius: 10px;

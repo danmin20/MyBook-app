@@ -86,7 +86,7 @@ const FollowStat = styled.TouchableOpacity`
 `;
 const Num = styled.Text`
   font-size: 20px;
-  color: ${styles.brownColor};
+  color: ${styles.blackColor};
 `;
 const StatName = styled.Text`
   margin-top: 5px;

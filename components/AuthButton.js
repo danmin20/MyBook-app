@@ -9,7 +9,7 @@ const Touchable = styled.TouchableOpacity``;
 const Container = styled.View`
   margin: 2px;
   background-color: ${props =>
-    props.bgColor ? props.bgColor : styles.blackColor};
+    props.bgColor ? props.bgColor : styles.brownColor};
   padding: 10px;
   border-radius: 4px;
   width: ${constants.width / 2.5}px;

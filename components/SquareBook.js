@@ -33,7 +33,7 @@ const SubInfo = styled.View`
   max-width: ${constants.width / 1.6}px;
 `;
 const Kind = styled.Text`
-  opacity: 0.7;
+  color: ${styles.brownColor};
   width: 50px;
 `;
 

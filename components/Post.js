@@ -40,7 +40,7 @@ const Bottom = styled.View`
 const Date = styled.Text`
   margin-left: auto;
   font-size: 10px;
-  opacity: 0.7;
+  color: ${styles.brownColor};
 `;
 const Link = styled.View`
   flex-direction: row;
@@ -69,7 +69,7 @@ const Buttom = styled.View`
   border-bottom-width: 1px;
 `;
 const NameBox = styled.TouchableOpacity`
-  background-color: ${styles.blackColor};
+  background-color: ${styles.moderateBrownColor};
   padding: 3px 25px;
   margin-right: auto;
   border-radius: 10px;
@@ -90,7 +90,7 @@ const Like = styled.View`
   padding: 5px;
 `;
 const HeartIconContainer = styled.TouchableOpacity`
-  opacity: 0.7;
+  opacity: 0.8;
 `;
 
 const Post = ({
@@ -233,7 +233,7 @@ const Post = ({
                   <MaterialIcons
                     name="mode-edit"
                     size={15}
-                    color={styles.blackColor}
+                    color={styles.brownColor}
                   />
                 </TouchableOpacity>
                 <Text>{"  "}</Text>
@@ -241,7 +241,7 @@ const Post = ({
                   <MaterialIcons
                     name="delete"
                     size={15}
-                    color={styles.blackColor}
+                    color={styles.brownColor}
                   />
                 </TouchableOpacity>
               </Funcs>

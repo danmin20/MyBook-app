@@ -12,7 +12,7 @@ const Container = styled.View`
   justify-content: center;
 `;
 const Name = styled.Text`
-  color: ${styles.blackColor};
+  color: ${styles.brownColor};
 `;
 const Sentiment = styled.View`
   flex: 1;
@@ -26,7 +26,7 @@ const Date = styled.Text`
   margin-left: auto;
   margin-bottom: 10px;
   font-size: 10px;
-  opacity: 0.7;
+  color: ${styles.brownColor};
 `;
 const Box = styled.View`
   margin: 10px;
@@ -40,13 +40,17 @@ const BookInfo = styled.View`
 `;
 const TitleBox = styled.View`
   background-color: ${styles.moderateBrownColor};
-  flex-direction: row;
   flex: 1;
 `;
-const Square = styled.View`
+const UpSquare = styled.View`
   background-color: white;
-  flex:1;
-  border-bottom-right-radius: 20px;
+  flex: 1;
+  border-bottom-right-radius: 16px;
+`;
+const DownSquare = styled.View`
+  background-color: white;
+  flex: 1;
+  border-top-right-radius: 16px;
 `;
 const Title = styled.View`
   flex: 13;
@@ -55,16 +59,18 @@ const Title = styled.View`
   padding: 10px;
   background-color: ${styles.moderateBrownColor};
   border-radius: 10px;
-  border-bottom-left-radius: 0;
 `;
 const NameBox = styled.View`
-  margin-top: auto;
-  padding-bottom: 0;
-  flex: 4;
-  background-color: ${styles.brownColor};
+  padding: 5px 0px;
+  margin: auto;
+  flex: 4.2;
+  background-color: ${styles.brownGrey};
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
 `;
 const Header = styled.View`
-  width: 90%;
+  width: 95%;
   flex-direction: row;
   margin: 10px;
   flex: 1;
@@ -83,12 +89,30 @@ const Post = ({ id, title, user, book, createdAt, sentiment, navigation }) => {
             <Name>{user.name}</Name>
           </NameBox>
           <TitleBox>
-            <Square/>
+            <UpSquare />
+            <DownSquare />
           </TitleBox>
           <Title>
-            <MaterialCommunityIcons name="format-quote-open" size={20} />
-            <Text style={{ fontSize: 15, fontStyle: "italic" }}> {title} </Text>
-            <MaterialCommunityIcons name="format-quote-close" size={20} />
+            <MaterialCommunityIcons
+              name="format-quote-open"
+              size={20}
+              color={styles.brownColor}
+            />
+            <Text
+              style={{
+                fontSize: 15,
+                fontStyle: "italic",
+                color: "white"
+              }}
+            >
+              {" "}
+              {title}{" "}
+            </Text>
+            <MaterialCommunityIcons
+              name="format-quote-close"
+              size={20}
+              color={styles.brownColor}
+            />
           </Title>
         </Header>
         <Box>
@@ -104,7 +128,11 @@ const Post = ({ id, title, user, book, createdAt, sentiment, navigation }) => {
             />
           </BookInfo>
           <Sentiment>
-            <Text style={{ color: styles.brownColor }}>{sentiment}</Text>
+            {sentiment.length > 135 ? (
+              <Text>{sentiment.substring(0, 135)}...</Text>
+            ) : (
+              <Text>{sentiment}</Text>
+            )}
           </Sentiment>
         </Box>
         <Date>

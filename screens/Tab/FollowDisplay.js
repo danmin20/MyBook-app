@@ -1,8 +1,5 @@
 import React, { useState } from "react";
-import { useQuery } from "react-apollo-hooks";
-import { ME } from "../../gql/queries";
 import { ScrollView, View, Text, RefreshControl } from "react-native";
-import Loader from "../../components/Loader";
 import SquareUser from "../../components/SquareUser";
 
 export default ({ navigation }) => {
