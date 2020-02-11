@@ -9,13 +9,13 @@ import styles from "../../styles";
 
 const Box = styled.View`
   flex-direction: row;
-  background-color: ${styles.blackColor};
+  background-color: ${styles.brownColor};
   align-items: center;
 `;
 const Search = styled.TouchableOpacity`
   justify-content: center;
-  background-color: ${styles.blackColor};
-  padding: 5px;
+  background-color: ${styles.brownColor};
+  padding: 5px 10px;
   padding-bottom: 10px;
   margin-bottom: auto;
 `;

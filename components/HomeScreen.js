@@ -9,7 +9,7 @@ import { withNavigation } from "react-navigation";
 
 const Container = styled.View``;
 const ContainerDB = styled.View`
-  background-color: ${styles.lightGreyColor};
+  background-color: ${styles.lightBrownColor};
 `;
 const TopicBox = styled.View`
   margin-left: 10px;

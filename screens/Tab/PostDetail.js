@@ -76,7 +76,7 @@ export default ({ navigation }) => {
               placeholder="댓글 입력..."
               onSubmitEditing={handleAddComment}
             />
-            <Button>
+            <Button onSubmitEditing={handleAddComment}>
               <Text style={{ color: "white" }}>등록</Text>
             </Button>
           </CommentInput>

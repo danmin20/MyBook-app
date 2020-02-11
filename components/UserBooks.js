@@ -15,7 +15,7 @@ const View = styled.View`
   height: ${constants.height}px;
 `;
 const Top = styled.View`
-  background-color: ${styles.blackColor};
+  background-color: ${styles.brownColor};
   padding-bottom: 25px;
 `;
 const Header = styled.View`
@@ -101,18 +101,19 @@ const Stats = styled.View`
 const Func = styled.View`
   justify-content: center;
   align-items: center;
-  background-color: white;
+  background-color: ${styles.lightBrownColor};
   border-radius: 5px;
   padding: 3px 15px;
   margin-top: 10px;
 `;
 const FuncText = styled.Text`
+  color: ${styles.blackColor};
   font-size: 11px;
 `;
 const Buttoncontainer = styled.View`
   padding: 2px 0;
   flex-direction: row;
-  background-color: ${styles.moderateGreyColor};
+  background-color: ${styles.lightBrownColor};
 `;
 const Button = styled.TouchableOpacity`
   width: ${constants.width / 2}px;
@@ -196,7 +197,10 @@ const UserBooks = ({
               </Stat>
               <FollowStat
                 onPress={() =>
-                  navigation.navigate("FollowDisplay", { follow: followers, type: "팔로워" })
+                  navigation.navigate("FollowDisplay", {
+                    follow: followers,
+                    type: "팔로워"
+                  })
                 }
               >
                 <StatName>팔로워</StatName>
@@ -204,7 +208,10 @@ const UserBooks = ({
               </FollowStat>
               <FollowStat
                 onPress={() =>
-                  navigation.navigate("FollowDisplay", { follow: following, type: "팔로잉" })
+                  navigation.navigate("FollowDisplay", {
+                    follow: following,
+                    type: "팔로잉"
+                  })
                 }
               >
                 <StatName>팔로잉</StatName>
@@ -217,13 +224,13 @@ const UserBooks = ({
           <BioBox>
             <MaterialCommunityIcons
               name="format-quote-open"
-              color="white"
+              color={styles.blackColor}
               size={30}
             />
             <Bio> {bio} </Bio>
             <MaterialCommunityIcons
               name="format-quote-close"
-              color="white"
+              color={styles.blackColor}
               size={30}
             />
           </BioBox>
@@ -232,16 +239,16 @@ const UserBooks = ({
       <Buttoncontainer>
         <Button onPress={setMine}>
           <MaterialCommunityIcons
-            name={isMine ? "pencil-box" : "pencil-box-outline"}
+            name={"pencil-box"}
             size={40}
-            color={styles.blackColor}
+            color={isMine ? styles.blackColor : styles.brownColor}
           />
         </Button>
         <Button onPress={setLikes}>
           <MaterialCommunityIcons
-            name={isLikes ? "heart-box" : "heart-box-outline"}
+            name={"heart-box"}
             size={40}
-            color={styles.blackColor}
+            color={isLikes ? styles.blackColor : styles.brownColor}
           />
         </Button>
       </Buttoncontainer>

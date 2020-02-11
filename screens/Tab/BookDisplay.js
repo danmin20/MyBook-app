@@ -6,6 +6,7 @@ import { ScrollView, View, RefreshControl, Image } from "react-native";
 import Loader from "../../components/Loader";
 import SquareBook from "../../components/SquareBook";
 import constants from "../../constants";
+import styles from "../../styles";
 
 const ErrView = styled.View`
   margin-top: 50px;
@@ -19,7 +20,7 @@ const Ex = styled.View`
   margin: 0 30px;
 `;
 const Red = styled.Text`
-  color: red;
+  color: ${styles.redColor};
 `;
 const Row = styled.View`
   flex-direction: row;
