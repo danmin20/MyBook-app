@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useMutation, useQuery } from "react-apollo-hooks";
-import { FEED, ME, SEARCH, EDIT_POST } from "../../gql/queries";
+import { FEED, ME, EDIT_POST } from "../../gql/queries";
 import useInput from "../../hook/useInput";
 import { ActivityIndicator } from "react-native";
 import styles from "../../styles";
@@ -90,14 +90,13 @@ export default ({ navigation }) => {
   return (
     <View>
       <Button onPress={handleEdit}>
-        {loading ? (
+        {loading && (
           <ActivityIndicator
             style={{ marginLeft: 15, marginTop: 3, marginBottom: 3 }}
-            color="black"
+            color={styles.brownColor}
           />
-        ) : (
-          <Text>수정하기 </Text>
         )}
+        <Text>수정하기 </Text>
         <MaterialCommunityIcons
           name="arrow-right"
           size={20}

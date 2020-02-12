@@ -95,14 +95,13 @@ export default ({ navigation }) => {
   return (
     <View>
       <Button onPress={handleUpload}>
-        {loading ? (
+        {loading && (
           <ActivityIndicator
             style={{ marginLeft: 15, marginTop: 3, marginBottom: 3 }}
-            color="black"
+            color={styles.brownColor}
           />
-        ) : (
-          <Text>업로드하기 </Text>
         )}
+        <Text>업로드하기 </Text>
         <MaterialCommunityIcons name="arrow-right" size={20} />
       </Button>
       <Container>

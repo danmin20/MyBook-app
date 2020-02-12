@@ -57,7 +57,7 @@ const Info = styled.View`
   align-items: center;
 `;
 const Name = styled.Text`
-  font-size: 10px;
+  font-size: 8px;
   margin-bottom: 5px;
   color: ${styles.blackColor};
   background-color: white;

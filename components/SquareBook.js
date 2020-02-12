@@ -1,7 +1,7 @@
 import React from "react";
 import { MarkdownView } from "react-native-markdown-view";
 import styled from "styled-components";
-import { TouchableOpacity, Text, View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import { withNavigation } from "react-navigation";
 import styles from "../styles";
 import PropTypes from "prop-types";
@@ -23,7 +23,9 @@ const Info = styled.View`
   justify-content: center;
   margin-left: 20px;
 `;
-const Title = styled.View`
+const Title = styled.Text`
+  padding-bottom: 10px;
+  color: ${styles.blackColor};
   border: 0px solid ${styles.brownGrey};
   border-bottom-width: 1px;
   margin-bottom: 5px;
@@ -35,6 +37,10 @@ const SubInfo = styled.View`
 const Kind = styled.Text`
   color: ${styles.brownColor};
   width: 50px;
+`;
+const Text = styled.Text`
+  color: ${styles.blackColor};
+  opacity: 0.8;
 `;
 
 const SquareBook = ({
@@ -61,19 +67,17 @@ const SquareBook = ({
         </View>
         <Info>
           <Title>
-            <MarkdownView>
-              {title
-                .replace(/<b>/gi, "")
-                .replace(/<\/b>/gi, "")
-                .replace(/&#x0D;/gi, "\n")
-                .replace(/&quot;/gi, '"')
-                .replace(/&nbsp;/gi, " ")
-                .replace(/&lt;/gi, "<")
-                .replace(/&gt;/gi, ">")
-                .replace(/&amp;/gi, "&")
-                .replace(/&#035;/gi, "#")
-                .replace(/#039;/gi, "'")}
-            </MarkdownView>
+            {title
+              .replace(/<b>/gi, "")
+              .replace(/<\/b>/gi, "")
+              .replace(/&#x0D;/gi, "\n")
+              .replace(/&quot;/gi, '"')
+              .replace(/&nbsp;/gi, " ")
+              .replace(/&lt;/gi, "<")
+              .replace(/&gt;/gi, ">")
+              .replace(/&amp;/gi, "&")
+              .replace(/&#035;/gi, "#")
+              .replace(/#039;/gi, "'")}
           </Title>
           <SubInfo>
             <Kind>저자</Kind>

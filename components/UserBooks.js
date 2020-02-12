@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useLogOut } from "../AuthContext";
-import { Image, ScrollView, TouchableOpacity, Text } from "react-native";
+import { Image, ScrollView, TouchableOpacity, Text, Alert } from "react-native";
 import constants from "../constants";
 import { withNavigation } from "react-navigation";
 import styles from "../styles";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons, Ionicons } from "@expo/vector-icons";
 import { useMutation } from "react-apollo-hooks";
 import { TOGGLE_FOLLOW } from "../gql/queries";
 import PropTypes from "prop-types";
@@ -17,11 +17,13 @@ const View = styled.View`
 const Top = styled.View`
   background-color: ${styles.brownColor};
   padding-bottom: 25px;
+  align-items: center;
 `;
 const Header = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  width: 90%;
 `;
 const Books = styled.View`
   justify-content: center;
@@ -43,7 +45,12 @@ const Book = styled.TouchableOpacity`
 const Profile = styled.View`
   justify-content: center;
   align-items: center;
-  margin-left: 20px;
+  width: 30%;
+`;
+const Stats = styled.View`
+  align-items: center;
+  padding-right: 10px;
+  width: 70%;
 `;
 const Name = styled.Text`
   font-size: 20px;
@@ -55,6 +62,7 @@ const BioBox = styled.View`
   align-items: center;
   justify-content: center;
   padding: 0 10px;
+  max-width: 80%;
 `;
 const Bio = styled.Text`
   color: white;
@@ -105,17 +113,12 @@ const Title = styled.Text`
   font-size: 12px;
   text-align: center;
 `;
-const Stats = styled.View`
-  align-items: center;
-  margin-right: 10px;
-`;
 const Func = styled.View`
   justify-content: center;
   align-items: center;
   background-color: ${styles.lightBrownColor};
   border-radius: 5px;
   padding: 3px 15px;
-  margin-top: 10px;
 `;
 const FuncText = styled.Text`
   color: ${styles.blackColor};
@@ -129,6 +132,12 @@ const Buttoncontainer = styled.View`
 const Button = styled.TouchableOpacity`
   width: ${constants.width / 2}px;
   align-items: center;
+`;
+const Funcs = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
 `;
 
 const UserBooks = ({
@@ -174,6 +183,22 @@ const UserBooks = ({
       console.log(e);
     }
   };
+  const handleLogOut = () => {
+    Alert.alert(
+      "",
+      "로그아웃 하시겠습니까?",
+      [
+        {
+          text: "예",
+          onPress: async () => {
+            logOut();
+          }
+        },
+        { text: "아니오", style: "cancel" }
+      ],
+      { cancelable: false }
+    );
+  };
   return (
     <View>
       <Top>
@@ -181,23 +206,37 @@ const UserBooks = ({
           <Profile>
             <Name>{name}</Name>
             {isSelf ? (
-              <TouchableOpacity onPress={logOut}>
-                <Func>
-                  <FuncText>로그아웃</FuncText>
-                </Func>
-              </TouchableOpacity>
+              <Funcs>
+                <TouchableOpacity onPress={handleLogOut}>
+                  <Func>
+                    <FuncText>로그아웃</FuncText>
+                  </Func>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={{ marginLeft: 5 }}
+                  onPress={() => navigation.navigate("EditUser", { name, bio })}
+                >
+                  <Ionicons
+                    name="ios-settings"
+                    size={20}
+                    color={styles.lightBrownColor}
+                  />
+                </TouchableOpacity>
+              </Funcs>
             ) : (
-              <TouchableOpacity onPress={handleFollow}>
-                {isFollowing ? (
-                  <Func>
-                    <FuncText>언팔로우</FuncText>
-                  </Func>
-                ) : (
-                  <Func>
-                    <FuncText>팔로우</FuncText>
-                  </Func>
-                )}
-              </TouchableOpacity>
+              <Funcs>
+                <TouchableOpacity onPress={handleFollow}>
+                  {isFollowing ? (
+                    <Func>
+                      <FuncText>언팔로우</FuncText>
+                    </Func>
+                  ) : (
+                    <Func>
+                      <FuncText>팔로우</FuncText>
+                    </Func>
+                  )}
+                </TouchableOpacity>
+              </Funcs>
             )}
           </Profile>
           <Stats>

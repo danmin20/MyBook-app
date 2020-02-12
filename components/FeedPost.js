@@ -12,14 +12,14 @@ const Container = styled.View`
   justify-content: center;
 `;
 const Name = styled.Text`
-  color: ${styles.brownColor};
+  color: white;
 `;
 const Sentiment = styled.View`
   flex: 1;
   height: 116px;
   padding: 10px;
   border-radius: 10px;
-  background-color: ${styles.brownGrey};
+  border: 1px solid ${styles.moderateBrownColor};
 `;
 const Date = styled.Text`
   margin-right: 10px;
@@ -39,7 +39,7 @@ const BookInfo = styled.View`
   margin-right: 5px;
 `;
 const TitleBox = styled.View`
-  background-color: ${styles.moderateBrownColor};
+  background-color: ${styles.brownGrey};
   flex: 1;
 `;
 const UpSquare = styled.View`
@@ -56,15 +56,16 @@ const Title = styled.View`
   flex: 13;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
   padding: 10px;
-  background-color: ${styles.moderateBrownColor};
+  background-color: ${styles.brownGrey};
   border-radius: 10px;
 `;
 const NameBox = styled.View`
-  padding: 5px 0px;
+  padding: 5px 10px;
   margin: auto;
-  flex: 4.2;
-  background-color: ${styles.brownGrey};
+  flex: 3;
+  background-color: ${styles.moderateBrownColor};
   align-items: center;
   justify-content: center;
   border-radius: 10px;
@@ -102,7 +103,7 @@ const Post = ({ id, title, user, book, createdAt, sentiment, navigation }) => {
               style={{
                 fontSize: 15,
                 fontStyle: "italic",
-                color: "white"
+                color: styles.blackColor
               }}
             >
               {" "}

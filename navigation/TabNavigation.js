@@ -15,6 +15,7 @@ import { Text, View } from "react-native";
 import Upload from "../screens/Tab/Upload";
 import EditPost from "../screens/Tab/EditPost";
 import FollowDisplay from "../screens/Tab/FollowDisplay";
+import EditUser from "../screens/Tab/EditUser";
 
 const stackFactory = (initialRoute, customConfig) =>
   createStackNavigator(
@@ -78,6 +79,12 @@ const stackFactory = (initialRoute, customConfig) =>
         navigationOptions: ({ navigation }) => ({
           title: navigation.getParam("type")
         })
+      },
+      EditUser: {
+        screen: EditUser,
+        navigationOptions: {
+          title: "내 정보 수정"
+        }
       }
     },
     {

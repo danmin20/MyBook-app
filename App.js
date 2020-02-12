@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { MaterialIcons, MaterialCommunityIcons, EvilIcons } from "@expo/vector-icons";
+import { MaterialIcons, MaterialCommunityIcons, EvilIcons, Ionicons } from "@expo/vector-icons";
 import { AppLoading } from "expo";
 import { AsyncStorage } from "react-native";
 import * as Font from "expo-font";
@@ -23,7 +23,8 @@ export default function App() {
       await Font.loadAsync({
         ...MaterialIcons.font,
         ...MaterialCommunityIcons.font,
-        ...EvilIcons.font
+        ...EvilIcons.font,
+        ...Ionicons.font
       });
       await Asset.loadAsync([
         require("./assets/logo.png"),

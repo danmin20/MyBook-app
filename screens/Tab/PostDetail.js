@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { ScrollView, RefreshControl, Text, View } from "react-native";
+import {
+  ScrollView,
+  RefreshControl,
+  Text,
+  View,
+  ActivityIndicator
+} from "react-native";
 import { useQuery, useMutation } from "react-apollo-hooks";
 import { POST_DETAIL, ADD_COMMENT } from "../../gql/queries";
 import Post from "../../components/Post";
@@ -25,6 +31,7 @@ const Button = styled.TouchableOpacity`
 
 export default ({ navigation }) => {
   const commentInput = useInput("");
+  const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const { data, refetch } = useQuery(POST_DETAIL, {
     variables: { id: navigation.getParam("id") },
@@ -43,6 +50,7 @@ export default ({ navigation }) => {
   };
   const handleAddComment = async () => {
     try {
+      setLoading(true);
       const {
         data: { addComment }
       } = await addCommentMutation({
@@ -56,6 +64,8 @@ export default ({ navigation }) => {
       }
     } catch (e) {
       console.log(e);
+    } finally {
+      setLoading(false);
     }
   };
   return (
@@ -75,8 +85,12 @@ export default ({ navigation }) => {
               placeholder="댓글 입력..."
               onSubmitEditing={handleAddComment}
             />
-            <Button onSubmitEditing={handleAddComment}>
-              <Text style={{ color: "white" }}>등록</Text>
+            <Button onPress={handleAddComment}>
+              {loading ? (
+                <ActivityIndicator color={"white"} />
+              ) : (
+                <Text style={{ color: "white" }}>등록</Text>
+              )}
             </Button>
           </CommentInput>
         </View>

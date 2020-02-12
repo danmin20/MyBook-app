@@ -116,3 +116,11 @@ export const POST_DB = gql`
   }
   ${POST_FRAGMENT}
 `;
+
+export const EDIT_USER = gql`
+  mutation editUser($name: String, $bio: String) {
+    editUser(name: $name, bio: $bio) {
+      id
+    }
+  }
+`;
