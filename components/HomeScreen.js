@@ -1,10 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { SEARCH, POST_DB } from "../gql/queries";
-import { TouchableOpacity, Text } from "react-native";
+import { TouchableOpacity } from "react-native";
 import styles from "../styles";
 import { useQuery } from "react-apollo-hooks";
-import Loader from "./Loader";
 import { withNavigation, FlatList } from "react-navigation";
 
 const Container = styled.View`

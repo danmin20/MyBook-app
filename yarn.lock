@@ -2368,13 +2368,6 @@ expand-brackets@^2.1.4:
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
 
-expo-app-auth@~8.0.0:
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/expo-app-auth/-/expo-app-auth-8.0.0.tgz#607813705bf7c56178cc427dfb2b67e0b180aa89"
-  integrity sha512-sb1gsmS4C2YB1ZnBKmQ2RBnjcW0oPfSJ6OTCyQkineY99qIQ37nqkOCReLEMj/fAhDDbGzIqrlLdCXUyzhr7zQ==
-  dependencies:
-    invariant "^2.2.4"
-
 expo-app-loader-provider@~8.0.0:
   version "8.0.0"
   resolved "https://registry.yarnpkg.com/expo-app-loader-provider/-/expo-app-loader-provider-8.0.0.tgz#c18ef20a24153f5a0dbb297106ef0bcb5de57180"
@@ -2401,11 +2394,6 @@ expo-error-recovery@~1.0.0:
   resolved "https://registry.yarnpkg.com/expo-error-recovery/-/expo-error-recovery-1.0.0.tgz#2ca9d59fcd16c5c881af877993731056f2d46afe"
   integrity sha512-xnxciNEpGmwxx8BAE2A9fd9HxtzWtz8p9mikKU+EfWgOXaYD3FJwgbFoVLD2pm4QUarxwOcic76rcwg+0cNnGg==
 
-expo-facebook@^8.0.0:
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/expo-facebook/-/expo-facebook-8.0.0.tgz#d337a56459a3833488a879b925349b30c06a0afd"
-  integrity sha512-fF+lwFLWkB/mrr/xu4aIZ3HhpsITUTC1Dut4fD7ZzBPpQ3x2s1KpdNOOrb6FQFlE0thFlLAASRe0HDhFD7EN4w==
-
 expo-file-system@~8.0.0:
   version "8.0.0"
   resolved "https://registry.yarnpkg.com/expo-file-system/-/expo-file-system-8.0.0.tgz#60b90c8a375308dc85922592a77531a8e0cde6f7"
@@ -2419,14 +2407,6 @@ expo-font@^8.0.0, expo-font@~8.0.0:
   integrity sha512-1hrlvxv8MpE1761v2mDjZRwhhM4hkfDr/MQlkWD2+g17N+UjU3WQct4kc+VuZW30pP+YowwrmG3O6JVoIOhWGA==
   dependencies:
     fontfaceobserver "^2.1.0"
-
-expo-google-app-auth@^8.0.1:
-  version "8.0.1"
-  resolved "https://registry.yarnpkg.com/expo-google-app-auth/-/expo-google-app-auth-8.0.1.tgz#38f30f1285e55a94956a1898f7d75bd3119d3ed6"
-  integrity sha512-CCZ15ZR6ffRsoEFjakEbraqsJ4/Upl6uEl4jc7cly6tGeuOpx4Ow0y3bsTk2oyU9AgEImLImoG28kEGD7BNRXw==
-  dependencies:
-    expo-app-auth "~8.0.0"
-    expo-constants "~8.0.0"
 
 expo-keep-awake@~8.0.0:
   version "8.0.0"
@@ -4382,7 +4362,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.5.10, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -4479,30 +4459,6 @@ react-native-iphone-x-helper@^1.2.1:
   resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.2.1.tgz#645e2ffbbb49e80844bb4cbbe34a126fda1e6772"
   integrity sha512-/VbpIEp8tSNNHIvstuA3Swx610whci1Zpc9mqNkqn14DkMbw+ORviln2u0XyHG1kPvvwTNGZY6QpeFwxYaSdbQ==
 
-react-native-keyboard-aware-view@^0.0.14:
-  version "0.0.14"
-  resolved "https://registry.yarnpkg.com/react-native-keyboard-aware-view/-/react-native-keyboard-aware-view-0.0.14.tgz#4cb0079c97a3f85172e451267e333db95cc70372"
-  integrity sha1-TLAHnJej+FFy5FEmfjM9uVzHA3I=
-
-react-native-markdown-view@^1.1.4:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/react-native-markdown-view/-/react-native-markdown-view-1.1.4.tgz#390fdbe2ececa92505572efe1911ec2c7fe8bc13"
-  integrity sha512-dW4I+pqTGXBt4JRnTuo40N1u/m7P72wxqD+qwQoNzRqKNo/wP2N70Gokn3/5+u8orXK/kUbnxxLEQauF7+4tFg==
-  dependencies:
-    prop-types "^15.5.10"
-    react-native-tabular-grid-markdown-view "0.1.x"
-    simple-markdown "0.3.x"
-
-react-native-reanimated@^1.7.0:
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-1.7.0.tgz#896db2576552ac59d288a1f6c7f00afc171f240c"
-  integrity sha512-FQWSqP605eQVJumuK2HpR+7heF0ZI+qfy4jNguv3Xv8nPFHeIgZaRTXHCEQL2AcuSIj50zy8jGJf5l134QMQWQ==
-
-react-native-safe-area-context@^0.6.4:
-  version "0.6.4"
-  resolved "https://registry.yarnpkg.com/react-native-safe-area-context/-/react-native-safe-area-context-0.6.4.tgz#624bd50cebc9f47853f179373501511931d2a0c3"
-  integrity sha512-xj8Mv8ZHfc8RquBgVYt+4+nOJaexTblLsQJpyx4Dh4qFUG+3QtbNlfOF7/ITj/qY5LNdlfafKoDsVgFz0WIU1w==
-
 react-native-safe-area-view@^0.14.1, react-native-safe-area-view@^0.14.6:
   version "0.14.8"
   resolved "https://registry.yarnpkg.com/react-native-safe-area-view/-/react-native-safe-area-view-0.14.8.tgz#ef33c46ff8164ae77acad48c3039ec9c34873e5b"
@@ -4517,24 +4473,10 @@ react-native-screens@^2.0.0-alpha.34:
   dependencies:
     debounce "^1.2.0"
 
-react-native-swiper@^1.6.0-nightly.5:
-  version "1.6.0-nightly.5"
-  resolved "https://registry.yarnpkg.com/react-native-swiper/-/react-native-swiper-1.6.0-nightly.5.tgz#894319918ff22680c325b8052457ccf213a7c7cd"
-  integrity sha512-0siIUvD7FcGPSjRtsMyTWWmosUA+kJNT0WbJ0lf3Drp8vxeuWAg5kSmvQO+dJpISugcBWpfBc0OBDC5fBl+DsA==
-  dependencies:
-    prop-types "^15.5.10"
-
 react-native-tab-view@^2.11.0:
   version "2.13.0"
   resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-2.13.0.tgz#23037aa43b0f8f682ddc20415a4baaaf6f82ae8f"
   integrity sha512-AeYbp/u91+D/C9+PmVEPBmFb3ixv8IkLMC3Sc5MajJ/fg0Zl3Of+BcEknBvTnKoe7Fj2y8+Qf9zorBbh5xzh4A==
-
-react-native-tabular-grid-markdown-view@0.1.x:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/react-native-tabular-grid-markdown-view/-/react-native-tabular-grid-markdown-view-0.1.0.tgz#d5b3c291242373aa49ac60df43a017b39fc84338"
-  integrity sha512-K1WzwmwR53sOUpekEgBv4fN8wDVqsniJAda+FUp6hVXhRQwzj2CZDIuY1skFo/IkVlF/iyrKa1TeTHEba0aHFA==
-  dependencies:
-    prop-types "^15.5.10"
 
 react-native-view-shot@3.0.2:
   version "3.0.2"
@@ -4990,11 +4932,6 @@ signal-exit@^3.0.0, signal-exit@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
   integrity sha1-tf3AjxKH6hF4Yo5BXiUTK3NkbG0=
-
-simple-markdown@0.3.x:
-  version "0.3.3"
-  resolved "https://registry.yarnpkg.com/simple-markdown/-/simple-markdown-0.3.3.tgz#a2c50114aa0aa9794cf30fb91b57965599b3ff00"
-  integrity sha512-2qx5eXuRP/2pH+I/EQYVzZ/XgGHg2IAHEfIZkrPbtfiOkSkd4Q1mswE7LG77I+TDz2eb2Vx2K/v/Ul0llFhplg==
 
 simple-plist@^1.0.0:
   version "1.1.0"

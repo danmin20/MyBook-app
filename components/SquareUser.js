@@ -1,5 +1,4 @@
 import React from "react";
-import { MarkdownView } from "react-native-markdown-view";
 import styled from "styled-components";
 import { TouchableOpacity, Text } from "react-native";
 import { withNavigation } from "react-navigation";
