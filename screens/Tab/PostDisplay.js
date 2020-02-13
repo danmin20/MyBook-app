@@ -1,69 +1,88 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useQuery } from "react-apollo-hooks";
 import { POSTS_BOOK } from "../../gql/queries";
-import { Image } from "react-native";
-import styles from "../../styles";
+import { RefreshControl, FlatList, View, Image } from "react-native";
+import FeedPost from "../../components/FeedPost";
+import constants from "../../constants";
 
-const Title = styled.Text`
-  background-color: white;
-  width: 84px;
-  padding: 5px;
-  position: absolute;
-  bottom: 15px;
-  margin: auto;
-  border: 1px solid ${styles.blackColor};
-  color: black;
-  font-size: 12px;
-  text-align: center;
+const Err = styled.View`
+  margin-top: 40px;
+  align-items: center;
 `;
-const Books = styled.View`
-  justify-content: center;
-  flex-direction: row;
-  flex-wrap: wrap;
+const Img = styled.View`
+  margin-top: 150px;
+  align-items: center;
+  opacity: 0.5;
 `;
-const Book = styled.TouchableOpacity`
-  margin-top: 30px;
-  margin-left: 15px;
-  margin-right: 15px;
-  border: 0px solid ${styles.blackColor};
-  padding: 1px;
-  border-bottom-width: 15px;
-  border-right-width: 15px;
-  border-bottom-left-radius: 15px;
-  border-top-right-radius: 15px;
-  background-color: ${styles.blackColor};
+const Text = styled.Text`
+  font-size: 15px;
 `;
 
 export default ({ navigation }) => {
-  const { data, loading, refetch } = useQuery(POSTS_BOOK, {
-    variables: { isbn: navigation.getParam("isbn") }
+  const [refreshing, setRefreshing] = useState(false);
+  const { data, loading, refetch, fetchMore } = useQuery(POSTS_BOOK, {
+    variables: {
+      isbn: navigation.getParam("isbn"),
+      first: 5,
+      offset: 0
+    }
   });
-  const posts = data.postsOfBook;
+  const onLoadMore = () => {
+    fetchMore({
+      variables: {
+        isbn: navigation.getParam("isbn"),
+        first: 5,
+        offset: data.postsOfBook.length
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult) return prev;
+        return Object.assign({}, prev, {
+          postsOfBook: [...prev.postsOfBook, ...fetchMoreResult.postsOfBook]
+        });
+      }
+    });
+  };
+  const refresh = async () => {
+    try {
+      setRefreshing(true);
+      await refetch();
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setRefreshing(false);
+    }
+  };
   return (
-    <Books>
-      {!loading &&
-        posts &&
-        posts.map(post => (
-          <Book
-            key={post.id}
-            onPress={() =>
-              navigation.navigate("PostDetail", {
-                title: post.title,
-                id: post.id
-              })
-            }
-          >
+    <>
+      {!loading && data.postsOfBook[0] === undefined && (
+        <View>
+          <Err>
+            <Text>작성된 글이 없습니다.</Text>
+          </Err>
+          <Img>
             <Image
-              style={{
-                height: 116,
-                width: 82
-              }}
-              source={{ uri: post.book?.image }}
+              resizeMode={"contain"}
+              source={require("../../assets/logo.png")}
+              style={{ width: constants.width / 3 }}
             />
-            <Title>{post.title}</Title>
-          </Book>
-        ))}
-    </Books>
+          </Img>
+        </View>
+      )}
+      {!loading && data.postsOfBook && (
+        <FlatList
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={refresh} />
+          }
+          data={data.postsOfBook}
+          onEndReachedThreshold={1}
+          onEndReached={onLoadMore}
+          dataLength={data.postsOfBook.length}
+          renderItem={({ item }) => {
+            return <FeedPost key={item.id} {...item} />;
+          }}
+        />
+      )}
+    </>
   );
 };

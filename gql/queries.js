@@ -126,8 +126,8 @@ export const EDIT_USER = gql`
 `;
 
 export const POSTS_BOOK = gql`
-  query postsOfBook($isbn: String!) {
-    postsOfBook(isbn: $isbn) {
+  query postsOfBook($isbn: String!, $first: Int!, $offset: Int!) {
+    postsOfBook(isbn: $isbn, first: $first, offset: $offset) {
       ...PostParts
     }
   }

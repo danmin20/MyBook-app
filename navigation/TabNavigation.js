@@ -89,11 +89,9 @@ const stackFactory = (initialRoute, customConfig) =>
       },
       PostDisplay: {
         screen: PostDisplay,
-        navigationOptions: {
-          headerTitle: () => {
-            "none";
-          }
-        }
+        navigationOptions: ({ navigation }) => ({
+          title: "      " + navigation.getParam("title") + "      "
+        })
       }
     },
     {

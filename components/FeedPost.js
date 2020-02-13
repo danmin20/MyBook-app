@@ -80,9 +80,7 @@ const Header = styled.View`
 const Post = ({ id, title, user, book, createdAt, sentiment, navigation }) => {
   return (
     <TouchableOpacity
-      onPress={() =>
-        navigation.navigate("PostDetail", { title: title, id: id })
-      }
+      onPress={() => navigation.navigate("PostDetail", { title, id })}
     >
       <Container>
         <Header>

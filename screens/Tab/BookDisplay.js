@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useQuery } from "react-apollo-hooks";
 import { SEARCH } from "../../gql/queries";
-import { Image, FlatList } from "react-native";
+import { Image, FlatList, RefreshControl } from "react-native";
 import Loader from "../../components/Loader";
 import SquareBook from "../../components/SquareBook";
 import constants from "../../constants";
@@ -101,12 +101,13 @@ export default ({ navigation }) => {
       )}
       {!loading && data && data?.books && (
         <FlatList
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={refresh} />
+          }
           data={data?.books}
           onEndReachedThreshold={1}
           onEndReached={onLoadMore}
-          refreshing={refreshing}
           dataLength={data?.books.length}
-          onRefresh={refresh}
           renderItem={({ item }) => {
             return <SquareBook key={item.isbn} {...item} />;
           }}

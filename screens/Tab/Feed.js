@@ -9,6 +9,7 @@ import useInput from "../../hook/useInput";
 import styles from "../../styles";
 import { EvilIcons } from "@expo/vector-icons";
 import { FlatList } from "react-native-gesture-handler";
+import { RefreshControl } from "react-native";
 
 const Box = styled.View`
   flex-direction: row;
@@ -83,12 +84,13 @@ export default ({ navigation }) => {
       {loading && <Loader />}
       {!loading && data && data.seeFeed && (
         <FlatList
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={refresh} />
+          }
           data={data.seeFeed}
           onEndReachedThreshold={1}
           onEndReached={onLoadMore}
-          refreshing={refreshing}
           dataLength={data.seeFeed.length}
-          onRefresh={refresh}
           renderItem={({ item }) => {
             return <FeedPost id={item.id} title={item.title} {...item} />;
           }}
