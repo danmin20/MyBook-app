@@ -2,7 +2,13 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useQuery } from "react-apollo-hooks";
 import { SEARCH } from "../../gql/queries";
-import { ScrollView, View, RefreshControl, Image } from "react-native";
+import {
+  ScrollView,
+  View,
+  RefreshControl,
+  Image,
+  FlatList
+} from "react-native";
 import Loader from "../../components/Loader";
 import SquareBook from "../../components/SquareBook";
 import constants from "../../constants";
@@ -36,9 +42,22 @@ const Img = styled.View`
 
 export default ({ navigation }) => {
   const [refreshing, setRefreshing] = useState(false);
-  const { data, loading, refetch } = useQuery(SEARCH, {
-    variables: { term: navigation.getParam("term") }
+  const { data, loading, refetch, fetchMore } = useQuery(SEARCH, {
+    variables: { term: navigation.getParam("term"), start: 1 }
   });
+  const onLoadMore = () => {
+    fetchMore({
+      variables: {
+        start: data?.books.length
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult) return prev;
+        return Object.assign({}, prev, {
+          books: [...prev.books, ...fetchMoreResult.books]
+        });
+      }
+    });
+  };
   const refresh = async () => {
     try {
       setRefreshing(true);
@@ -50,13 +69,9 @@ export default ({ navigation }) => {
     }
   };
   return (
-    <ScrollView
-      refreshControl={
-        <RefreshControl refreshing={refreshing} onRefresh={refresh} />
-      }
-    >
+    <>
       {loading && <Loader />}
-      {!loading && data?.books[0] === undefined && (
+      {!loading && data?.books === undefined && (
         <ErrView>
           <Error>
             <Red>' {navigation.getParam("term")} '</Red>
@@ -91,12 +106,19 @@ export default ({ navigation }) => {
         </ErrView>
       )}
       {!loading && data && data?.books && (
-        <View>
-          {data?.books.map(book => (
-            <SquareBook key={book.isbn} {...book} />
-          ))}
-        </View>
+        <FlatList
+          data={data?.books}
+          onEndReachedThreshold={1}
+          onEndReached={onLoadMore}
+          refreshing={refreshing}
+          dataLength={data?.books.length}
+          onRefresh={refresh}
+          renderItem={({ item }) => {
+            return <SquareBook key={item.isbn} {...item} />;
+          }}
+          keyExtractor={item => item.isbn}
+        />
       )}
-    </ScrollView>
+    </>
   );
 };

@@ -2,8 +2,8 @@ import { gql } from "apollo-boost";
 import { BOOK_FRAGMENT, USER_FRAGMENT, POST_FRAGMENT } from "./fragments";
 
 export const SEARCH = gql`
-  query books($term: String!) {
-    books(term: $term) {
+  query books($term: String!, $start: Int!) {
+    books(term: $term, start: $start) {
       ...BookParts
     }
   }
@@ -38,8 +38,8 @@ export const USER_DETAIL = gql`
 `;
 
 export const FEED = gql`
-  {
-    seeFeed {
+  query seeFeed($first: Int!, $offset: Int!) {
+    seeFeed(first: $first, offset: $offset) {
       ...PostParts
     }
   }
