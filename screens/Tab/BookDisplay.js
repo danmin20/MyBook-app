@@ -2,13 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useQuery } from "react-apollo-hooks";
 import { SEARCH } from "../../gql/queries";
-import {
-  ScrollView,
-  View,
-  RefreshControl,
-  Image,
-  FlatList
-} from "react-native";
+import { Image, FlatList } from "react-native";
 import Loader from "../../components/Loader";
 import SquareBook from "../../components/SquareBook";
 import constants from "../../constants";

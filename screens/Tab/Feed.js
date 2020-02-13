@@ -45,7 +45,7 @@ export default ({ navigation }) => {
   const onLoadMore = () => {
     fetchMore({
       variables: {
-        first: 1,
+        first: 10,
         offset: data.seeFeed.length
       },
       updateQuery: (prev, { fetchMoreResult }) => {

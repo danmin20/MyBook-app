@@ -5,7 +5,7 @@ import { TouchableOpacity, Text } from "react-native";
 import styles from "../styles";
 import { useQuery } from "react-apollo-hooks";
 import Loader from "./Loader";
-import { withNavigation } from "react-navigation";
+import { withNavigation, FlatList } from "react-navigation";
 
 const Container = styled.View`
   margin-top: 5px;
@@ -67,56 +67,83 @@ const Name = styled.Text`
 `;
 
 const HomeScreen = ({ navigation }) => {
-  const { data, loading } = useQuery(POST_DB, {
+  const { data, loading, fetchMore } = useQuery(POST_DB, {
+    variables: {
+      first: 10,
+      offset: 0
+    },
     fetchPolicy: "cache-and-network"
   });
+  const onLoadMore = () => {
+    fetchMore({
+      variables: {
+        first: 10,
+        offset: data?.seePostDB.length
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult) return prev;
+        return Object.assign({}, prev, {
+          seePostDB: [...prev?.seePostDB, ...fetchMoreResult?.seePostDB]
+        });
+      }
+    });
+  };
   const { data: data_10, loading: loading_10 } = useQuery(SEARCH, {
-    variables: { term: "10대" }
+    variables: { term: "10대", start: 1, offset: 0 },
+    fetchPolicy: "cache-and-network"
   });
   const { data: data_20, loading: loading_20 } = useQuery(SEARCH, {
-    variables: { term: "20대" }
+    variables: { term: "20대", start: 1, offset: 0 },
+    fetchPolicy: "cache-and-network"
   });
   const { data: data_30, loading: loading_30 } = useQuery(SEARCH, {
-    variables: { term: "30대" }
+    variables: { term: "30대", start: 1, offset: 0 },
+    fetchPolicy: "cache-and-network"
   });
   const { data: data_40, loading: loading_40 } = useQuery(SEARCH, {
-    variables: { term: "40대" }
+    variables: { term: "40대", start: 1, offset: 0 },
+    fetchPolicy: "cache-and-network"
   });
   return (
     <>
-      {loading &&
-        loading_10 &&
-        loading_20 &&
-        loading_30 &&
-        loading_40 &&
-        loading_50 && <Loader />}
       <ContainerDB key={0}>
-        <BookScroll horizontal={true}>
-          {data?.seePostDB.map(post => (
-            <TouchableOpacity
-              key={post.id}
-              onPress={() =>
-                navigation.navigate("PostDetail", {
-                  id: post.id,
-                  title: post.title
-                })
-              }
-            >
-              <Info>
-                <CircleBookBox>
-                  <CircleImage source={{ uri: post.book.image }} />
-                </CircleBookBox>
-                <Name>{post.user.name}</Name>
-              </Info>
-            </TouchableOpacity>
-          ))}
-        </BookScroll>
+        {data && data?.seePostDB && (
+          <FlatList
+            style={{ padding: 5 }}
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            data={data?.seePostDB}
+            onEndReached={onLoadMore}
+            dataLength={data?.seePostDB.length}
+            keyExtractor={item => item.id}
+            renderItem={({ item }) => {
+              return (
+                <TouchableOpacity
+                  key={item.id}
+                  onPress={() =>
+                    navigation.navigate("PostDetail", {
+                      id: item.id,
+                      title: item.title
+                    })
+                  }
+                >
+                  <Info>
+                    <CircleBookBox>
+                      <CircleImage source={{ uri: item.book.image }} />
+                    </CircleBookBox>
+                    <Name>{item.user.name}</Name>
+                  </Info>
+                </TouchableOpacity>
+              );
+            }}
+          />
+        )}
       </ContainerDB>
       <Container key={1}>
         <TopicBox>
           <Topic>10대 추천도서</Topic>
         </TopicBox>
-        <BookScroll horizontal={true}>
+        <BookScroll horizontal={true} showsHorizontalScrollIndicator={false}>
           {data_10?.books.map(book => (
             <TouchableOpacity
               key={book.isbn}
@@ -135,7 +162,7 @@ const HomeScreen = ({ navigation }) => {
         <TopicBox>
           <Topic>20대 추천도서</Topic>
         </TopicBox>
-        <BookScroll horizontal={true}>
+        <BookScroll horizontal={true} showsHorizontalScrollIndicator={false}>
           {data_20?.books.map(book => (
             <TouchableOpacity
               key={book.isbn}
@@ -154,7 +181,7 @@ const HomeScreen = ({ navigation }) => {
         <TopicBox>
           <Topic>30대 추천도서</Topic>
         </TopicBox>
-        <BookScroll horizontal={true}>
+        <BookScroll horizontal={true} showsHorizontalScrollIndicator={false}>
           {data_30?.books.map(book => (
             <TouchableOpacity
               key={book.isbn}
@@ -173,7 +200,7 @@ const HomeScreen = ({ navigation }) => {
         <TopicBox>
           <Topic>40대 추천도서</Topic>
         </TopicBox>
-        <BookScroll horizontal={true}>
+        <BookScroll horizontal={true} showsHorizontalScrollIndicator={false}>
           {data_40?.books.map(book => (
             <TouchableOpacity
               key={book.isbn}

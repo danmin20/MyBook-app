@@ -109,8 +109,8 @@ export const ADD_COMMENT = gql`
 `;
 
 export const POST_DB = gql`
-  {
-    seePostDB {
+  query seePostDB($first: Int!, $offset: Int!) {
+    seePostDB(first: $first, offset: $offset) {
       ...PostParts
     }
   }
