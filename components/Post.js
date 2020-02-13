@@ -109,7 +109,11 @@ const Post = ({
   const [isLiked, setIsLiked] = useState(isLikedProp);
   const [isOpened, setIsOpened] = useState(true);
   const [likeCount, setLikeCount] = useState(likeCountProp);
-  const { refetch: refetchFeed } = useQuery(FEED);
+  const { refetch: refetchFeed } = useQuery(FEED, {
+    variables: {
+      first: 10,
+      offset: 0
+    }  });
   const { refetch: refetchMe } = useQuery(ME);
   const [toggleLikeMutation] = useMutation(TOGGLE_LIKE, {
     variables: { postId: id }

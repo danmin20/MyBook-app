@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useQuery } from "react-apollo-hooks";
 import { FEED } from "../../gql/queries";
-import { ScrollView, RefreshControl, Text } from "react-native";
 import Loader from "../../components/Loader";
 import FeedPost from "../../components/FeedPost";
 import SearchBar from "../../components/SearchBar";

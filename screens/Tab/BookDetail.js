@@ -57,7 +57,17 @@ const Kind = styled.Text`
 const Upload = styled.TouchableOpacity`
   flex-direction: row;
   margin-left: auto;
-  padding: 15px;
+  margin-top: 5px;
+  padding: 5px;
+  padding-right: 15px;
+  align-items: center;
+  justify-content: center;
+`;
+const Posts = styled.TouchableOpacity`
+  flex-direction: row;
+  margin-left: auto;
+  padding: 5px;
+  padding-right: 15px;
   align-items: center;
   justify-content: center;
 `;
@@ -86,6 +96,16 @@ export default ({ navigation }) => {
               <Text>글쓰러 가기 </Text>
               <MaterialCommunityIcons name="arrow-right" size={20} />
             </Upload>
+            <Posts
+              onPress={() =>
+                navigation.navigate("PostDisplay", {
+                  isbn: detail.isbn.replace(/<b>/gi, "").replace(/<\/b>/gi, "")
+                })
+              }
+            >
+              <Text>글보러 가기 </Text>
+              <MaterialCommunityIcons name="arrow-right" size={20} />
+            </Posts>
             <Info>
               <Img>
                 <Image

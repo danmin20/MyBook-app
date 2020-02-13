@@ -116,7 +116,9 @@ export default ({ navigation }) => {
           renderItem={({ item }) => {
             return <SquareBook key={item.isbn} {...item} />;
           }}
-          keyExtractor={item => item.isbn}
+          keyExtractor={item =>
+            item.isbn + Math.floor(Math.random() * 10).toString()
+          }
         />
       )}
     </>

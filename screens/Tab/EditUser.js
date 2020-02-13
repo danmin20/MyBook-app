@@ -57,7 +57,12 @@ export default ({ navigation }) => {
   const nameInput = useInput(navigation.getParam("name"));
   const bioInput = useInput(navigation.getParam("bio"));
   const [editMutation] = useMutation(EDIT_USER);
-  const { refetch: refetchFeed } = useQuery(FEED);
+  const { refetch: refetchFeed } = useQuery(FEED, {
+    variables: {
+      first: 10,
+      offset: 0
+    }
+  });
   const { refetch: refetchMe } = useQuery(ME);
   const handleEdit = async () => {
     try {

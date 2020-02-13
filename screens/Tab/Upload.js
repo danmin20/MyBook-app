@@ -66,7 +66,12 @@ export default ({ navigation }) => {
   const sentimentInput = useInput("");
   const [uploadMutation] = useMutation(UPLOAD);
   const book = data?.books[0];
-  const { refetch: refetchFeed } = useQuery(FEED);
+  const { refetch: refetchFeed } = useQuery(FEED, {
+    variables: {
+      first: 10,
+      offset: 0
+    }
+  });
   const { refetch: refetchMe } = useQuery(ME);
   const handleUpload = async () => {
     try {

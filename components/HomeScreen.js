@@ -67,7 +67,9 @@ const Name = styled.Text`
 `;
 
 const HomeScreen = ({ navigation }) => {
-  const { data, loading } = useQuery(POST_DB);
+  const { data, loading } = useQuery(POST_DB, {
+    fetchPolicy: "cache-and-network"
+  });
   const { data: data_10, loading: loading_10 } = useQuery(SEARCH, {
     variables: { term: "10대" }
   });
@@ -101,10 +103,10 @@ const HomeScreen = ({ navigation }) => {
               }
             >
               <Info>
-              <CircleBookBox>
-                <CircleImage source={{ uri: post.book.image }} />
-              </CircleBookBox>
-              <Name>{post.user.name}</Name>
+                <CircleBookBox>
+                  <CircleImage source={{ uri: post.book.image }} />
+                </CircleBookBox>
+                <Name>{post.user.name}</Name>
               </Info>
             </TouchableOpacity>
           ))}

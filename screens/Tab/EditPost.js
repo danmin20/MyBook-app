@@ -60,7 +60,12 @@ export default ({ navigation }) => {
   const titleInput = useInput(navigation.getParam("title"));
   const sentimentInput = useInput(navigation.getParam("sentiment"));
   const [editMutation] = useMutation(EDIT_POST);
-  const { refetch: refetchFeed } = useQuery(FEED);
+  const { refetch: refetchFeed } = useQuery(FEED, {
+    variables: {
+      first: 10,
+      offset: 0
+    }
+  });
   const { refetch: refetchMe } = useQuery(ME);
   const uri = navigation.getParam("uri");
   const handleEdit = async () => {

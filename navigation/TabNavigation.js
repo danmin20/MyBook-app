@@ -16,6 +16,7 @@ import Upload from "../screens/Tab/Upload";
 import EditPost from "../screens/Tab/EditPost";
 import FollowDisplay from "../screens/Tab/FollowDisplay";
 import EditUser from "../screens/Tab/EditUser";
+import PostDisplay from "../screens/Tab/PostDisplay";
 
 const stackFactory = (initialRoute, customConfig) =>
   createStackNavigator(
@@ -84,6 +85,14 @@ const stackFactory = (initialRoute, customConfig) =>
         screen: EditUser,
         navigationOptions: {
           title: "내 정보 수정"
+        }
+      },
+      PostDisplay: {
+        screen: PostDisplay,
+        navigationOptions: {
+          headerTitle: () => {
+            "none";
+          }
         }
       }
     },
