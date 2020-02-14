@@ -113,7 +113,8 @@ const Post = ({
     variables: {
       first: 10,
       offset: 0
-    }  });
+    }
+  });
   const { refetch: refetchMe } = useQuery(ME);
   const [toggleLikeMutation] = useMutation(TOGGLE_LIKE, {
     variables: { postId: id }
@@ -308,7 +309,7 @@ Post.propTypes = {
     link: PropTypes.string.isRequired,
     publisher: PropTypes.string.isRequired,
     author: PropTypes.string.isRequired
-  }).isRequired,
+  }),
   likeCount: PropTypes.number.isRequired,
   sentiment: PropTypes.string.isRequired,
   isLiked: PropTypes.bool.isRequired,
@@ -319,7 +320,7 @@ Post.propTypes = {
       user: PropTypes.shape({
         id: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired
-      }).isRequired
+      })
     })
   ),
   createdAt: PropTypes.string.isRequired

@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { SEARCH, POST_DB } from "../gql/queries";
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, RefreshControl } from "react-native";
 import styles from "../styles";
 import { useQuery } from "react-apollo-hooks";
 import { withNavigation, FlatList } from "react-navigation";
@@ -66,12 +66,12 @@ const Name = styled.Text`
 `;
 
 const HomeScreen = ({ navigation }) => {
-  const { data, loading, fetchMore } = useQuery(POST_DB, {
+  const { data, fetchMore } = useQuery(POST_DB, {
     variables: {
       first: 10,
       offset: 0
     },
-    fetchPolicy: "cache-and-network"
+    fetchPolicy: "network-only"
   });
   const onLoadMore = () => {
     fetchMore({
@@ -87,19 +87,19 @@ const HomeScreen = ({ navigation }) => {
       }
     });
   };
-  const { data: data_10, loading: loading_10 } = useQuery(SEARCH, {
+  const { data: data_10 } = useQuery(SEARCH, {
     variables: { term: "10대", start: 1, offset: 0 },
     fetchPolicy: "cache-and-network"
   });
-  const { data: data_20, loading: loading_20 } = useQuery(SEARCH, {
+  const { data: data_20 } = useQuery(SEARCH, {
     variables: { term: "20대", start: 1, offset: 0 },
     fetchPolicy: "cache-and-network"
   });
-  const { data: data_30, loading: loading_30 } = useQuery(SEARCH, {
+  const { data: data_30 } = useQuery(SEARCH, {
     variables: { term: "30대", start: 1, offset: 0 },
     fetchPolicy: "cache-and-network"
   });
-  const { data: data_40, loading: loading_40 } = useQuery(SEARCH, {
+  const { data: data_40 } = useQuery(SEARCH, {
     variables: { term: "40대", start: 1, offset: 0 },
     fetchPolicy: "cache-and-network"
   });

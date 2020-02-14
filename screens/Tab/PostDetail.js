@@ -70,14 +70,14 @@ export default ({ navigation }) => {
   };
   return (
     <>
-      {data && data.seeFullPost && (
+      {data && data?.seeFullPost && (
         <View style={{ flex: 1 }}>
           <ScrollView
             refreshControl={
               <RefreshControl refreshing={refreshing} onRefresh={refresh} />
             }
           >
-            <Post {...data.seeFullPost} />
+            <Post {...data?.seeFullPost} />
           </ScrollView>
           <CommentInput>
             <CommentWindow

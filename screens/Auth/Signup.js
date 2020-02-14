@@ -3,7 +3,7 @@ import styled from "styled-components";
 import useInput from "../../hook/useInput";
 import { useMutation } from "react-apollo-hooks";
 import { CREATE_ACCOUNT } from "./AuthQueries";
-import { TouchableWithoutFeedback, Keyboard } from "react-native";
+import { TouchableWithoutFeedback, Keyboard, Alert } from "react-native";
 import AuthInput from "../../components/AuthInput";
 import AuthButton from "../../components/AuthButton";
 

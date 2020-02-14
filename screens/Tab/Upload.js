@@ -7,6 +7,7 @@ import { ActivityIndicator } from "react-native";
 import styles from "../../styles";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import constants from "../../constants";
+import Loader from "../../components/Loader";
 
 const View = styled.View`
   flex: 1;
@@ -57,15 +58,15 @@ const Text = styled.Text`
 
 export default ({ navigation }) => {
   const [loading, setLoading] = useState(false);
-  const { data } = useQuery(SEARCH, {
+  const { data, loading: loadingData } = useQuery(SEARCH, {
     variables: {
-      term: navigation.getParam("bookId")
+      term: navigation.getParam("bookId"),
+      start: 1
     }
   });
   const titleInput = useInput("");
   const sentimentInput = useInput("");
   const [uploadMutation] = useMutation(UPLOAD);
-  const book = data?.books[0];
   const { refetch: refetchFeed } = useQuery(FEED, {
     variables: {
       first: 10,
@@ -97,57 +98,62 @@ export default ({ navigation }) => {
       setLoading(false);
     }
   };
-  return (
-    <View>
-      <Button onPress={handleUpload}>
-        {loading && (
-          <ActivityIndicator
-            style={{ marginLeft: 15, marginTop: 3, marginBottom: 3 }}
-            color={styles.brownColor}
-          />
-        )}
-        <Text>업로드하기 </Text>
-        <MaterialCommunityIcons name="arrow-right" size={20} />
-      </Button>
-      <Container>
-        <Header>
-          <MaterialCommunityIcons
-            name="format-quote-open"
-            size={30}
-            color={styles.brownColor}
-          />
-          <Title
-            onChangeText={titleInput.onChange}
-            value={titleInput.value}
-            placeholder="제목 입력..."
-            multiline={true}
-            placeholderTextColor={styles.darkGreyColor}
-          />
-          <MaterialCommunityIcons
-            name="format-quote-close"
-            size={30}
-            color={styles.brownColor}
-          />
-        </Header>
-        <Content>
-          <Image
-            style={{ position: "absolute" }}
-            source={require("../../assets/noImage.png")}
-          />
-          {book?.image !== "" && <Image source={{ uri: book?.image }} />}
-          {book?.image === "" && (
-            <Image source={require("../../assets/noImage.png")} />
+  if (!loadingData && data && data?.books) {
+    const book = data?.books[0];
+    return (
+      <View>
+        <Button onPress={handleUpload}>
+          {loading && (
+            <ActivityIndicator
+              style={{ marginLeft: 15, marginTop: 3, marginBottom: 3 }}
+              color={styles.brownColor}
+            />
           )}
+          <Text>업로드하기 </Text>
+          <MaterialCommunityIcons name="arrow-right" size={20} />
+        </Button>
+        <Container>
+          <Header>
+            <MaterialCommunityIcons
+              name="format-quote-open"
+              size={30}
+              color={styles.brownColor}
+            />
+            <Title
+              onChangeText={titleInput.onChange}
+              value={titleInput.value}
+              placeholder="제목 입력..."
+              multiline={true}
+              placeholderTextColor={styles.darkGreyColor}
+            />
+            <MaterialCommunityIcons
+              name="format-quote-close"
+              size={30}
+              color={styles.brownColor}
+            />
+          </Header>
+          <Content>
+            <Image
+              style={{ position: "absolute" }}
+              source={require("../../assets/noImage.png")}
+            />
+            {book?.image !== "" && <Image source={{ uri: book?.image }} />}
+            {book?.image === "" && (
+              <Image source={require("../../assets/noImage.png")} />
+            )}
 
-          <Sentiment
-            onChangeText={sentimentInput.onChange}
-            value={sentimentInput.value}
-            placeholder="내용 입력..."
-            multiline={true}
-            placeholderTextColor={styles.darkGreyColor}
-          />
-        </Content>
-      </Container>
-    </View>
-  );
+            <Sentiment
+              onChangeText={sentimentInput.onChange}
+              value={sentimentInput.value}
+              placeholder="내용 입력..."
+              multiline={true}
+              placeholderTextColor={styles.darkGreyColor}
+            />
+          </Content>
+        </Container>
+      </View>
+    );
+  } else {
+    return <Loader />;
+  }
 };

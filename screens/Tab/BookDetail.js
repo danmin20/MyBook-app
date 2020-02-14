@@ -78,101 +78,109 @@ const Func = styled.View`
 
 export default ({ navigation }) => {
   const { loading, data } = useQuery(SEARCH, {
-    variables: { term: navigation.getParam("isbn") }
+    variables: { term: navigation.getParam("isbn"), start: 1 }
   });
-  const detail = data?.books[0];
-  return (
-    <>
-      <Func>
-        <Upload
-          onPress={() =>
-            navigation.navigate("Upload", {
-              bookId: detail.isbn.replace(/<b>/gi, "").replace(/<\/b>/gi, "")
-            })
-          }
-        >
-          <Text style={{ color: styles.blackColor }}>글쓰러 가기 </Text>
-        </Upload>
-        <Posts
-          onPress={() =>
-            navigation.navigate("PostDisplay", {
-              title: detail.title,
-              isbn: detail.isbn.replace(/<b>/gi, "").replace(/<\/b>/gi, "")
-            })
-          }
-        >
-          <Text style={{ color: styles.blackColor }}>글보러 가기 </Text>
-        </Posts>
-      </Func>
-      <ScrollView>
-        {loading ? (
-          <Loader />
-        ) : (
-          detail && (
-            <Container>
-              <Info>
-                <Img>
-                  <Image
-                    style={{ position: "absolute" }}
-                    source={require("../../assets/noImage.png")}
-                  />
-                  {detail.image !== "" && (
-                    <Image source={{ uri: detail.image }} />
-                  )}
-                  {detail.image === "" && (
-                    <Image source={require("../../assets/noImage.png")} />
-                  )}
-                </Img>
-                <Title>{detail.title.replace(/&quot;/gi, '"')}</Title>
-                <TextRow>
-                  <Kind>출판사</Kind>
-                  <Text>{detail.publisher}</Text>
-                </TextRow>
-                <TextRow>
-                  <Kind>저자</Kind>
-                  <Text>{detail.author}</Text>
-                </TextRow>
-                <TextRow>
-                  <Kind>정가</Kind>
-                  <Text>{detail.price}</Text>
-                </TextRow>
-                <TextRow>
-                  <Kind>할인가</Kind>
-                  <Text>{detail.discount}</Text>
-                </TextRow>
-                <Descript>
-                  <Text>
-                    {detail.description
-                      .replace(/<b>/gi, "")
-                      .replace(/<\/b>/gi, "")
-                      .replace(/&quot;/gi, '"')
-                      .replace(/&#x0D;/gi, "\n")
-                      .replace(/&nbsp;/gi, " ")
-                      .replace(/&lt;/gi, "<")
-                      .replace(/&gt;/gi, ">")
-                      .replace(/&amp;/gi, "&")
-                      .replace(/&#035;/gi, "#")
-                      .replace(/#039;/gi, "'")}
-                  </Text>
-                </Descript>
-                <Link>
-                  <MaterialCommunityIcons
-                    name={"alpha-n-box"}
-                    color={"white"}
-                    size={30}
-                  />
-                  <Text
-                    style={{ color: "white", fontSize: 15, fontWeight: "bold" }}
-                    onPress={() => Linking.openURL(detail.link)}
-                  >
-                    네이버 책으로 이동
-                  </Text>
-                </Link>
-              </Info>
-            </Container>
-          )
-        )}
-      </ScrollView>
-    </>
-  );
+  if (!loading && data && data?.books) {
+    const detail = data?.books[0];
+    return (
+      <>
+        <Func>
+          <Upload
+            onPress={() =>
+              navigation.navigate("Upload", {
+                bookId: detail.isbn.replace(/<b>/gi, "").replace(/<\/b>/gi, "")
+              })
+            }
+          >
+            <Text style={{ color: styles.blackColor }}>글쓰러 가기 </Text>
+          </Upload>
+          <Posts
+            onPress={() =>
+              navigation.navigate("PostDisplay", {
+                title: detail.title,
+                isbn: detail.isbn.replace(/<b>/gi, "").replace(/<\/b>/gi, "")
+              })
+            }
+          >
+            <Text style={{ color: styles.blackColor }}>글보러 가기 </Text>
+          </Posts>
+        </Func>
+        <ScrollView>
+          {loading ? (
+            <Loader />
+          ) : (
+            detail && (
+              <Container>
+                <Info>
+                  <Img>
+                    <Image
+                      style={{ position: "absolute" }}
+                      source={require("../../assets/noImage.png")}
+                    />
+                    {detail.image !== "" && (
+                      <Image source={{ uri: detail.image }} />
+                    )}
+                    {detail.image === "" && (
+                      <Image source={require("../../assets/noImage.png")} />
+                    )}
+                  </Img>
+                  <Title>{detail.title.replace(/&quot;/gi, '"')}</Title>
+                  <TextRow>
+                    <Kind>출판사</Kind>
+                    <Text>{detail.publisher}</Text>
+                  </TextRow>
+                  <TextRow>
+                    <Kind>저자</Kind>
+                    <Text>{detail.author}</Text>
+                  </TextRow>
+                  <TextRow>
+                    <Kind>정가</Kind>
+                    <Text>{detail.price}</Text>
+                  </TextRow>
+                  <TextRow>
+                    <Kind>할인가</Kind>
+                    <Text>{detail.discount}</Text>
+                  </TextRow>
+                  <Descript>
+                    <Text>
+                      {detail.description
+                        .replace(/<b>/gi, "")
+                        .replace(/<\/b>/gi, "")
+                        .replace(/&quot;/gi, '"')
+                        .replace(/&#x0D;/gi, "\n")
+                        .replace(/&nbsp;/gi, " ")
+                        .replace(/&lt;/gi, "<")
+                        .replace(/&gt;/gi, ">")
+                        .replace(/&amp;/gi, "&")
+                        .replace(/&#035;/gi, "#")
+                        .replace(/#039;/gi, "'")}
+                    </Text>
+                  </Descript>
+                  <Link>
+                    <MaterialCommunityIcons
+                      name={"alpha-n-box"}
+                      color={"white"}
+                      size={30}
+                    />
+                    <Text
+                      style={{
+                        color: "white",
+                        fontSize: 15,
+                        fontWeight: "bold"
+                      }}
+                      onPress={() => Linking.openURL(detail.link)}
+                    >
+                      네이버 책으로 이동
+                    </Text>
+                  </Link>
+                </Info>
+              </Container>
+            )
+          )}
+        </ScrollView>
+      </>
+    );
+  } else {
+    return <Loader />;
+  }
 };

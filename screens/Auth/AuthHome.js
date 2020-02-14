@@ -14,6 +14,7 @@ const View = styled.View`
 const Image = styled.Image`
   width: ${constants.width / 2.5}px;
   margin-bottom: -15px;
+  opacity: 0.8;
 `;
 
 const Touchable = styled.TouchableOpacity``;
@@ -23,7 +24,7 @@ const LoginLink = styled.View``;
 const LoginLinkText = styled.Text`
   margin-top: 20px;
   font-weight: 600;
-  color: ${styles.brownColor};
+  opacity: 0.8;
 `;
 
 export default ({ navigation }) => (
