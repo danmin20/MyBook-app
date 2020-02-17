@@ -264,7 +264,6 @@ const Post = ({
                   name={isLiked ? "ios-heart" : "ios-heart-empty"}
                 />
               </HeartIconContainer>
-
               <Text style={{ marginLeft: 5 }}>좋아요 {likeCount}개</Text>
             </Like>
             <Date>

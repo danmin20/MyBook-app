@@ -30,14 +30,7 @@ const Delete = styled.View`
   padding: 0 10px;
 `;
 
-const Comment = ({
-  navigation,
-  id,
-  text,
-  userOfPost,
-  user,
-  createdAt
-}) => {
+const Comment = ({ navigation, id, text, userOfPost, user, createdAt }) => {
   const [loading, setLoading] = useState(false);
   const [isDeleted, setIsDeleted] = useState(false);
   const [deleteCommentMutation] = useMutation(DEL_COMMENT);
@@ -86,7 +79,7 @@ const Comment = ({
             <Text>{text}</Text>
           </CommentText>
           <View style={{ flex: 1 }}>
-            {userOfPost === user.id && (
+            {(userOfPost === user.id || user.isSelf) && (
               <Delete>
                 <TouchableOpacity onPress={handleDelete}>
                   <MaterialIcons
