@@ -21,4 +21,7 @@ Heroku<br>
 
 ### ScreenShots
 <div>
+<img width="250" src="https://user-images.githubusercontent.com/50590192/74651288-cb099a00-51c6-11ea-9400-0e6815b024c3.gif">
+<img width="250" src="https://user-images.githubusercontent.com/50590192/74651291-cd6bf400-51c6-11ea-9c18-07bca8a07c1a.gif">
+<img width="250" src="https://user-images.githubusercontent.com/50590192/74651298-d1981180-51c6-11ea-9d2d-9a3b4a0b97f9.gif">
 </div>
