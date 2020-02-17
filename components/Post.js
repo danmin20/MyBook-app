@@ -285,7 +285,7 @@ const Post = ({
             <Comment
               key={comment.id}
               postId={id}
-              userOfPost={user.id}
+              postIsSelf={user.isSelf}
               {...comment}
             />
           ))}
