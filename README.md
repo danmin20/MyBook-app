@@ -3,7 +3,9 @@ App for MyBook<br>
 [MyBook Back-end](https://github.com/danmin20/MyBook-Backend)
 
 ## App
-Name : "마이북"
+Name : "마이북"<br/>
+Download : [android apk](https://expo.io/artifacts/cb219f6b-6b3d-45a2-8c6d-1b359a7a5850)<br/>
+** 현재 구글 플레이 출시 중에 있습니다 **
 
 ### Made with
 NodeJS<br>
@@ -15,13 +17,11 @@ Apollo<br>
 Sendgrid<br>
 Passport<br>
 Expo<br>
-AWS S3<br>
 Heroku<br>
-Netlify<br>
 
 ### ScreenShots
 <div>
-<img width="200" src="https://user-images.githubusercontent.com/50590192/74231483-05c48b80-4d0a-11ea-9dde-75e0d60b735a.gif">
-<img width="200" src="https://user-images.githubusercontent.com/50590192/74231490-09581280-4d0a-11ea-8f57-c23eb375e100.gif">
-<img width="200" src="https://user-images.githubusercontent.com/50590192/74231496-0b21d600-4d0a-11ea-9829-fb3aed902051.gif">
+<img width="250" src="https://user-images.githubusercontent.com/50590192/74651288-cb099a00-51c6-11ea-9400-0e6815b024c3.gif">
+<img width="250" src="https://user-images.githubusercontent.com/50590192/74651291-cd6bf400-51c6-11ea-9c18-07bca8a07c1a.gif">
+<img width="250" src="https://user-images.githubusercontent.com/50590192/74651298-d1981180-51c6-11ea-9d2d-9a3b4a0b97f9.gif">
 </div>
