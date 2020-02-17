@@ -76,7 +76,7 @@ export default ({ navigation }) => {
         {search ? (
           <SearchBar
             {...searchInput}
-            placeholder="도서 검색"
+            placeholder="유저 검색"
             onSubmitEditing={handleSearch}
           />
         ) : null}
