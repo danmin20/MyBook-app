@@ -5,7 +5,7 @@ App for MyBook<br>
 ## App
 Name : "마이북"<br/>
 Download : [android apk](https://exp-shell-app-assets.s3.us-west-1.amazonaws.com/android/%40danmin/mybook-app-a7acfffda9044f0bac3836928080d617-signed.apk)<br/>
-** 현재 구글 플레이 출시 중에 있습니다 **
+* 현재 플레이 스토어 출시 중에 있습니다
 
 ### Made with
 NodeJS<br>
