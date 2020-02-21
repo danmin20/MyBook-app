@@ -31,7 +31,7 @@ export default ({ navigation }) => {
   });
   const handleConfirm = async () => {
     const { value } = confirmInput;
-    if (value === "" || !value.includes(" ")) {
+    if (value === "") {
       Alert.alert("잘못된 시크릿 키");
     }
     try {
