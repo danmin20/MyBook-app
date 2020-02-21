@@ -4,7 +4,8 @@ import { SEARCH, POST_DB } from "../gql/queries";
 import { TouchableOpacity, RefreshControl } from "react-native";
 import styles from "../styles";
 import { useQuery } from "react-apollo-hooks";
-import { withNavigation, FlatList } from "react-navigation";
+import { withNavigation, FlatList, ScrollView } from "react-navigation";
+import Loader from "./Loader";
 
 const Container = styled.View`
   margin-top: 5px;
@@ -66,12 +67,12 @@ const Name = styled.Text`
 `;
 
 const HomeScreen = ({ navigation }) => {
-  const { data, fetchMore } = useQuery(POST_DB, {
+  const [refreshing, setRefreshing] = useState(false);
+  const { data, loading, refetch, fetchMore } = useQuery(POST_DB, {
     variables: {
       first: 10,
       offset: 0
-    },
-    fetchPolicy: "network-only"
+    }
   });
   const onLoadMore = () => {
     fetchMore({
@@ -86,6 +87,16 @@ const HomeScreen = ({ navigation }) => {
         });
       }
     });
+  };
+  const refresh = async () => {
+    try {
+      setRefreshing(true);
+      await refetch();
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setRefreshing(false);
+    }
   };
   const { data: data_10 } = useQuery(SEARCH, {
     variables: { term: "10대", start: 1, offset: 0 },
@@ -104,9 +115,14 @@ const HomeScreen = ({ navigation }) => {
     fetchPolicy: "cache-and-network"
   });
   return (
-    <>
+    <ScrollView
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={refresh} />
+      }
+    >
       <ContainerDB key={0}>
-        {data && data?.seePostDB && (
+        {loading && <Loader />}
+        {!loading && data && data?.seePostDB && (
           <FlatList
             style={{ padding: 5 }}
             horizontal={true}
@@ -214,7 +230,7 @@ const HomeScreen = ({ navigation }) => {
           ))}
         </BookScroll>
       </Container>
-    </>
+    </ScrollView>
   );
 };
 

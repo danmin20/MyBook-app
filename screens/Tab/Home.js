@@ -46,9 +46,7 @@ export default ({ navigation }) => {
           />
         ) : null}
       </Box>
-      <ScrollView>
-        <HomeScreen />
-      </ScrollView>
+      <HomeScreen />
     </>
   );
 };
