@@ -3,9 +3,8 @@ App for MyBook<br>
 [MyBook Back-end](https://github.com/danmin20/MyBook-Backend)
 
 ## App
-Name : "마이북"<br/>
-Download : [android apk](https://exp-shell-app-assets.s3.us-west-1.amazonaws.com/android/%40danmin/mybook-app-a7acfffda9044f0bac3836928080d617-signed.apk)<br/>
-Play Store : [go to download](https://play.google.com/store/apps/details?id=com.danmin.mybook)
+Name : "MyBook: 마이북"<br/>
+Download : [Google Play Store](https://play.google.com/store/apps/details?id=com.danmin.mybook)
 
 ### Made with
 NodeJS<br>
