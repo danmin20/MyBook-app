@@ -24,9 +24,11 @@ const CommentInput = styled.View`
 `;
 const Button = styled.TouchableOpacity`
   background-color: ${styles.brownColor};
-  padding: 10px;
+  padding: 10px 0;
   margin-left: 10px;
   border-radius: 10px;
+  align-items: center;
+  width: 13%;
 `;
 
 export default ({ navigation }) => {
@@ -60,6 +62,7 @@ export default ({ navigation }) => {
         }
       });
       if (addComment.id) {
+        commentInput.setValue("");
         refresh();
       }
     } catch (e) {
