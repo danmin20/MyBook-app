@@ -32,7 +32,7 @@ export default ({ navigation }) => {
   const handleConfirm = async () => {
     const { value } = confirmInput;
     if (value === "") {
-      Alert.alert("잘못된 시크릿 키");
+      Alert.alert("시크릿 키를 입력해주세요");
     }
     try {
       setLoading(true);
