@@ -54,7 +54,6 @@ export default ({ navigation }) => {
       setLoading(false);
     }
   };
-  //네이버로 로그인
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
