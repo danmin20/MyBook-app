@@ -70,14 +70,14 @@ const HomeScreen = ({ navigation }) => {
   const [refreshing, setRefreshing] = useState(false);
   const { data, loading, refetch, fetchMore } = useQuery(POST_DB, {
     variables: {
-      first: 10,
+      first: 5,
       offset: 0
     }
   });
   const onLoadMore = () => {
     fetchMore({
       variables: {
-        first: 10,
+        first: 5,
         offset: data?.seePostDB.length
       },
       updateQuery: (prev, { fetchMoreResult }) => {
@@ -130,7 +130,6 @@ const HomeScreen = ({ navigation }) => {
             data={data?.seePostDB}
             onEndReached={onLoadMore}
             dataLength={data?.seePostDB.length}
-            keyExtractor={item => item.id}
             renderItem={({ item }) => {
               return (
                 <TouchableOpacity

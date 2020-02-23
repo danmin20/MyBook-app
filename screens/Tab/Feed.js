@@ -94,7 +94,6 @@ export default ({ navigation }) => {
           renderItem={({ item }) => {
             return <FeedPost id={item.id} title={item.title} {...item} />;
           }}
-          keyExtractor={item => item.id}
         />
       )}
     </>
