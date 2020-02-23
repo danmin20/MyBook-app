@@ -120,9 +120,6 @@ export default ({ navigation }) => {
                     {detail.image !== "" && (
                       <Image source={{ uri: detail.image }} />
                     )}
-                    {detail.image === "" && (
-                      <Image source={require("../../assets/noImage.png")} />
-                    )}
                   </Img>
                   <Title>{detail.title.replace(/&quot;/gi, '"')}</Title>
                   <TextRow>

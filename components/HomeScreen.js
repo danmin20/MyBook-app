@@ -34,19 +34,19 @@ const CircleBookBox = styled.View`
   margin: 5px;
   align-items: center;
   justify-content: center;
-  background-color: white;
+  background-color: black;
   border-radius: 56.5px;
   padding: 3px;
-`;
-const BookBox = styled.View`
-  margin: 8px;
-  align-items: center;
-  justify-content: center;
 `;
 const CircleImage = styled.Image`
   width: 80px;
   height: 80px;
   border-radius: 40px;
+`;
+const BookBox = styled.View`
+  margin: 8px;
+  align-items: center;
+  justify-content: center;
 `;
 const Image = styled.Image`
   width: 110px;
@@ -143,6 +143,10 @@ const HomeScreen = ({ navigation }) => {
                 >
                   <Info>
                     <CircleBookBox>
+                      <CircleImage
+                        style={{ position: "absolute" }}
+                        source={require("../assets/noImage.png")}
+                      />
                       <CircleImage source={{ uri: item.book.image }} />
                     </CircleBookBox>
                     <Name>{item.user.name}</Name>
@@ -166,6 +170,10 @@ const HomeScreen = ({ navigation }) => {
               }
             >
               <BookBox>
+                <Image
+                  style={{ position: "absolute" }}
+                  source={require("../assets/noImage.png")}
+                />
                 <Image source={{ uri: book.image }} />
               </BookBox>
             </TouchableOpacity>
@@ -185,6 +193,10 @@ const HomeScreen = ({ navigation }) => {
               }
             >
               <BookBox>
+                <Image
+                  style={{ position: "absolute" }}
+                  source={require("../assets/noImage.png")}
+                />
                 <Image source={{ uri: book.image }} />
               </BookBox>
             </TouchableOpacity>
@@ -204,6 +216,10 @@ const HomeScreen = ({ navigation }) => {
               }
             >
               <BookBox>
+                <Image
+                  style={{ position: "absolute" }}
+                  source={require("../assets/noImage.png")}
+                />
                 <Image source={{ uri: book.image }} />
               </BookBox>
             </TouchableOpacity>
@@ -223,6 +239,10 @@ const HomeScreen = ({ navigation }) => {
               }
             >
               <BookBox>
+                <Image
+                  style={{ position: "absolute" }}
+                  source={require("../assets/noImage.png")}
+                />
                 <Image source={{ uri: book.image }} />
               </BookBox>
             </TouchableOpacity>

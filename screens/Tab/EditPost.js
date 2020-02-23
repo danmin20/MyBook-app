@@ -134,7 +134,6 @@ export default ({ navigation }) => {
             source={require("../../assets/noImage.png")}
           />
           {uri !== "" && <Image source={{ uri }} />}
-          {uri === "" && <Image source={require("../../assets/noImage.png")} />}
           <Sentiment
             onChangeText={sentimentInput.onChange}
             value={sentimentInput.value}

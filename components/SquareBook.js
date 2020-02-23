@@ -62,7 +62,6 @@ const SquareBook = ({
             source={require("../assets/noImage.png")}
           />
           {image !== "" && <Image source={{ uri: image }} />}
-          {image === "" && <Image source={require("../assets/noImage.png")} />}
         </View>
         <Info>
           <Title>

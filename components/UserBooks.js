@@ -319,6 +319,14 @@ const UserBooks = ({
                 <Image
                   style={{
                     height: 116,
+                    width: 82,
+                    position: "absolute"
+                  }}
+                  source={require("../assets/noImage.png")}
+                />
+                <Image
+                  style={{
+                    height: 116,
                     width: 82
                   }}
                   source={{ uri: post.book?.image }}
