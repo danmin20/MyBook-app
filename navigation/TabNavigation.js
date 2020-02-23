@@ -47,7 +47,7 @@ const stackFactory = (initialRoute, customConfig) =>
       PostDetail: {
         screen: PostDetail,
         navigationOptions: ({ navigation }) => ({
-          title: navigation.getParam("title")
+          title: '" '+navigation.getParam("title")+' "'
         })
       },
       UserDetail: {
