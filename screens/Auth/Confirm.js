@@ -33,21 +33,22 @@ export default ({ navigation }) => {
     const { value } = confirmInput;
     if (value === "") {
       Alert.alert("시크릿 키를 입력해주세요");
-    }
-    try {
-      setLoading(true);
-      const {
-        data: { confirmSecret }
-      } = await confirmSecretMutation();
-      if (confirmSecret !== "" || confirmSecret !== false) {
-        logIn(confirmSecret);
-      } else {
-        Alert.alert("잘못된 시크릿 키");
+    } else {
+      try {
+        setLoading(true);
+        const {
+          data: { confirmSecret }
+        } = await confirmSecretMutation();
+        if (confirmSecret !== "" || confirmSecret !== false) {
+          logIn(confirmSecret);
+        } else {
+          Alert.alert("잘못된 시크릿 키");
+        }
+      } catch (e) {
+        Alert.alert("오류 발생", "재시도 하십시오");
+      } finally {
+        setLoading(false);
       }
-    } catch (e) {
-      Alert.alert("오류 발생", "재시도 하십시오");
-    } finally {
-      setLoading(false);
     }
   };
   return (
