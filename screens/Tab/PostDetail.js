@@ -5,7 +5,8 @@ import {
   RefreshControl,
   Text,
   View,
-  ActivityIndicator
+  ActivityIndicator,
+  KeyboardAvoidingView
 } from "react-native";
 import { useQuery, useMutation } from "react-apollo-hooks";
 import { POST_DETAIL, ADD_COMMENT } from "../../gql/queries";
@@ -82,20 +83,25 @@ export default ({ navigation }) => {
           >
             <Post {...data?.seeFullPost} />
           </ScrollView>
-          <CommentInput>
-            <CommentWindow
-              {...commentInput}
-              placeholder="댓글 입력..."
-              onSubmitEditing={handleAddComment}
-            />
-            <Button onPress={handleAddComment}>
-              {loading ? (
-                <ActivityIndicator color={"white"} />
-              ) : (
-                <Text style={{ color: "white" }}>등록</Text>
-              )}
-            </Button>
-          </CommentInput>
+          <KeyboardAvoidingView behavior="padding">
+            <CommentInput>
+              <CommentWindow
+                {...commentInput}
+                placeholder="댓글 입력..."
+                onSubmitEditing={handleAddComment}
+              />
+              <Button onPress={handleAddComment}>
+                {loading ? (
+                  <ActivityIndicator color={"white"} />
+                ) : (
+                  <Text style={{ color: "white" }}>등록</Text>
+                )}
+              </Button>
+            </CommentInput>
+            <View style={{ height: 80, backgroundColor: "white" }}>
+              <Text style={{ padding: 10 }}>여기 광고넣고 싶어요...</Text>
+            </View>
+          </KeyboardAvoidingView>
         </View>
       )}
     </>

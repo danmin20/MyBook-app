@@ -18,6 +18,17 @@ import FollowDisplay from "../screens/Tab/FollowDisplay";
 import EditUser from "../screens/Tab/EditUser";
 import PostDisplay from "../screens/Tab/PostDisplay";
 
+const tabBarVisible = navigation => {
+  const { routes } = navigation.state;
+  let showTabBar = true;
+  routes.forEach(route => {
+    if (route.routeName === "PostDetail") {
+      showTabBar = false;
+    }
+  });
+  return showTabBar;
+};
+
 const stackFactory = (initialRoute, customConfig) =>
   createStackNavigator(
     {
@@ -133,7 +144,8 @@ export default createBottomTabNavigator(
         ),
         headerTitleAlign: "center"
       }),
-      navigationOptions: {
+      navigationOptions: ({ navigation }) => ({
+        tabBarVisible: tabBarVisible(navigation),
         tabBarIcon: ({ focused }) => (
           <MaterialCommunityIcons
             name={focused ? "home" : "home-outline"}
@@ -141,7 +153,7 @@ export default createBottomTabNavigator(
             size={30}
           />
         )
-      }
+      })
     },
     Feed: {
       screen: stackFactory(Feed, {
@@ -163,7 +175,8 @@ export default createBottomTabNavigator(
         ),
         headerTitleAlign: "center"
       }),
-      navigationOptions: {
+      navigationOptions: ({ navigation }) => ({
+        tabBarVisible: tabBarVisible(navigation),
         tabBarIcon: ({ focused }) => (
           <MaterialIcons
             name={focused ? "people" : "people-outline"}
@@ -171,13 +184,14 @@ export default createBottomTabNavigator(
             size={30}
           />
         )
-      }
+      })
     },
     MyBooks: {
       screen: stackFactory(MyBooks, {
         title: ""
       }),
-      navigationOptions: {
+      navigationOptions: ({ navigation }) => ({
+        tabBarVisible: tabBarVisible(navigation),
         tabBarIcon: ({ focused }) => (
           <MaterialCommunityIcons
             name={focused ? "bookmark" : "bookmark-outline"}
@@ -185,7 +199,7 @@ export default createBottomTabNavigator(
             size={30}
           />
         )
-      }
+      })
     }
   },
   {
