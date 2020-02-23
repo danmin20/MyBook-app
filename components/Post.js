@@ -102,10 +102,12 @@ const Post = ({
   likeCount: likeCountProp,
   comments = [],
   isLiked: isLikedProp,
+  likes=[],
   createdAt,
   sentiment,
   navigation
 }) => {
+  likes.map(like=>console.log(like.user.name))
   const [loading, setLoading] = useState(false);
   const [isLiked, setIsLiked] = useState(isLikedProp);
   const [isOpened, setIsOpened] = useState(true);
@@ -274,7 +276,11 @@ const Post = ({
                   name={isLiked ? "ios-heart" : "ios-heart-empty"}
                 />
               </HeartIconContainer>
-              <Text style={{ marginLeft: 5 }}>좋아요 {likeCount}개</Text>
+              <TouchableOpacity
+                onPress={() => navigation.navigate("LikeDisplay")}
+              >
+                <Text style={{ marginLeft: 5 }}>스크랩 {likeCount}회</Text>
+              </TouchableOpacity>
             </Like>
             <Date>
               {createdAt

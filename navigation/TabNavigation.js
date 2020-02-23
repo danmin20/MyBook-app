@@ -17,6 +17,7 @@ import EditPost from "../screens/Tab/EditPost";
 import FollowDisplay from "../screens/Tab/FollowDisplay";
 import EditUser from "../screens/Tab/EditUser";
 import PostDisplay from "../screens/Tab/PostDisplay";
+import LikeDisplay from "../screens/Tab/LikeDisplay";
 
 const tabBarVisible = navigation => {
   const { routes } = navigation.state;
@@ -93,6 +94,12 @@ const stackFactory = (initialRoute, customConfig) =>
         navigationOptions: ({ navigation }) => ({
           title: navigation.getParam("type")
         })
+      },
+      LikeDisplay: {
+        screen: LikeDisplay,
+        navigationOptions: {
+          title: "스크랩"
+        }
       },
       EditUser: {
         screen: EditUser,
