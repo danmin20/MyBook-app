@@ -24,6 +24,8 @@ const tabBarVisible = navigation => {
   routes.forEach(route => {
     if (route.routeName === "PostDetail") {
       showTabBar = false;
+    } else {
+      showTabBar = true;
     }
   });
   return showTabBar;
@@ -47,7 +49,7 @@ const stackFactory = (initialRoute, customConfig) =>
       PostDetail: {
         screen: PostDetail,
         navigationOptions: ({ navigation }) => ({
-          title: '" '+navigation.getParam("title")+' "'
+          title: '" ' + navigation.getParam("title") + ' "'
         })
       },
       UserDetail: {

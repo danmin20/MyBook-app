@@ -186,6 +186,15 @@ const Post = ({
             }
           >
             <Image
+              style={{
+                height: 116,
+                width: 82,
+                borderRadius: 5,
+                position: "absolute"
+              }}
+              source={require("../assets/noImage.png")}
+            />
+            <Image
               style={{ height: 116, width: 82, borderRadius: 5 }}
               source={{ uri: book.image }}
             />
