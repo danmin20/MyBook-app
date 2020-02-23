@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useMutation, useQuery } from "react-apollo-hooks";
 import { UPLOAD, FEED, ME, SEARCH } from "../../gql/queries";
 import useInput from "../../hook/useInput";
-import { ActivityIndicator } from "react-native";
+import { ActivityIndicator, Alert } from "react-native";
 import styles from "../../styles";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import constants from "../../constants";
@@ -75,27 +75,31 @@ export default ({ navigation }) => {
   });
   const { refetch: refetchMe } = useQuery(ME);
   const handleUpload = async () => {
-    try {
-      setLoading(true);
-      const {
-        data: { upload }
-      } = await uploadMutation({
-        variables: {
-          title: titleInput.value,
-          sentiment: sentimentInput.value,
-          bookId: navigation.getParam("bookId")
+    if (titleInput.value === "" || sentimentInput.value === "") {
+      Alert.alert("내용을 모두 입력해주세요");
+    } else {
+      try {
+        setLoading(true);
+        const {
+          data: { upload }
+        } = await uploadMutation({
+          variables: {
+            title: titleInput.value,
+            sentiment: sentimentInput.value,
+            bookId: navigation.getParam("bookId")
+          }
+        });
+        await refetchFeed();
+        await refetchMe();
+        if (upload.id) {
+          navigation.navigate("MyBooks");
+        } else {
         }
-      });
-      await refetchFeed();
-      await refetchMe();
-      if (upload.id) {
-        navigation.navigate("MyBooks");
-      } else {
+      } catch (e) {
+        console.log(e);
+      } finally {
+        setLoading(false);
       }
-    } catch (e) {
-      console.log(e);
-    } finally {
-      setLoading(false);
     }
   };
   if (!loadingData && data && data?.books) {
