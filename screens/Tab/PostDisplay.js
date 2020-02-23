@@ -78,6 +78,7 @@ export default ({ navigation }) => {
           onEndReachedThreshold={1}
           onEndReached={onLoadMore}
           dataLength={data.postsOfBook.length}
+          keyExtractor={item => item.id}
           renderItem={({ item }) => {
             return <FeedPost key={item.id} {...item} />;
           }}

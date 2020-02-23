@@ -108,8 +108,14 @@ export default ({ navigation }) => {
           onEndReachedThreshold={1}
           onEndReached={onLoadMore}
           dataLength={data?.books.length}
+          keyExtractor={item => item.isbn + Math.floor(Math.random() * 10) + 1}
           renderItem={({ item }) => {
-            return <SquareBook key={item.isbn} {...item} />;
+            return (
+              <SquareBook
+                key={item.isbn + Math.floor(Math.random() * 10) + 1}
+                {...item}
+              />
+            );
           }}
         />
       )}

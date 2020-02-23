@@ -130,6 +130,7 @@ const HomeScreen = ({ navigation }) => {
             data={data?.seePostDB}
             onEndReached={onLoadMore}
             dataLength={data?.seePostDB.length}
+            keyExtractor={item => item.id}
             renderItem={({ item }) => {
               return (
                 <TouchableOpacity
