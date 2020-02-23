@@ -34,14 +34,18 @@ const CircleBookBox = styled.View`
   margin: 5px;
   align-items: center;
   justify-content: center;
-  background-color: black;
-  border-radius: 56.5px;
+  background-color: ${styles.moderateBrownColor};
+  border-radius: 100px;
   padding: 3px;
+  overflow: hidden;
+`;
+const Circle = styled.View`
+  overflow: hidden;
+  border-radius: 40px;
 `;
 const CircleImage = styled.Image`
   width: 80px;
   height: 80px;
-  border-radius: 40px;
 `;
 const BookBox = styled.View`
   margin: 8px;
@@ -144,11 +148,17 @@ const HomeScreen = ({ navigation }) => {
                 >
                   <Info>
                     <CircleBookBox>
+                      <Circle>
                       <CircleImage
                         style={{ position: "absolute" }}
                         source={require("../assets/noImage.png")}
+                        borderRadius={40}
                       />
-                      <CircleImage source={{ uri: item.book.image }} />
+                      <CircleImage
+                        source={{ uri: item.book.image }}
+                        borderRadius={40}
+                      />
+                      </Circle>
                     </CircleBookBox>
                     <Name>{item.user.name}</Name>
                   </Info>
