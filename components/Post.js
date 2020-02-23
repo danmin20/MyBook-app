@@ -53,7 +53,8 @@ const Link = styled.View`
 `;
 const BookInfo = styled.View`
   flex-direction: row;
-  margin: 20px 80px;
+  margin-top: 30px;
+  margin-bottom: 20px;
   justify-content: center;
   align-items: center;
 `;
