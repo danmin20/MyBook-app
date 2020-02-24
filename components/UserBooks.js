@@ -99,7 +99,7 @@ const Num = styled.Text`
 const StatName = styled.Text`
   margin-top: 5px;
   font-size: 13px;
-  color: ${styles.brownColor};
+  color: ${styles.blackColor};
 `;
 const Title = styled.Text`
   background-color: ${styles.brownColor};
