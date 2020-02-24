@@ -29,7 +29,14 @@ export const POST_FRAGMENT = gql`
     }
     likes {
       user {
+        id
         name
+        postsCount
+        isFollowing
+        isSelf
+      }
+      post {
+        id
       }
     }
     comments {

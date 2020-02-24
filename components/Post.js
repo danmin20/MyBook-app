@@ -107,7 +107,6 @@ const Post = ({
   sentiment,
   navigation
 }) => {
-  likes.map(like=>console.log(like.user.name))
   const [loading, setLoading] = useState(false);
   const [isLiked, setIsLiked] = useState(isLikedProp);
   const [isOpened, setIsOpened] = useState(true);
@@ -277,7 +276,7 @@ const Post = ({
                 />
               </HeartIconContainer>
               <TouchableOpacity
-                onPress={() => navigation.navigate("LikeDisplay")}
+                onPress={() => navigation.navigate("LikeDisplay", { likes })}
               >
                 <Text style={{ marginLeft: 5 }}>스크랩 {likeCount}회</Text>
               </TouchableOpacity>
