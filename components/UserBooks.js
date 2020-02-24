@@ -40,7 +40,7 @@ const Book = styled.TouchableOpacity`
   border-right-width: 15px;
   border-bottom-left-radius: 15px;
   border-top-right-radius: 15px;
-  background-color: ${styles.blackColor};
+  background-color: ${styles.brownColor};
 `;
 const Profile = styled.View`
   justify-content: center;
@@ -102,15 +102,14 @@ const StatName = styled.Text`
   color: ${styles.brownColor};
 `;
 const Title = styled.Text`
-  background-color: white;
+  background-color: ${styles.brownColor};
   width: 84px;
   padding: 5px;
   position: absolute;
   bottom: 15px;
   margin: auto;
-  border: 1px solid ${styles.blackColor};
-  color: black;
   font-size: 12px;
+  color: white;
   text-align: center;
 `;
 const Func = styled.View`

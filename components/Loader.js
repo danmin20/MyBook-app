@@ -11,6 +11,6 @@ const Container = styled.View`
 
 export default () => (
   <Container>
-    <ActivityIndicator style={{ marginTop: 20 }} color={styles.brownColor} />
+    <ActivityIndicator style={{ margin: 40 }} color={styles.brownColor} />
   </Container>
 );

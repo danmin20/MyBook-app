@@ -36,7 +36,7 @@ const Box = styled.View`
 `;
 const BookInfo = styled.View`
   align-items: center;
-  margin-right: 5px;
+  margin-right: 10px;
 `;
 const TitleBox = styled.View`
   background-color: ${styles.brownGrey};
@@ -121,7 +121,15 @@ const Post = ({ id, title, user, book, createdAt, sentiment, navigation }) => {
                 height: 116,
                 width: 82,
                 borderRadius: 5,
-                marginRight: 5
+                position: "absolute"
+              }}
+              source={require("../assets/noImage.png")}
+            />
+            <Image
+              style={{
+                height: 116,
+                width: 82,
+                borderRadius: 5
               }}
               source={{ uri: book.image }}
             />
