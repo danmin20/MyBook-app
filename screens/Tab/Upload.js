@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useMutation, useQuery } from "react-apollo-hooks";
-import { UPLOAD, FEED, ME, SEARCH } from "../../gql/queries";
+import { UPLOAD, ME, SEARCH } from "../../gql/queries";
 import useInput from "../../hook/useInput";
 import { ActivityIndicator, Alert } from "react-native";
 import styles from "../../styles";
@@ -67,12 +67,6 @@ export default ({ navigation }) => {
   const titleInput = useInput("");
   const sentimentInput = useInput("");
   const [uploadMutation] = useMutation(UPLOAD);
-  const { refetch: refetchFeed } = useQuery(FEED, {
-    variables: {
-      first: 10,
-      offset: 0
-    }
-  });
   const { refetch: refetchMe } = useQuery(ME);
   const handleUpload = async () => {
     if (titleInput.value === "" || sentimentInput.value === "") {
@@ -89,7 +83,6 @@ export default ({ navigation }) => {
             bookId: navigation.getParam("bookId")
           }
         });
-        await refetchFeed();
         await refetchMe();
         if (upload.id) {
           navigation.navigate("MyBooks");

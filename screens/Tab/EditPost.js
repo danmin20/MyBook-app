@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useMutation, useQuery } from "react-apollo-hooks";
-import { FEED, ME, EDIT_POST } from "../../gql/queries";
+import { ME, EDIT_POST } from "../../gql/queries";
 import useInput from "../../hook/useInput";
 import { ActivityIndicator } from "react-native";
 import styles from "../../styles";
@@ -60,12 +60,6 @@ export default ({ navigation }) => {
   const titleInput = useInput(navigation.getParam("title"));
   const sentimentInput = useInput(navigation.getParam("sentiment"));
   const [editMutation] = useMutation(EDIT_POST);
-  const { refetch: refetchFeed } = useQuery(FEED, {
-    variables: {
-      first: 10,
-      offset: 0
-    }
-  });
   const { refetch: refetchMe } = useQuery(ME);
   const uri = navigation.getParam("uri");
   const handleEdit = async () => {
@@ -81,7 +75,6 @@ export default ({ navigation }) => {
           action: "EDIT"
         }
       });
-      await refetchFeed();
       await refetchMe();
       if (editPost.id) {
         navigation.navigate("PostDetail", { title: titleInput.value });

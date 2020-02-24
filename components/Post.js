@@ -10,7 +10,7 @@ import {
   MaterialIcons,
   Ionicons
 } from "@expo/vector-icons";
-import { TOGGLE_LIKE, ME, EDIT_POST, FEED } from "../gql/queries";
+import { TOGGLE_LIKE, ME, EDIT_POST } from "../gql/queries";
 import Loader from "./Loader";
 import Comment from "./Comment";
 import constants from "../constants";
@@ -111,12 +111,6 @@ const Post = ({
   const [isLiked, setIsLiked] = useState(isLikedProp);
   const [isOpened, setIsOpened] = useState(true);
   const [likeCount, setLikeCount] = useState(likeCountProp);
-  const { refetch: refetchFeed } = useQuery(FEED, {
-    variables: {
-      first: 10,
-      offset: 0
-    }
-  });
   const { refetch: refetchMe } = useQuery(ME);
   const [toggleLikeMutation] = useMutation(TOGGLE_LIKE, {
     variables: { postId: id }
@@ -157,7 +151,6 @@ const Post = ({
                   action: "DELETE"
                 }
               });
-              await refetchFeed();
               await refetchMe();
               if (editPost.id) {
                 navigation.goBack();

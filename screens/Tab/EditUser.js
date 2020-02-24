@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { ActivityIndicator } from "react-native";
 import useInput from "../../hook/useInput";
 import { useMutation, useQuery } from "react-apollo-hooks";
-import { EDIT_USER, FEED, ME } from "../../gql/queries";
+import { EDIT_USER, ME } from "../../gql/queries";
 import styles from "../../styles";
 import constants from "../../constants";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -57,12 +57,6 @@ export default ({ navigation }) => {
   const nameInput = useInput(navigation.getParam("name"));
   const bioInput = useInput(navigation.getParam("bio"));
   const [editMutation] = useMutation(EDIT_USER);
-  const { refetch: refetchFeed } = useQuery(FEED, {
-    variables: {
-      first: 10,
-      offset: 0
-    }
-  });
   const { refetch: refetchMe } = useQuery(ME);
   const handleEdit = async () => {
     try {
@@ -75,7 +69,6 @@ export default ({ navigation }) => {
           bio: bioInput.value
         }
       });
-      await refetchFeed();
       await refetchMe();
       if (editUser.id) {
         navigation.goBack();
