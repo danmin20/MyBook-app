@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import constants from "../../constants";
 import AuthButton from "../../components/AuthButton";
-import styles from "../../styles";
 
 const View = styled.View`
   justify-content: center;

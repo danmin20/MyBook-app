@@ -2,34 +2,34 @@ import React from "react";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import { createStackNavigator } from "react-navigation-stack";
 import { createBottomTabNavigator } from "react-navigation-tabs";
-import Home from "../screens/Tab/Home";
-import MyBooks from "../screens/Tab/MyBooks";
-import Feed from "../screens/Tab/Feed";
-import BookDetail from "../screens/Tab/BookDetail";
-import UserDetail from "../screens/Tab/UserDetail";
-import PostDetail from "../screens/Tab/PostDetail";
-import BookDisplay from "../screens/Tab/BookDisplay";
-import UserDisplay from "../screens/Tab/UserDisplay";
 import styles from "../styles";
 import { Text, View } from "react-native";
-import Upload from "../screens/Tab/Upload";
-import EditPost from "../screens/Tab/EditPost";
-import FollowDisplay from "../screens/Tab/FollowDisplay";
-import EditUser from "../screens/Tab/EditUser";
-import PostDisplay from "../screens/Tab/PostDisplay";
-import LikeDisplay from "../screens/Tab/LikeDisplay";
+import {
+  Home,
+  MyBooks,
+  Feed,
+  BookDetail,
+  UserDetail,
+  PostDetail,
+  BookDisplay,
+  UserDisplay,
+  Upload,
+  EditPost,
+  FollowDisplay,
+  EditUser,
+  PostDisplay,
+  LikeDisplay,
+} from "../screens/Tab";
 
-const tabBarVisible = navigation => {
+const tabBarVisible = (navigation) => {
   const { routes } = navigation.state;
-  let showTabBar = true;
-  routes.forEach(route => {
+  routes.forEach((route) => {
     if (route.routeName === "PostDetail") {
-      showTabBar = false;
+      return false;
     } else {
-      showTabBar = true;
+      return true;
     }
   });
-  return showTabBar;
 };
 
 const stackFactory = (initialRoute, customConfig) =>
@@ -38,96 +38,96 @@ const stackFactory = (initialRoute, customConfig) =>
       initialRoute: {
         screen: initialRoute,
         navigationOptions: {
-          ...customConfig
-        }
+          ...customConfig,
+        },
       },
       BookDetail: {
         screen: BookDetail,
         navigationOptions: {
-          title: "책 상세정보"
-        }
+          title: "책 상세정보",
+        },
       },
       PostDetail: {
         screen: PostDetail,
         navigationOptions: ({ navigation }) => ({
-          title: '" ' + navigation.getParam("title") + ' "'
-        })
+          title: '" ' + navigation.getParam("title") + ' "',
+        }),
       },
       UserDetail: {
         screen: UserDetail,
         navigationOptions: {
           headerTitle: () => {
             "none";
-          }
-        }
+          },
+        },
       },
       BookDisplay: {
         screen: BookDisplay,
         navigationOptions: ({ navigation }) => ({
-          title: "' " + navigation.getParam("term") + " '  검색결과"
-        })
+          title: "' " + navigation.getParam("term") + " '  검색결과",
+        }),
       },
       UserDisplay: {
         screen: UserDisplay,
         navigationOptions: ({ navigation }) => ({
-          title: "' " + navigation.getParam("name") + " '  검색결과"
-        })
+          title: "' " + navigation.getParam("name") + " '  검색결과",
+        }),
       },
       Upload: {
         screen: Upload,
         navigationOptions: {
           headerTitle: () => {
             "none";
-          }
-        }
+          },
+        },
       },
       EditPost: {
         screen: EditPost,
         navigationOptions: {
           headerTitle: () => {
             "none";
-          }
-        }
+          },
+        },
       },
       FollowDisplay: {
         screen: FollowDisplay,
         navigationOptions: ({ navigation }) => ({
-          title: navigation.getParam("type")
-        })
+          title: navigation.getParam("type"),
+        }),
       },
       LikeDisplay: {
         screen: LikeDisplay,
         navigationOptions: {
-          title: "스크랩"
-        }
+          title: "스크랩",
+        },
       },
       EditUser: {
         screen: EditUser,
         navigationOptions: {
-          title: "내 정보 수정"
-        }
+          title: "내 정보 수정",
+        },
       },
       PostDisplay: {
         screen: PostDisplay,
         navigationOptions: ({ navigation }) => ({
-          title: "      " + navigation.getParam("title") + "      "
-        })
-      }
+          title: "      " + navigation.getParam("title") + "      ",
+        }),
+      },
     },
     {
       defaultNavigationOptions: {
         headerBackTitleVisible: false,
         headerStyle: {
           backgroundColor: styles.brownColor,
-          elevation: 0
+          elevation: 0,
         },
         headerTitleStyle: {
-          color: "white"
+          color: "white",
         },
         headerTitleAlign: "center",
         headerBackTitle: null,
-        cardStyle: { backgroundColor: "white" }
-      }
+        cardStyle: { backgroundColor: "white" },
+      },
     }
   );
 
@@ -140,7 +140,7 @@ export default createBottomTabNavigator(
             style={{
               flexDirection: "row",
               alignItems: "center",
-              justifyContent: "center"
+              justifyContent: "center",
             }}
           >
             <MaterialCommunityIcons
@@ -151,7 +151,7 @@ export default createBottomTabNavigator(
             <Text style={{ fontSize: 22, color: "white" }}> MY BOOK</Text>
           </View>
         ),
-        headerTitleAlign: "center"
+        headerTitleAlign: "center",
       }),
       navigationOptions: ({ navigation }) => ({
         tabBarVisible: tabBarVisible(navigation),
@@ -161,8 +161,8 @@ export default createBottomTabNavigator(
             color={"white"}
             size={30}
           />
-        )
-      })
+        ),
+      }),
     },
     Feed: {
       screen: stackFactory(Feed, {
@@ -171,7 +171,7 @@ export default createBottomTabNavigator(
             style={{
               flexDirection: "row",
               alignItems: "center",
-              justifyContent: "center"
+              justifyContent: "center",
             }}
           >
             <MaterialCommunityIcons
@@ -182,7 +182,7 @@ export default createBottomTabNavigator(
             <Text style={{ fontSize: 22, color: "white" }}> MY BOOK</Text>
           </View>
         ),
-        headerTitleAlign: "center"
+        headerTitleAlign: "center",
       }),
       navigationOptions: ({ navigation }) => ({
         tabBarVisible: tabBarVisible(navigation),
@@ -192,12 +192,12 @@ export default createBottomTabNavigator(
             color={"white"}
             size={30}
           />
-        )
-      })
+        ),
+      }),
     },
     MyBooks: {
       screen: stackFactory(MyBooks, {
-        title: ""
+        title: "",
       }),
       navigationOptions: ({ navigation }) => ({
         tabBarVisible: tabBarVisible(navigation),
@@ -207,14 +207,14 @@ export default createBottomTabNavigator(
             color={"white"}
             size={30}
           />
-        )
-      })
-    }
+        ),
+      }),
+    },
   },
   {
     tabBarOptions: {
       showLabel: false,
-      style: { backgroundColor: styles.moderateBrownColor }
-    }
+      style: { backgroundColor: styles.moderateBrownColor },
+    },
   }
 );

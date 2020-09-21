@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { MaterialIcons, MaterialCommunityIcons, EvilIcons, Ionicons } from "@expo/vector-icons";
+import {
+  MaterialIcons,
+  MaterialCommunityIcons,
+  EvilIcons,
+  Ionicons,
+} from "@expo/vector-icons";
 import { AppLoading } from "expo";
 import { AsyncStorage } from "react-native";
 import * as Font from "expo-font";
@@ -15,38 +20,42 @@ import NavController from "./components/NavController";
 import { AuthProvider } from "./AuthContext";
 
 export default function App() {
-  const [loaded, setLoaded] = useState(false);
   const [client, setClient] = useState(null);
+  const [loaded, setLoaded] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(null);
+
   const preLoad = async () => {
     try {
       await Font.loadAsync({
         ...MaterialIcons.font,
         ...MaterialCommunityIcons.font,
         ...EvilIcons.font,
-        ...Ionicons.font
+        ...Ionicons.font,
       });
       await Asset.loadAsync([
         require("./assets/logo.png"),
-        require("./assets/noImage.png")
+        require("./assets/noImage.png"),
       ]);
+
       const cache = new InMemoryCache();
       await persistCache({
         cache,
-        storage: AsyncStorage
+        storage: AsyncStorage,
       });
+
       const client = new ApolloClient({
         cache,
-        request: async operation => {
+        request: async (operation) => {
           const token = await AsyncStorage.getItem("jwt");
           return operation.setContext({
-            headers: { Authorization: `Bearer ${token}` }
+            headers: { Authorization: `Bearer ${token}` },
           });
         },
-        ...options
+        ...options,
       });
-      const isLoggedIn = await AsyncStorage.getItem("isLoggedIn");
-      if (!isLoggedIn || isLoggedIn === "false") {
+
+      const isLoggedInStorage = await AsyncStorage.getItem("isLoggedIn");
+      if (isLoggedInStorage === "false") {
         setIsLoggedIn(false);
       } else {
         setIsLoggedIn(true);
@@ -57,6 +66,7 @@ export default function App() {
       console.log(e);
     }
   };
+
   useEffect(() => {
     preLoad();
   }, []);
