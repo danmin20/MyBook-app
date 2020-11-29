@@ -6,7 +6,7 @@ import {
   Text,
   View,
   ActivityIndicator,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
 } from "react-native";
 import { useQuery, useMutation } from "react-apollo-hooks";
 import { POST_DETAIL, ADD_COMMENT } from "../../gql/queries";
@@ -19,12 +19,12 @@ const CommentInput = styled.View`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background-color: ${styles.moderateBrownColor};
+  background-color: ${styles.brownColor};
   padding: 15px 10px;
   margin-top: auto;
 `;
 const Button = styled.TouchableOpacity`
-  background-color: ${styles.brownColor};
+  background-color: ${styles.lightGreen};
   padding: 10px 0;
   margin-left: 10px;
   border-radius: 10px;
@@ -38,7 +38,7 @@ export default ({ navigation }) => {
   const [refreshing, setRefreshing] = useState(false);
   const { data, refetch } = useQuery(POST_DETAIL, {
     variables: { id: navigation.getParam("id") },
-    fetchPolicy: "cache-and-network"
+    fetchPolicy: "cache-and-network",
   });
   const [addCommentMutation] = useMutation(ADD_COMMENT);
   const refresh = async () => {
@@ -55,12 +55,12 @@ export default ({ navigation }) => {
     try {
       setLoading(true);
       const {
-        data: { addComment }
+        data: { addComment },
       } = await addCommentMutation({
         variables: {
           postId: navigation.getParam("id"),
-          text: commentInput.value
-        }
+          text: commentInput.value,
+        },
       });
       if (addComment.id) {
         commentInput.setValue("");
@@ -83,7 +83,7 @@ export default ({ navigation }) => {
           >
             <Post {...data?.seeFullPost} />
           </ScrollView>
-          <KeyboardAvoidingView behavior="padding">
+          <KeyboardAvoidingView>
             <CommentInput>
               <CommentWindow
                 {...commentInput}
@@ -94,13 +94,10 @@ export default ({ navigation }) => {
                 {loading ? (
                   <ActivityIndicator color={"white"} />
                 ) : (
-                  <Text style={{ color: "white" }}>등록</Text>
+                  <Text>등록</Text>
                 )}
               </Button>
             </CommentInput>
-            <View style={{ height: 80, backgroundColor: "white" }}>
-              <Text style={{ padding: 10 }}>여기 광고넣고 싶어요...</Text>
-            </View>
           </KeyboardAvoidingView>
         </View>
       )}

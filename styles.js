@@ -1,11 +1,10 @@
 const styles = {
-  blackColor: "#2E2E2E",
-  brownGrey: "#F2EDEB",
-  lightBrownColor: "#E8DBD1",
-  brownColor: "#877B75",
-  moderateBrownColor: "#C2B7AE",
-  darkGreyColor: "#999",
-  redColor: "#ED4956"
+  blackColor: "#323232",
+  brownGrey: "#dbdbdb", // light gray
+  brownColor: "#36c66f", // green
+  lightGreen: "#e8fbef",
+  darkGreyColor: "#626262",
+  redColor: "#ff7b49",
 };
 
 export default styles;

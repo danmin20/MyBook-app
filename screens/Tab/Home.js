@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import useInput from "../../hook/useInput";
 import HomeScreen from "../../components/HomeScreen";
-import { ScrollView } from "react-native";
 import SearchBar from "../../components/SearchBar";
 import { EvilIcons } from "@expo/vector-icons";
 import styles from "../../styles";
@@ -24,7 +23,7 @@ export default ({ navigation }) => {
   const [search, setSearch] = useState(false);
   const searchInput = useInput("");
   const toggleSearch = () => {
-    setSearch(p => !p);
+    setSearch((p) => !p);
   };
   const handleSearch = async () => {
     const { value } = searchInput;

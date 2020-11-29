@@ -40,7 +40,7 @@ const Book = styled.TouchableOpacity`
   border-right-width: 15px;
   border-bottom-left-radius: 15px;
   border-top-right-radius: 15px;
-  background-color: ${styles.brownColor};
+  background-color: ${styles.blackColor};
 `;
 const Profile = styled.View`
   justify-content: center;
@@ -76,7 +76,7 @@ const ProfileStats = styled.View`
 `;
 const Stat = styled.View`
   align-items: center;
-  background-color: ${styles.lightBrownColor};
+  background-color: ${styles.brownGrey};
   margin-left: 10px;
   justify-content: center;
   height: 70px;
@@ -85,7 +85,7 @@ const Stat = styled.View`
 `;
 const FollowStat = styled.TouchableOpacity`
   align-items: center;
-  background-color: ${styles.lightBrownColor};
+  background-color: ${styles.brownGrey};
   margin-left: 10px;
   justify-content: center;
   height: 70px;
@@ -102,7 +102,7 @@ const StatName = styled.Text`
   color: ${styles.blackColor};
 `;
 const Title = styled.Text`
-  background-color: ${styles.brownColor};
+  background-color: ${styles.blackColor};
   width: 84px;
   padding: 5px;
   position: absolute;
@@ -115,7 +115,7 @@ const Title = styled.Text`
 const Func = styled.View`
   justify-content: center;
   align-items: center;
-  background-color: ${styles.lightBrownColor};
+  background-color: ${styles.brownGrey};
   border-radius: 5px;
   padding: 3px 15px;
 `;
@@ -126,7 +126,7 @@ const FuncText = styled.Text`
 const Buttoncontainer = styled.View`
   padding: 2px 0;
   flex-direction: row;
-  background-color: ${styles.lightBrownColor};
+  background-color: ${styles.brownGrey};
 `;
 const Button = styled.TouchableOpacity`
   width: ${constants.width / 2}px;
@@ -152,12 +152,12 @@ const UserBooks = ({
   likes,
   isSelf,
   isFollowing: isFollowingProp,
-  navigation
+  navigation,
 }) => {
   const logOut = useLogOut();
   const [isFollowing, setIsFollowing] = useState(isFollowingProp);
   const [toggleFollowMtation] = useMutation(TOGGLE_FOLLOW, {
-    variables: { id }
+    variables: { id },
   });
   const [isMine, setIsMine] = useState(true);
   const [isLikes, setIsLikes] = useState(false);
@@ -170,7 +170,7 @@ const UserBooks = ({
     setIsMine(false);
   };
   const handleFollow = async () => {
-    setIsFollowing(p => !p);
+    setIsFollowing((p) => !p);
     if (isFollowing) {
       setIsFollowing(false);
     } else {
@@ -191,9 +191,9 @@ const UserBooks = ({
           text: "예",
           onPress: async () => {
             logOut();
-          }
+          },
         },
-        { text: "아니오", style: "cancel" }
+        { text: "아니오", style: "cancel" },
       ],
       { cancelable: false }
     );
@@ -218,7 +218,7 @@ const UserBooks = ({
                   <Ionicons
                     name="ios-settings"
                     size={20}
-                    color={styles.lightBrownColor}
+                    color={styles.brownGrey}
                   />
                 </TouchableOpacity>
               </Funcs>
@@ -248,7 +248,7 @@ const UserBooks = ({
                 onPress={() =>
                   navigation.navigate("FollowDisplay", {
                     follow: followers,
-                    type: "팔로워"
+                    type: "팔로워",
                   })
                 }
               >
@@ -259,7 +259,7 @@ const UserBooks = ({
                 onPress={() =>
                   navigation.navigate("FollowDisplay", {
                     follow: following,
-                    type: "팔로잉"
+                    type: "팔로잉",
                   })
                 }
               >
@@ -273,13 +273,13 @@ const UserBooks = ({
           <BioBox>
             <MaterialCommunityIcons
               name="format-quote-open"
-              color={styles.moderateBrownColor}
+              color={styles.brownColor}
               size={30}
             />
             <Bio> {bio} </Bio>
             <MaterialCommunityIcons
               name="format-quote-close"
-              color={styles.moderateBrownColor}
+              color={styles.brownColor}
               size={30}
             />
           </BioBox>
@@ -290,14 +290,14 @@ const UserBooks = ({
           <MaterialCommunityIcons
             name={"pencil-circle"}
             size={40}
-            color={isMine ? styles.blackColor : styles.brownColor}
+            color={isMine ? styles.brownColor : "#ffffff"}
           />
         </Button>
         <Button onPress={setLikes}>
           <MaterialCommunityIcons
             name={"heart-circle"}
             size={40}
-            color={isLikes ? styles.blackColor : styles.brownColor}
+            color={!isMine ? styles.brownColor : "#ffffff"}
           />
         </Button>
       </Buttoncontainer>
@@ -305,13 +305,13 @@ const UserBooks = ({
         <Books>
           {isMine &&
             posts &&
-            posts.map(post => (
+            posts.map((post) => (
               <Book
                 key={post.id}
                 onPress={() =>
                   navigation.navigate("PostDetail", {
                     title: post.title,
-                    id: post.id
+                    id: post.id,
                   })
                 }
               >
@@ -319,14 +319,14 @@ const UserBooks = ({
                   style={{
                     height: 116,
                     width: 82,
-                    position: "absolute"
+                    position: "absolute",
                   }}
                   source={require("../assets/noImage.png")}
                 />
                 <Image
                   style={{
                     height: 116,
-                    width: 82
+                    width: 82,
                   }}
                   source={{ uri: post.book?.image }}
                 />
@@ -335,20 +335,20 @@ const UserBooks = ({
             ))}
           {isLikes &&
             likes &&
-            likes.map(like => (
+            likes.map((like) => (
               <Book
                 key={like.post.id}
                 onPress={() =>
                   navigation.navigate("PostDetail", {
                     title: like.post.title,
-                    id: like.post.id
+                    id: like.post.id,
                   })
                 }
               >
                 <Image
                   style={{
                     height: 116,
-                    width: 82
+                    width: 82,
                   }}
                   source={{ uri: like.post.book.image }}
                 />
@@ -373,12 +373,12 @@ UserBooks.propTypes = {
       id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       book: PropTypes.shape({
-        image: PropTypes.string
-      })
+        image: PropTypes.string,
+      }),
     })
   ),
   isSelf: PropTypes.bool.isRequired,
-  isFollowing: PropTypes.bool.isRequired
+  isFollowing: PropTypes.bool.isRequired,
 };
 
 export default withNavigation(UserBooks);

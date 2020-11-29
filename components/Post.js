@@ -8,7 +8,7 @@ import styles from "../styles";
 import {
   MaterialCommunityIcons,
   MaterialIcons,
-  Ionicons
+  Ionicons,
 } from "@expo/vector-icons";
 import { TOGGLE_LIKE, ME, EDIT_POST } from "../gql/queries";
 import Loader from "./Loader";
@@ -40,7 +40,7 @@ const Bottom = styled.View`
 const Date = styled.Text`
   margin-left: auto;
   font-size: 10px;
-  color: ${styles.brownColor};
+  color: ${styles.darkGreyColor};
 `;
 const Link = styled.View`
   flex-direction: row;
@@ -70,7 +70,7 @@ const Buttom = styled.View`
   border-bottom-width: 1px;
 `;
 const NameBox = styled.TouchableOpacity`
-  background-color: ${styles.moderateBrownColor};
+  background-color: ${styles.brownColor};
   padding: 3px 25px;
   margin-right: auto;
   border-radius: 10px;
@@ -102,10 +102,10 @@ const Post = ({
   likeCount: likeCountProp,
   comments = [],
   isLiked: isLikedProp,
-  likes=[],
+  likes = [],
   createdAt,
   sentiment,
-  navigation
+  navigation,
 }) => {
   const [loading, setLoading] = useState(false);
   const [isLiked, setIsLiked] = useState(isLikedProp);
@@ -113,14 +113,14 @@ const Post = ({
   const [likeCount, setLikeCount] = useState(likeCountProp);
   const { refetch: refetchMe } = useQuery(ME);
   const [toggleLikeMutation] = useMutation(TOGGLE_LIKE, {
-    variables: { postId: id }
+    variables: { postId: id },
   });
   const [deleteMutation] = useMutation(EDIT_POST);
   const handleOpen = () => {
-    setIsOpened(p => !p);
+    setIsOpened((p) => !p);
   };
   const handleLike = async () => {
-    setIsLiked(p => !p);
+    setIsLiked((p) => !p);
     if (isLiked) {
       setLikeCount(likeCount - 1);
     } else {
@@ -144,12 +144,12 @@ const Post = ({
             try {
               setLoading(true);
               const {
-                data: { editPost }
+                data: { editPost },
               } = await deleteMutation({
                 variables: {
                   id,
-                  action: "DELETE"
-                }
+                  action: "DELETE",
+                },
               });
               await refetchMe();
               if (editPost.id) {
@@ -160,9 +160,9 @@ const Post = ({
             } finally {
               setLoading(false);
             }
-          }
+          },
         },
-        { text: "아니오", style: "cancel" }
+        { text: "아니오", style: "cancel" },
       ],
       { cancelable: false }
     );
@@ -175,7 +175,7 @@ const Post = ({
           <TouchableOpacity
             onPress={() =>
               navigation.navigate("BookDetail", {
-                isbn: book.isbn
+                isbn: book.isbn,
               })
             }
           >
@@ -184,7 +184,7 @@ const Post = ({
                 height: 116,
                 width: 82,
                 borderRadius: 5,
-                position: "absolute"
+                position: "absolute",
               }}
               source={require("../assets/noImage.png")}
             />
@@ -209,7 +209,7 @@ const Post = ({
                   color: "white",
                   fontSize: 12,
                   fontWeight: "bold",
-                  marginLeft: 5
+                  marginLeft: 5,
                 }}
                 onPress={() => Linking.openURL(book.link)}
               >
@@ -235,7 +235,7 @@ const Post = ({
                       postId: id,
                       uri: book.image,
                       title,
-                      sentiment
+                      sentiment,
                     })
                   }
                 >
@@ -289,7 +289,7 @@ const Post = ({
       </HandleComments>
       {comments[0] !== undefined && isOpened && (
         <>
-          {comments.map(comment => (
+          {comments.map((comment) => (
             <Comment
               key={comment.id}
               postId={id}
@@ -307,7 +307,7 @@ Post.propTypes = {
   id: PropTypes.string.isRequired,
   user: PropTypes.shape({
     id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired
+    name: PropTypes.string.isRequired,
   }).isRequired,
   book: PropTypes.shape({
     isbn: PropTypes.string.isRequired,
@@ -315,7 +315,7 @@ Post.propTypes = {
     image: PropTypes.string,
     link: PropTypes.string.isRequired,
     publisher: PropTypes.string.isRequired,
-    author: PropTypes.string.isRequired
+    author: PropTypes.string.isRequired,
   }),
   likeCount: PropTypes.number.isRequired,
   sentiment: PropTypes.string.isRequired,
@@ -326,11 +326,11 @@ Post.propTypes = {
       text: PropTypes.string.isRequired,
       user: PropTypes.shape({
         id: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired
-      })
+        name: PropTypes.string.isRequired,
+      }),
     })
   ),
-  createdAt: PropTypes.string.isRequired
+  createdAt: PropTypes.string.isRequired,
 };
 
 export default withNavigation(Post);

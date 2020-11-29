@@ -11,22 +11,20 @@ const Container = styled.View`
   align-items: center;
   justify-content: center;
 `;
-const Name = styled.Text`
-  color: white;
-`;
+const Name = styled.Text``;
 const Sentiment = styled.View`
   flex: 1;
   height: 116px;
   padding: 10px;
   border-radius: 10px;
-  border: 1px solid ${styles.moderateBrownColor};
+  border: 1px solid ${styles.brownGrey};
 `;
 const Date = styled.Text`
   margin-right: 10px;
   margin-left: auto;
   margin-bottom: 10px;
   font-size: 10px;
-  color: ${styles.brownColor};
+  color: ${styles.darkGreyColor};
 `;
 const Box = styled.View`
   margin: 10px;
@@ -38,34 +36,19 @@ const BookInfo = styled.View`
   align-items: center;
   margin-right: 10px;
 `;
-const TitleBox = styled.View`
-  background-color: ${styles.brownGrey};
-  flex: 1;
-`;
-const UpSquare = styled.View`
-  background-color: white;
-  flex: 1;
-  border-bottom-right-radius: 16px;
-`;
-const DownSquare = styled.View`
-  background-color: white;
-  flex: 1;
-  border-top-right-radius: 16px;
-`;
 const Title = styled.View`
   flex: 13;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   padding: 10px;
-  background-color: ${styles.brownGrey};
   border-radius: 10px;
 `;
 const NameBox = styled.View`
   padding: 5px 10px;
   margin: auto;
   flex: 3;
-  background-color: ${styles.moderateBrownColor};
+  background-color: ${styles.brownGrey};
   align-items: center;
   justify-content: center;
   border-radius: 10px;
@@ -87,21 +70,18 @@ const Post = ({ id, title, user, book, createdAt, sentiment, navigation }) => {
           <NameBox>
             <Name>{user.name}</Name>
           </NameBox>
-          <TitleBox>
-            <UpSquare />
-            <DownSquare />
-          </TitleBox>
           <Title>
             <MaterialCommunityIcons
               name="format-quote-open"
               size={20}
-              color={styles.brownColor}
+              color={styles.redColor}
             />
             <Text
               style={{
                 fontSize: 15,
                 fontStyle: "italic",
-                color: styles.blackColor
+                color: styles.blackColor,
+                fontWeight: "bold",
               }}
             >
               {" "}
@@ -110,7 +90,7 @@ const Post = ({ id, title, user, book, createdAt, sentiment, navigation }) => {
             <MaterialCommunityIcons
               name="format-quote-close"
               size={20}
-              color={styles.brownColor}
+              color={styles.redColor}
             />
           </Title>
         </Header>
@@ -121,7 +101,7 @@ const Post = ({ id, title, user, book, createdAt, sentiment, navigation }) => {
                 height: 116,
                 width: 82,
                 borderRadius: 5,
-                position: "absolute"
+                position: "absolute",
               }}
               source={require("../assets/noImage.png")}
             />
@@ -129,7 +109,7 @@ const Post = ({ id, title, user, book, createdAt, sentiment, navigation }) => {
               style={{
                 height: 116,
                 width: 82,
-                borderRadius: 5
+                borderRadius: 5,
               }}
               source={{ uri: book.image }}
             />
@@ -143,11 +123,7 @@ const Post = ({ id, title, user, book, createdAt, sentiment, navigation }) => {
           </Sentiment>
         </Box>
         <Date>
-          {createdAt
-            .substring(0, 10)
-            .replace("-", "년 ")
-            .replace("-", "월 ")}
-          일
+          {createdAt.substring(0, 10).replace("-", "년 ").replace("-", "월 ")}일
         </Date>
       </Container>
     </TouchableOpacity>
@@ -159,7 +135,7 @@ Post.propTypes = {
   title: PropTypes.string.isRequired,
   user: PropTypes.shape({
     id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired
+    name: PropTypes.string.isRequired,
   }).isRequired,
   book: PropTypes.shape({
     isbn: PropTypes.string.isRequired,
@@ -167,7 +143,7 @@ Post.propTypes = {
     image: PropTypes.string,
     link: PropTypes.string.isRequired,
     publisher: PropTypes.string.isRequired,
-    author: PropTypes.string.isRequired
+    author: PropTypes.string.isRequired,
   }).isRequired,
   likeCount: PropTypes.number.isRequired,
   sentiment: PropTypes.string.isRequired,
@@ -178,11 +154,11 @@ Post.propTypes = {
       text: PropTypes.string.isRequired,
       user: PropTypes.shape({
         id: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired
-      }).isRequired
+        name: PropTypes.string.isRequired,
+      }).isRequired,
     })
   ).isRequired,
-  createdAt: PropTypes.string.isRequired
+  createdAt: PropTypes.string.isRequired,
 };
 
 export default withNavigation(Post);

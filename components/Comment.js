@@ -45,7 +45,7 @@ const Comment = ({ navigation, id, text, postIsSelf, user, createdAt }) => {
             try {
               setLoading(true);
               const {
-                data: { deleteComment }
+                data: { deleteComment },
               } = await deleteCommentMutation({ variables: { id } });
               if (deleteComment.id) {
                 setIsDeleted(true);
@@ -55,9 +55,9 @@ const Comment = ({ navigation, id, text, postIsSelf, user, createdAt }) => {
             } finally {
               setLoading(false);
             }
-          }
+          },
         },
-        { text: "아니오", style: "cancel" }
+        { text: "아니오", style: "cancel" },
       ],
       { cancelable: false }
     );
@@ -73,7 +73,9 @@ const Comment = ({ navigation, id, text, postIsSelf, user, createdAt }) => {
               navigation.navigate("UserDetail", { userId: user.id })
             }
           >
-            <Text style={{ color: styles.brownColor }}>{user.name}</Text>
+            <Text style={{ color: styles.brownColor, fontWeight: "bold" }}>
+              {user.name}
+            </Text>
           </Name>
           <CommentText>
             <Text>{text}</Text>
@@ -85,14 +87,14 @@ const Comment = ({ navigation, id, text, postIsSelf, user, createdAt }) => {
                   <MaterialIcons
                     name="delete"
                     size={15}
-                    color={styles.brownColor}
+                    color={styles.redColor}
                   />
                 </TouchableOpacity>
               </Delete>
             )}
           </View>
           <Date>
-            <Text style={{ fontSize: 10, color: styles.moderateBrownColor }}>
+            <Text style={{ fontSize: 10, color: styles.darkGreyColor }}>
               {createdAt.substring(0, 10).replace(/-/gi, ".")}
             </Text>
           </Date>
@@ -107,9 +109,9 @@ Comment.propTypes = {
   text: PropTypes.string.isRequired,
   user: PropTypes.shape({
     id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired
+    name: PropTypes.string.isRequired,
   }).isRequired,
-  createdAt: PropTypes.string.isRequired
+  createdAt: PropTypes.string.isRequired,
 };
 
 export default withNavigation(Comment);

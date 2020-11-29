@@ -11,7 +11,7 @@ const Container = styled.View`
   margin-top: 5px;
 `;
 const ContainerDB = styled.View`
-  background-color: ${styles.lightBrownColor};
+  background-color: ${styles.brownGrey};
   margin-bottom: 5px;
 `;
 const TopicBox = styled.View`
@@ -23,7 +23,7 @@ const TopicBox = styled.View`
 const Topic = styled.Text`
   font-size: 15px;
   padding: 5px 10px;
-  color: ${styles.brownColor};
+  color: ${styles.blackColor};
   background-color: ${styles.brownGrey};
   border-radius: 10px;
 `;
@@ -34,7 +34,7 @@ const CircleBookBox = styled.View`
   margin: 5px;
   align-items: center;
   justify-content: center;
-  background-color: ${styles.moderateBrownColor};
+  background-color: ${styles.brownColor};
   border-radius: 100px;
   padding: 3px;
   overflow: hidden;
@@ -75,21 +75,21 @@ const HomeScreen = ({ navigation }) => {
   const { data, loading, refetch, fetchMore } = useQuery(POST_DB, {
     variables: {
       first: 5,
-      offset: 0
-    }
+      offset: 0,
+    },
   });
   const onLoadMore = () => {
     fetchMore({
       variables: {
         first: 5,
-        offset: data?.seePostDB.length
+        offset: data?.seePostDB.length,
       },
       updateQuery: (prev, { fetchMoreResult }) => {
         if (!fetchMoreResult) return prev;
         return Object.assign({}, prev, {
-          seePostDB: [...prev?.seePostDB, ...fetchMoreResult?.seePostDB]
+          seePostDB: [...prev?.seePostDB, ...fetchMoreResult?.seePostDB],
         });
-      }
+      },
     });
   };
   const refresh = async () => {
@@ -104,19 +104,19 @@ const HomeScreen = ({ navigation }) => {
   };
   const { data: data_10 } = useQuery(SEARCH, {
     variables: { term: "10대", start: 1, offset: 0 },
-    fetchPolicy: "cache-and-network"
+    fetchPolicy: "cache-and-network",
   });
   const { data: data_20 } = useQuery(SEARCH, {
     variables: { term: "20대", start: 1, offset: 0 },
-    fetchPolicy: "cache-and-network"
+    fetchPolicy: "cache-and-network",
   });
   const { data: data_30 } = useQuery(SEARCH, {
     variables: { term: "30대", start: 1, offset: 0 },
-    fetchPolicy: "cache-and-network"
+    fetchPolicy: "cache-and-network",
   });
   const { data: data_40 } = useQuery(SEARCH, {
     variables: { term: "40대", start: 1, offset: 0 },
-    fetchPolicy: "cache-and-network"
+    fetchPolicy: "cache-and-network",
   });
   return (
     <ScrollView
@@ -134,7 +134,7 @@ const HomeScreen = ({ navigation }) => {
             data={data?.seePostDB}
             onEndReached={onLoadMore}
             dataLength={data?.seePostDB.length}
-            keyExtractor={item => item.id}
+            keyExtractor={(item) => item.id}
             renderItem={({ item }) => {
               return (
                 <TouchableOpacity
@@ -142,22 +142,22 @@ const HomeScreen = ({ navigation }) => {
                   onPress={() =>
                     navigation.navigate("PostDetail", {
                       id: item.id,
-                      title: item.title
+                      title: item.title,
                     })
                   }
                 >
                   <Info>
                     <CircleBookBox>
                       <Circle>
-                      <CircleImage
-                        style={{ position: "absolute" }}
-                        source={require("../assets/noImage.png")}
-                        borderRadius={40}
-                      />
-                      <CircleImage
-                        source={{ uri: item.book.image }}
-                        borderRadius={40}
-                      />
+                        <CircleImage
+                          style={{ position: "absolute" }}
+                          source={require("../assets/noImage.png")}
+                          borderRadius={40}
+                        />
+                        <CircleImage
+                          source={{ uri: item.book.image }}
+                          borderRadius={40}
+                        />
                       </Circle>
                     </CircleBookBox>
                     <Name>{item.user.name}</Name>
@@ -173,7 +173,7 @@ const HomeScreen = ({ navigation }) => {
           <Topic>10대 추천도서</Topic>
         </TopicBox>
         <BookScroll horizontal={true} showsHorizontalScrollIndicator={false}>
-          {data_10?.books.map(book => (
+          {data_10?.books.map((book) => (
             <TouchableOpacity
               key={book.isbn}
               onPress={() =>
@@ -196,7 +196,7 @@ const HomeScreen = ({ navigation }) => {
           <Topic>20대 추천도서</Topic>
         </TopicBox>
         <BookScroll horizontal={true} showsHorizontalScrollIndicator={false}>
-          {data_20?.books.map(book => (
+          {data_20?.books.map((book) => (
             <TouchableOpacity
               key={book.isbn}
               onPress={() =>
@@ -219,7 +219,7 @@ const HomeScreen = ({ navigation }) => {
           <Topic>30대 추천도서</Topic>
         </TopicBox>
         <BookScroll horizontal={true} showsHorizontalScrollIndicator={false}>
-          {data_30?.books.map(book => (
+          {data_30?.books.map((book) => (
             <TouchableOpacity
               key={book.isbn}
               onPress={() =>
@@ -242,7 +242,7 @@ const HomeScreen = ({ navigation }) => {
           <Topic>40대 추천도서</Topic>
         </TopicBox>
         <BookScroll horizontal={true} showsHorizontalScrollIndicator={false}>
-          {data_40?.books.map(book => (
+          {data_40?.books.map((book) => (
             <TouchableOpacity
               key={book.isbn}
               onPress={() =>
