@@ -25,6 +25,10 @@ const Header = styled.View`
   justify-content: center;
   width: 90%;
 `;
+const BookBox = styled.View`
+  flex-direction: column;
+  align-items: center;
+`;
 const Books = styled.View`
   justify-content: center;
   flex-direction: row;
@@ -101,16 +105,16 @@ const StatName = styled.Text`
   font-size: 13px;
   color: ${styles.blackColor};
 `;
-const Title = styled.Text`
-  background-color: ${styles.blackColor};
-  width: 84px;
-  padding: 5px;
-  position: absolute;
-  bottom: 15px;
+const TitleBox = styled.Text`
   margin: auto;
-  font-size: 12px;
-  color: white;
+  align-items: center;
+  justify-content: center;
+`;
+const Title = styled.Text`
+  padding: 5px 0;
+  font-size: 15px;
   text-align: center;
+  font-weight: bold;
 `;
 const Func = styled.View`
   justify-content: center;
@@ -305,55 +309,82 @@ const UserBooks = ({
         <Books>
           {isMine &&
             posts &&
-            posts.map((post) => (
-              <Book
-                key={post.id}
-                onPress={() =>
-                  navigation.navigate("PostDetail", {
-                    title: post.title,
-                    id: post.id,
-                  })
-                }
-              >
-                <Image
-                  style={{
-                    height: 116,
-                    width: 82,
-                    position: "absolute",
-                  }}
-                  source={require("../assets/noImage.png")}
-                />
-                <Image
-                  style={{
-                    height: 116,
-                    width: 82,
-                  }}
-                  source={{ uri: post.book?.image }}
-                />
-                <Title>{post.title}</Title>
-              </Book>
+            posts.map((post, idx) => (
+              <BookBox key={idx}>
+                <Book
+                  key={post.id}
+                  onPress={() =>
+                    navigation.navigate("PostDetail", {
+                      title: post.title,
+                      id: post.id,
+                    })
+                  }
+                >
+                  <Image
+                    style={{
+                      height: 116,
+                      width: 82,
+                    }}
+                    source={{ uri: post.book.image }}
+                  />
+                </Book>
+                <TitleBox>
+                  <MaterialCommunityIcons
+                    name="format-quote-open"
+                    size={20}
+                    color={styles.redColor}
+                  />
+                  <Title>
+                    {post.title.substring(0, 4)}
+                    {post.title.substring(0, 4) !== post.title && "..."}
+                  </Title>
+                  <MaterialCommunityIcons
+                    name="format-quote-close"
+                    size={20}
+                    color={styles.redColor}
+                  />
+                </TitleBox>
+              </BookBox>
             ))}
           {isLikes &&
             likes &&
-            likes.map((like) => (
-              <Book
-                key={like.post.id}
-                onPress={() =>
-                  navigation.navigate("PostDetail", {
-                    title: like.post.title,
-                    id: like.post.id,
-                  })
-                }
-              >
-                <Image
-                  style={{
-                    height: 116,
-                    width: 82,
-                  }}
-                  source={{ uri: like.post.book.image }}
-                />
-                <Title>{like.post.title}</Title>
-              </Book>
+            likes.map((like, idx) => (
+              <BookBox key={idx}>
+                <Book
+                  key={like.post.id}
+                  onPress={() =>
+                    navigation.navigate("PostDetail", {
+                      title: like.post.title,
+                      id: like.post.id,
+                    })
+                  }
+                >
+                  <Image
+                    style={{
+                      height: 116,
+                      width: 82,
+                    }}
+                    source={{ uri: like.post.book.image }}
+                  />
+                </Book>
+                <TitleBox>
+                  <MaterialCommunityIcons
+                    name="format-quote-open"
+                    size={20}
+                    color={styles.redColor}
+                  />
+                  <Title>
+                    {like.post.title.substring(0, 4)}
+                    {like.post.title.substring(0, 4) !== like.post.title &&
+                      "..."}
+                  </Title>
+                  <MaterialCommunityIcons
+                    name="format-quote-close"
+                    size={20}
+                    color={styles.redColor}
+                  />
+                </TitleBox>
+              </BookBox>
             ))}
         </Books>
       </ScrollView>
