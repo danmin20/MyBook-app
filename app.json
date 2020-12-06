@@ -22,7 +22,7 @@
     },
     "android": {
       "package": "com.danmin.mybook",
-      "versionCode": 3
+      "versionCode": 4
     },
     "description": ""
   }
