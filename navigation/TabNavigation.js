@@ -156,11 +156,14 @@ export default createBottomTabNavigator(
       navigationOptions: ({ navigation }) => ({
         tabBarVisible: tabBarVisible(navigation),
         tabBarIcon: ({ focused }) => (
-          <MaterialCommunityIcons
-            name={focused ? "home" : "home-outline"}
-            color={"white"}
-            size={30}
-          />
+          <>
+            <MaterialCommunityIcons
+              name={focused ? "home" : "home-outline"}
+              color={"white"}
+              size={25}
+            />
+            <Text style={{ color: "#ffffff" }}>HOME</Text>
+          </>
         ),
       }),
     },
@@ -187,11 +190,14 @@ export default createBottomTabNavigator(
       navigationOptions: ({ navigation }) => ({
         tabBarVisible: tabBarVisible(navigation),
         tabBarIcon: ({ focused }) => (
-          <MaterialIcons
-            name={focused ? "people" : "people-outline"}
-            color={"white"}
-            size={30}
-          />
+          <>
+            <MaterialIcons
+              name={focused ? "people" : "people-outline"}
+              color={"white"}
+              size={25}
+            />
+            <Text style={{ color: "#ffffff" }}>FEED</Text>
+          </>
         ),
       }),
     },
@@ -202,11 +208,14 @@ export default createBottomTabNavigator(
       navigationOptions: ({ navigation }) => ({
         tabBarVisible: tabBarVisible(navigation),
         tabBarIcon: ({ focused }) => (
-          <MaterialCommunityIcons
-            name={focused ? "bookmark" : "bookmark-outline"}
-            color={"white"}
-            size={30}
-          />
+          <>
+            <MaterialCommunityIcons
+              name={focused ? "bookmark" : "bookmark-outline"}
+              color={"white"}
+              size={25}
+            />
+            <Text style={{ color: "#ffffff" }}>MY PAGE</Text>
+          </>
         ),
       }),
     },
