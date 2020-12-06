@@ -3,7 +3,6 @@
     "name": "MyBook",
     "slug": "mybook-app",
     "privacy": "public",
-    "sdkVersion": "36.0.0",
     "platforms": ["ios", "android", "web"],
     "version": "1.0.3",
     "orientation": "portrait",
