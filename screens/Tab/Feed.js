@@ -28,7 +28,7 @@ export default ({ navigation }) => {
   const [search, setSearch] = useState(false);
   const searchInput = useInput("");
   const toggleSearch = () => {
-    setSearch(p => !p);
+    setSearch((p) => !p);
   };
   const handleSearch = async () => {
     const { value } = searchInput;
@@ -40,21 +40,21 @@ export default ({ navigation }) => {
   const { loading, data, refetch, fetchMore } = useQuery(FEED, {
     variables: {
       first: 10,
-      offset: 0
-    }
+      offset: 0,
+    },
   });
   const onLoadMore = () => {
     fetchMore({
       variables: {
         first: 10,
-        offset: data.seeFeed.length
+        offset: data.seeFeed.length,
       },
       updateQuery: (prev, { fetchMoreResult }) => {
         if (!fetchMoreResult) return prev;
         return Object.assign({}, prev, {
-          seeFeed: [...prev.seeFeed, ...fetchMoreResult.seeFeed]
+          seeFeed: [...prev.seeFeed, ...fetchMoreResult.seeFeed],
         });
-      }
+      },
     });
   };
   const refresh = async () => {
@@ -91,7 +91,7 @@ export default ({ navigation }) => {
           onEndReachedThreshold={1}
           onEndReached={onLoadMore}
           dataLength={data.seeFeed.length}
-          keyExtractor={item => item.id}
+          keyExtractor={(item) => item.id}
           renderItem={({ item }) => {
             return <FeedPost id={item.id} title={item.title} {...item} />;
           }}
