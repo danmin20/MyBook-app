@@ -18,14 +18,16 @@ const Image = styled.Image`
   border-radius: 5px;
 `;
 const Container = styled.View`
-  padding: 15px 15px;
+  padding: 15px;
 `;
 const Header = styled.View`
   flex-direction: row;
-  justify-content: center;
+  padding-bottom: 10px;
+  border: 0px solid ${styles.brownGrey};
+  border-bottom-width: 1.5px;
 `;
 const Content = styled.View`
-  margin: 15px;
+  margin-top: 20px;
   flex-direction: row;
 `;
 const Title = styled.TextInput`
@@ -35,12 +37,8 @@ const Title = styled.TextInput`
   text-align: center;
 `;
 const Sentiment = styled.TextInput`
-  border-radius: 10px;
-  margin-left: 15px;
-  background-color: ${styles.brownGrey};
-  padding: 10px;
-  min-height: 116px;
   flex: 1;
+  padding: 5px 10px;
 `;
 const Button = styled.TouchableOpacity`
   flex-direction: row;
@@ -61,8 +59,8 @@ export default ({ navigation }) => {
   const { data, loading: loadingData } = useQuery(SEARCH, {
     variables: {
       term: navigation.getParam("bookId"),
-      start: 1
-    }
+      start: 1,
+    },
   });
   const titleInput = useInput("");
   const sentimentInput = useInput("");
@@ -75,13 +73,13 @@ export default ({ navigation }) => {
       try {
         setLoading(true);
         const {
-          data: { upload }
+          data: { upload },
         } = await uploadMutation({
           variables: {
             title: titleInput.value,
             sentiment: sentimentInput.value,
-            bookId: navigation.getParam("bookId")
-          }
+            bookId: navigation.getParam("bookId"),
+          },
         });
         await refetchMe();
         if (upload.id) {
@@ -106,39 +104,24 @@ export default ({ navigation }) => {
               color={styles.brownColor}
             />
           )}
-          <Text>업로드하기 </Text>
+          <Text>등록 </Text>
           <MaterialCommunityIcons name="arrow-right" size={20} />
         </Button>
         <Container>
           <Header>
-            <MaterialCommunityIcons
-              name="format-quote-open"
-              size={30}
-              color={styles.brownColor}
-            />
             <Title
               onChangeText={titleInput.onChange}
               value={titleInput.value}
-              placeholder="제목 입력..."
+              placeholder="제목"
               multiline={true}
               placeholderTextColor={styles.darkGreyColor}
             />
-            <MaterialCommunityIcons
-              name="format-quote-close"
-              size={30}
-              color={styles.brownColor}
-            />
           </Header>
           <Content>
-            <Image
-              style={{ position: "absolute" }}
-              source={require("../../assets/noImage.png")}
-            />
-            {book?.image !== "" && <Image source={{ uri: book?.image }} />}
             <Sentiment
               onChangeText={sentimentInput.onChange}
               value={sentimentInput.value}
-              placeholder="내용 입력..."
+              placeholder="내용을 입력하세요."
               multiline={true}
               placeholderTextColor={styles.darkGreyColor}
             />
